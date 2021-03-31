@@ -1,0 +1,6 @@
+first_name,last_name,email,mobile,phone,notes,website,message,city,street,zip,state,country,industry_type,account,leadstatus,leadsource
+testtwenty,two,testtwentywo@gmail.com,8978836911,,dummy,http://cricketu.com,,,,,,,,,,
+testtwenty,three,testtwentythree@gmail.com,9299955335,,this is dummy,http://yahoo.com,,,,,,,,,,
+testtwenty,four,testtwentyfour@gmail.com,,,,,,Kakinada,"Ramanaya Peta, Kakinada, Andhra Pradesh, India",533005,,,,Webindia,,
+testtwenty,five,testtwentyfive@gmail.com,8521479630,987-654-3210,testing edit and update,http://rediff.com,,Kakinada,"Ramanaya Peta, Kakinada, Andhra Pradesh, India",533005,Entre Rios,Argentina,Storage Equipment,Webindia,FCB - Future Call Back,Google Adwords
+testtwenty,one,testtwentyone@gmail.com,8978836907,,,,,,,,Assam,India,,,,

@@ -1,0 +1,4 @@
+customer,name,amount,closing_date,notes,account
+test one three,test edit three,2000,26-02-2019,fdsfd,
+test one three,test deal two three,2000,26-02-2019,fdsfd,
+test ten three,test ten digit three,100000,27-02-2019,testing deal,

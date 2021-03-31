@@ -1,0 +1,5 @@
+Name,Description,Size,Price,Vendor,Tags,Units,Product_Category,Product_Sub_Category,,Store
+test pro one,this is a test product,10,10,vone,"one, two, three",kg,Mechanical,sub category 7,,Yes
+test pro two,this is a test product,10,10,vtwo,"eleven, twelve",g,Electrical,sub category 5,,No
+test pro three,this is a test product,10,10,vone,"one, two, three",kg,Mechanical,sub category 7,,Yes
+test pro four,this is a test product,10,10,vtwo,"eleven, twelve",g,Electrical,sub category 5,,No

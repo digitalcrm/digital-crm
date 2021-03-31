@@ -1,0 +1,332 @@
+/*******************************
+* MODAL AS LEFT/RIGHT SIDEBAR
+* Add "left" or "right" in modal parent div, after class="modal".
+* Get free snippets on bootpen.com
+*******************************/
+
+body {
+
+
+}
+a {
+    color: #0073aa;
+}
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a {
+    color: #fff;
+    background: #191e23;
+}
+
+.user-left-bar-icon {
+
+}
+
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+    position: fixed;
+    margin: auto;
+    width: 600px;
+    height: 100%;
+    -webkit-transform: translate3d(0%, 0, 0);
+    -ms-transform: translate3d(0%, 0, 0);
+    -o-transform: translate3d(0%, 0, 0);
+    transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+    padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog{
+    left: -320px;
+    -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+    transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog{
+    left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+    right: -320px;
+    -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+    transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+    right: 0;
+}
+
+/* ----- MODAL STYLE ----- */
+.modal-content {
+    border-radius: 0;
+    border: none;
+}
+
+.modal-header {
+    border-bottom-color: #EEEEEE;
+    background-color: #FAFAFA; 
+}
+
+.modal-body{
+    height: 87%;
+}
+
+
+/* Balwant CSS*/
+
+.skin-blue .main-header .navbar {
+    background-color: #23282d;
+
+}
+.skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
+    background-color: #23282d;
+}
+.skin-blue .main-header .logo {
+    background-color: #1e282c;
+    color: #fff;
+    border-bottom: 0 solid transparent;
+}
+.content-header>h1 {
+    font-size: 23px;
+    font-weight: 400;
+    margin: 0;
+}
+.content {
+    min-height: 250px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.content-header {
+    position: relative;
+    padding: 15px 15px 0 25px;
+}
+.box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 20px;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    border-bottom: 1px solid #f4f4f4;
+}
+
+table.dataTable {
+    clear: both;
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+    max-width: none !important;
+    border-collapse: collapse!important;
+    border-top: 1px solid #eee;
+}
+
+.form-control {
+    border-radius: 2px;
+    box-shadow: none;
+    border-color: #e5e5e5;
+    height: 40px;
+}
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #404040;
+    text-transform: uppercase;
+}
+.fa-asterisk:before {
+    content: "\f069";
+    font-size: 7px;
+    vertical-align: top;
+}
+
+.box {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    border: 0px solid #cfddf3;
+    background-color: #fff;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    border-radius: 4px;
+}
+
+
+.btn-primary {
+    background: #0085ba;
+    border-color: #0073aa #006799 #006799;
+    box-shadow: 0 1px 0 #006799;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
+.bg-dashboard {
+    webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    border: 0px solid #cfddf3;
+    background-color: #fff!important;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.1);
+    border-radius: 4px;
+	padding:5px 5px 5px 15px;
+}
+.text-btn-space {
+	margin:0 5px 0 0!important;
+	}
+.bg-dashboard h3, .bg-dashboard p {
+    color:#404040;
+}
+.skin-blue .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a {
+    color: #fff;
+    background: #0073aa;
+}
+
+
+
+
+
+.skin-blue .sidebar-menu>li.active>a {
+    background-color: #0073aa;
+	border-left-color:#0073aa;
+}
+.skin-blue .sidebar-menu>li>.treeview-menu {
+    margin: 0 1px;
+    background: #32373c;
+}
+.skin-blue .sidebar a {
+    color: #eee;
+}
+.content-wrapper {
+    min-height: 100%;
+    background-color: #f1f1f1;
+    z-index: 800;
+}
+.sidebar-menu>li>a {
+    padding: 12px 5px 12px 15px;
+    display: block;
+}
+
+.skin-blue .sidebar-menu .treeview-menu>li>a {
+    color: #b4b9be;
+}
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+
+.user-image {
+    width:24px;
+    border-radius:50%;
+}
+.user-image2 {
+    width:100px;
+
+}
+
+.ion-bag {
+       color: #4680ff;
+	   font-size:48px;
+	   margin:40px 10px 0 0;
+	   vertical-align:top;
+	   
+}
+.ion-stats-bars {
+       color: #26dad2;
+	   	   font-size:48px;
+	   margin:40px 10px 0 0;
+	   vertical-align:top;
+}
+.ion-person-add {
+       color: #ffb64d;
+	   	   font-size:48px;
+	   margin:40px 10px 0 0;
+	   vertical-align:top;
+}
+.ion-pie-graph {
+       color: #fc6180;
+	   	   font-size:48px;
+	   margin:40px 10px 0 0;
+	   vertical-align:top;
+}
+.main-footer {
+    background: #fff;
+    padding: 8px 15px;
+    color: #afafaf;
+    font-size: 12px;
+    font-weight: 300;
+    border-top: 1px solid #e5e5e5;
+}
+.main-footer a {font-weight: 300;}
+
+/* Balwant CSS 
+
+.bg-aqua, .callout.callout-info, .alert-info, .label-info, .modal-info .modal-body {
+   background-color: #fff !important;
+}
+.bg-aqua p, .bg-green p, .bg-yellow p, .bg-red p {
+       color: #99abb4;
+}
+.bg-green, .callout.callout-success, .alert-success, .label-success, .modal-success .modal-body {
+   background-color: #fff !important;
+}
+.bg-yellow, .callout.callout-warning, .alert-warning, .label-warning, .modal-warning .modal-body {
+   background-color: #fff !important;
+}
+.bg-red, .callout.callout-danger, .alert-danger, .alert-error, .label-danger, .modal-danger .modal-body {
+   background-color: #fff !important;
+}
+.small-box>.inner {
+   padding: 20px;
+}
+.small-box .icon {
+   -webkit-transition: all .3s linear;
+   -o-transition: all .3s linear;
+   transition: all .3s linear;
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   z-index: 0;
+   font-size: 48px;
+   color: rgba(0,0,0,0.15);
+}
+
+
+
+
+}*/
+
+.table-title a {
+	font-weight:600;
+}

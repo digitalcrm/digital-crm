@@ -1,0 +1,163 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Auth;
+use Illuminate\Support\Facades\DB;
+//---------Models---------------
+use App\Tbl_accounttypes;
+
+class AccountTypeController extends Controller {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct() {
+        $this->middleware('auth:admin');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+        $accounttypes = Tbl_accounttypes::all();
+        $total = count($accounttypes);
+        if (count($accounttypes) > 0) {
+            $formstable = '<table id="example1" class="table">';
+            $formstable .= '<thead>';
+            $formstable .= '<tr>';
+            $formstable .= '<th>Account Type</th>';
+            $formstable .= '<th>Action</th>';
+            $formstable .= '</tr>';
+            $formstable .= '</thead>';
+            $formstable .= '<tbody>';
+            foreach ($accounttypes as $types) {
+                $formstable .= '<tr>';
+                $formstable .= '<td>' . $types->account_type . '</td>';
+                $formstable .= '<td>';
+                $formstable .= '<a class="btn badge badge-secondary py-1 px-2 mr-2" href="' . url('admin/accounttypes/' . $types->actype_id . '/edit') . '">Edit</a>';
+                $formstable .= '<a class="btn badge badge-secondary py-1 px-2 mr-2"  href="' . url('admin/accounttypes/delete/' . $types->actype_id) . '">Delete</a>';
+                /*
+                  $formstable .= '<div class="btn-group">
+                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                  <li><a href="' . url('admin/accounttypes/' . $types->actype_id . '/edit') . '">Edit</a></li>
+                  <li><a href="' . url('admin/accounttypes/delete/' . $types->actype_id) . '">Delete</a></li>
+                  </ul>
+                  </div>';
+                 */
+                $formstable .= '</td>';
+                $formstable .= '</tr>';
+            }
+            $formstable .= '</tbody>';
+            $formstable .= '</table>';
+        } else {
+            $formstable = 'No records available';
+        }
+
+//        echo $formstable;
+
+        $data['total'] = $total;
+        $data['table'] = $formstable;
+
+        return view('admin.accounttypes.accounttypes')->with("data", $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create() {
+        return view('admin.accounttypes.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
+//        echo json_encode($request->input());
+
+        $this->validate($request, [
+            'account_type' => 'required|max:255|unique:tbl_accounttypes',
+        ]);
+
+//        echo $request->input('account_type');
+
+        $formdata = array(
+            'account_type' => $request->input('account_type'),
+        );
+        $types = Tbl_accounttypes::create($formdata);
+        if ($types->actype_id > 0) {
+            return redirect('admin/accounttypes')->with('success', 'Account type Created Successfully...!');
+        } else {
+            return redirect('admin/accounttypes')->with('error', 'Error occurred. Please try again...!');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id) {
+        $accounttype = Tbl_accounttypes::find($id);
+        return view('admin.accounttypes.edit')->with('data', $accounttype);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id) {
+        $accounttype = Tbl_accounttypes::find($id);
+        return view('admin.accounttypes.edit')->with('data', $accounttype);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id) {
+//        echo json_encode($request->input());
+        $types = Tbl_accounttypes::find($id);
+        $types->account_type = $request->input('account_type');
+        $types->save();
+        return redirect('admin/accounttypes')->with('success', 'Updated Successfully...!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id) {
+        //
+    }
+
+    public function delete($id) {
+        $types = Tbl_accounttypes::find($id);
+        $types->delete();
+        return redirect('admin/accounttypes')->with('success', 'Deleted Successfully...!');
+    }
+
+}
