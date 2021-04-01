@@ -135,7 +135,8 @@
                         </form>
                     </div>
                 </div>
-                <a class="btn-text btn-block text-center py-3" href="{{ route('password.request') }}">
+                <a class="btn-text btn-block text-center mt-3" href="{{ route('register') }}">{{ __('Register')}}</a>
+                <a class="btn-text btn-block text-center" href="{{ route('password.request') }}">
                     {{ __('Forgot your password?') }}
                 </a>
 

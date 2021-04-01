@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Rules\Captcha;
 //------------------Controllers----------------------
 use App\Http\Controllers\MailController;
+use App\Tbl_features;
 
 class RegisterController extends Controller
 {
@@ -87,6 +88,11 @@ class RegisterController extends Controller
             'uid' => $user->id,
             'token' => strtotime(date('Ymdhis'))
         ]);
+
+        //  This below features add moved in User model
+        // $addFeatures = Tbl_features::create([
+        //     'uid' => $user->id,
+        // ]);
 
         // $mail = new MailController();
         // $mailres = $mail->registrationMailUser($user);

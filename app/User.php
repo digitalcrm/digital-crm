@@ -119,7 +119,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Tbl_events', 'uid');
     }
 
-    public function tbl_products() {
+    public function tbl_products()
+    {
         return $this->hasMany('App\Tbl_products', 'uid');
     }
 
@@ -269,7 +270,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function rfqs()
     {
-        return $this->hasMany( Rfq::class, 'user_id');
+        return $this->hasMany(Rfq::class, 'user_id');
     }
 
     public function profileUrl()
@@ -283,5 +284,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function defaultProfilePhotoUrl()
     {
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4AA';
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function ($model) {
+            Tbl_features::create([
+                'uid' => $model->id
+            ]);
+        });
     }
 }
