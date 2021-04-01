@@ -4,46 +4,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
-
-
-/*
-
-  |--------------------------------------------------------------------------
-
-  | Web Routes
-
-  |--------------------------------------------------------------------------
-
-  |
-
-  | Here is where you can register web routes for your application. Thesea
-
-  | routes are loaded by the RouteServiceProvider within a group which
-
-  | contains the "web" middleware group. Now create something great!
-
-  |
-
- */
-
-
-
 Route::get('/', function () {
-
-    // return view('welcome');
-    // return view('auth.login');
-	return redirect('/login');
+    return redirect('/login');
 });
 
-
-
-// Route::get('/clear-cache', function () {
-
-//     Artisan::call('cache:clear');
-
-//     return "Cache is cleared";
-// });
-
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/clear-cache', function () {
+        Artisan::call('config:cache');
+        return redirect('/admin/dashboard');
+    });
+});
 
 Auth::routes(['verify' => true]);
 
@@ -51,10 +21,6 @@ Auth::routes(['verify' => true]);
 Route::middleware(['isActive'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-
-
-
-
 
     // ------------------------------------------------------------------------
 
@@ -1056,7 +1022,6 @@ Route::middleware(['isActive'])->group(function () {
     //Route::post('search/getsearchresults/', 'SearchController@getSearchResults')->name('search.getsearchresults');
 
     Route::get('search/getsearchresults/', 'SearchController@getSearchResults')->name('search.getsearchresults');
-
 });
 
 
@@ -2742,7 +2707,7 @@ Route::get('ticket/assign/{ticketid}/{userid}', 'Ticket\GuestQueryTicketControll
 //  consumers
 Route::prefix('shop')->group(function () {
 
-    Route::get('/', function(){
+    Route::get('/', function () {
         return redirect('/');
     });
 
@@ -2958,7 +2923,7 @@ Route::resource('companies', 'Company\User\CompanyController')->middleware('veri
 Route::resource('rfq-forms', 'RFQ\user\RfqController');
 Route::get('rfq/lists', 'RFQ\user\RfqController@lists')->name('lists.rfq');
 Route::get('rfq/details/{details}', 'RFQ\user\RfqController@details')->name('details.rfq');
-Route::resource('rfq-leads','RFQ\user\RfqLeadController');
+Route::resource('rfq-leads', 'RFQ\user\RfqLeadController');
 #=============================Product Of Interest pois===========================#
 Route::resource('pois', 'RFQ\user\PoiController');
 Route::get('lists-product', 'RFQ\user\PoiController@listproducts')->name('product.interested');

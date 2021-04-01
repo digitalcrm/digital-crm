@@ -31,6 +31,23 @@ class Admin extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $appends = ['profile_img'];
+
+    public function getProfileImgAttribute()
+    {
+        return $this->profileLogo();
+    }
+
+    public function profileLogo()
+    {
+        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl();
+    }
+
+    protected function defaultProfilePhotoUrl()
+    {
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4AA';
+    }
+
     /**
      * Send the password reset notification.
      *

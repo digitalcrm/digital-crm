@@ -66,7 +66,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function profileLogo()
     {
-        return $this->picture ? asset($this->picture) : null;
+        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl();
+    }
+
+    protected function defaultProfilePhotoUrl()
+    {
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4AA';
     }
 
     public function currency()
@@ -271,19 +276,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function rfqs()
     {
         return $this->hasMany(Rfq::class, 'user_id');
-    }
-
-    public function profileUrl()
-    {
-        // return $this->defaultProfilePhotoUrl();
-        return $this->picture
-            ? url($this->picture)
-            : $this->defaultProfilePhotoUrl();
-    }
-
-    protected function defaultProfilePhotoUrl()
-    {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4AA';
     }
 
     public static function boot()
