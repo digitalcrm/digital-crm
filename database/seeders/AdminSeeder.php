@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             [
                 'name' => 'Administrator',
                 'email' => 'admin@bigindia.com',
-                'password' => Hash::make('Bigindia@Aynsoft#321.com'), //password
+                'password' => Hash::make('Bigindia@Aynsoft#321.com'), //Bigindia@Aynsoft#321.com
                 'remember_token' => Str::random(10),
                 'user_type' => 2,
                 'cr_id' => 2,

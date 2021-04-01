@@ -84,7 +84,7 @@
                                 <div class="">
                                     <input id="email" type="email"
                                         class="form-control form-control-lg {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                        name="email" value="demouser@digitalcrm.com" required autofocus>
+                                        name="email" value="{{ old('email') }}" required autofocus>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -101,7 +101,7 @@
                                 <div class="">
                                     <input id="password" type="password"
                                         class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        name="password" required value="123456">
+                                        name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
