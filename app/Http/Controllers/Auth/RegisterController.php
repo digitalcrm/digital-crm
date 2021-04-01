@@ -57,13 +57,13 @@ class RegisterController extends Controller
         $messages = array(
             'required' => ':attribute field is required.',
             'unique' => 'Email Id is already exists.',
-            'min' => 'The field has to be 6 chars long!',
+            'min' => 'The field has to be 8 chars long!',
         );
 
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:8|confirmed',
             'g-recaptcha-response' => 'required', new Captcha(),
         ], $messages);
     }
