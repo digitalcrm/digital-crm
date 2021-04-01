@@ -85,8 +85,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <img src="<?php echo Auth::user()->picture != null ? url(Auth::user()->picture) : url('uploads/default/user.png'); ?>"
-                                class="user-image2 rounded-circle my-2" alt="User Image" width="85" height="85">
+                            <img src="{{ auth()->user()->profile_img }}"
+                                class="user-image2 rounded-circle my-2" alt="{{auth()->user()->name}}" width="85" height="85">
                         </div>
                     </div>
                     <div class="col-lg-12 text-center">

@@ -58,8 +58,7 @@ class DocumentPolicy
      */
     public function update(User $user, Tbl_documents $tblDocuments)
     {
-        //
-        return $this->view($user, $tblDocuments);
+        return $user->id === $tblDocuments->uid;
     }
 
     /**
@@ -71,7 +70,6 @@ class DocumentPolicy
      */
     public function delete(User $user, Tbl_documents $tblDocuments)
     {
-        //
         return $this->view($user, $tblDocuments);
     }
 

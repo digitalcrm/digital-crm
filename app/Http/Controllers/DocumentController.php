@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
 use File;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 use App\Tbl_documents;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class DocumentController extends Controller
 {
@@ -243,13 +244,11 @@ class DocumentController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::user();
-        $data = Tbl_documents::find($id);
-        if ($user->can('edit', $data)) {
-            return view('auth.documents.edit')->with('data', $data);
-        } else {
-            return redirect('/documents');
-        }
+        Gate::authorize('update', Tbl_documents::findOrFail($id));
+
+        $data = Tbl_documents::findOrFail($id);
+
+        return view('auth.documents.edit')->with('data', $data);
     }
 
     /**
@@ -351,16 +350,19 @@ class DocumentController extends Controller
 
     public function delete($id)
     {
-        $user = Auth::user();
+        Gate::authorize('delete', Tbl_documents::findOrFail($id));
+
         $doc = Tbl_documents::find($id);
 
-        if ($user->can('update', $doc)) {
-            $doc->active = 0;
-            $doc->save();
-            return redirect('/documents')->with('success', 'Deleted Successfully...!');
-        } else {
-            return redirect('/documents');
-        }
+        $doc->active = 0;
+
+        $doc->save();
+
+        return redirect('/documents')->with('success', 'Deleted Successfully...!');
+        // if ($user->can('update', $doc)) {
+        // } else {
+        //     return redirect('/documents');
+        // }
     }
 
     public function deleteAll(Request $request)

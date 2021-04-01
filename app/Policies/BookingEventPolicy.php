@@ -71,25 +71,25 @@ class BookingEventPolicy
         return $this->view($user, $bookevent);
     }
 
-    // /**
-    //  * Determine whether the user can restore the model.
-    //  *
-    //  * @param  \App\User  $user
-    //  * @param  \App\BookingEvent  $bookevent
-    //  * @return mixed
-    //  */
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\BookingEvent  $bookevent
+     * @return mixed
+     */
     // public function restore(User $user, BookingEvent $bookevent)
     // {
     //     //
     // }
 
-    // /**
-    //  * Determine whether the user can permanently delete the model.
-    //  *
-    //  * @param  \App\User  $user
-    //  * @param  \App\BookingEvent  $bookevent
-    //  * @return mixed
-    //  */
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\BookingEvent  $bookevent
+     * @return mixed
+     */
     // public function forceDelete(User $user, BookingEvent $bookevent)
     // {
     //     //

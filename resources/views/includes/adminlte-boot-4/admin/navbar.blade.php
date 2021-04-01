@@ -36,8 +36,8 @@
                 <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                    <img src="{{ auth()->user()->profile_img }}"
-                        class="img-profile rounded-circle" alt="{{auth()->user()->name}}" width="24" height="24">
+                    <img src="{{ auth()->user()->profile_img }}" class="img-profile rounded-circle"
+                        alt="{{ auth()->user()->name }}" width="24" height="24">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown"
@@ -45,8 +45,8 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="text-center">
-                                <img src="<?php echo Auth::user()->picture != null ? url(Auth::user()->picture) : url('uploads/default/admin.png'); ?>"
-                                    class="user-image2" alt="User Image" width="72" height="72">
+                                <img src="{{ auth()->user()->profile_img }}" class="user-image2 rounded-circle my-2"
+                                    alt="{{ auth()->user()->name }}" width="72" height="72">
                             </div>
                         </div>
                         <div class="col-lg-8">
