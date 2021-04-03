@@ -136,7 +136,6 @@ $features = Auth::user()->tbl_features;
                 @endif
 
                 <li class="nav-header">CRM</li>
-                <hr>
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
