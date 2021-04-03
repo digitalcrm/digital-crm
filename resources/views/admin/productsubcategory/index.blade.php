@@ -105,12 +105,12 @@
 
 
     // function previewForm(id){
-    //   $('#myModal3').modal('hide'); 
+    //   $('#myModal3').modal('hide');
     //   var ajaxUrl = url;
     //   $.get( ajaxUrl, {'form_id':id,'type':'preview'},function(result) {
     //     // $("#resulttt").html(result);
     //     $("#tab_1").html(result);
-    //     $('#myModal2').modal('show'); 
+    //     $('#myModal2').modal('show');
     //   });
     // }
 </script>

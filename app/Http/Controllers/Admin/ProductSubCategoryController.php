@@ -28,12 +28,13 @@ class ProductSubCategoryController extends Controller
      */
     public function index()
     {
-        $accounttypes = Tbl_product_subcategory::with('tbl_product_category')->get();
+        $accounttypes = Tbl_product_subcategory::with('tbl_product_category')->paginate(100);
         // echo json_encode($accounttypes);
         // exit();
         $total = count($accounttypes);
         if (count($accounttypes) > 0) {
-            $formstable = '<table id="example1" class="table">';
+            // $formstable = '<table id="example1" class="table">';
+            $formstable = '<table id="subcattable" class="table">';
             $formstable .= '<thead>';
             $formstable .= '<tr>';
             $formstable .= '<th>Category</th>';
@@ -52,7 +53,10 @@ class ProductSubCategoryController extends Controller
                 $formstable .= '</td>';
                 $formstable .= '</tr>';
             }
-            $formstable .= '</tbody>';
+            $formstable .= '</tbody>
+            <tfoot><tr><td>
+            '.$accounttypes->onEachSide(5)->links().'
+            </td></tr></tfoot>';
             $formstable .= '</table>';
         } else {
             $formstable = 'No records available';
