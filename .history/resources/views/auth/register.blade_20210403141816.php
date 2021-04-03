@@ -11,8 +11,8 @@
             }
 
             /* .navbar-laravel {
-                                                display: none !important;
-                                            } */
+                                display: none !important;
+                            } */
 
             .btn-primary {
                 background-color: #024A81 !important;
@@ -36,55 +36,50 @@
                     font-size: 14px !important;
                 }
 
-                .label-color2 {
-                    color: #808080 !important;
+                .label-color {
+                    color: #898989 !important;
                 }
 
         </style>
     @endpush
     <div class="container">
         <div class="row">
-            {{-- @if (session('success'))
-                <div class='alert alert-success'>
-                    asdf
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class='alert alert-danger'>
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            @if (session('warning'))
-                <div class='alert alert-warning'>
-                    {{ session('warning') }}
-                </div>
-            @endif --}}
-
             <div class="col-md-12">
                 <div class="text-center mt-5 pb-4">
-                    @if (session('error'))
-                        <div class='text-danger pb-3' style="width:350px;">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <img alt="company-logo" src="{{ asset('uploads/logo/digitalcrm-logo.png') }}" height="55px" />
                 </div>
                 <div class="card shadows no-border"
                     style="box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);border: 0px solid rgba(0,0,0,.125)!important;width:350px;">
                     <div class="card-body py-3">
-                        <h4 class="mb-4" style="color:#404040;">{{ __('Sign in now') }}</h4>
-                        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+                        <h4 class="mb-4" style="color:#404040;">{{ __('Register Now') }}</h4>
+                        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             @csrf
+
+                            <div class="form-group mb-4">
+                                <!-- <label for="name"
+                                    class="text-uppercase small font-weight-bold label-color">{{ __('Name') }}</label> -->
+
+                                <div class="">
+                                    <input id="name" type="text"
+                                        class="form-control form-control-lg{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                        placeholder="Your name" name="name" value="{{ old('name') }}" required autofocus>
+
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group mb-4">
                                 <!-- <label for="email"
                                     class="text-uppercase small font-weight-bold label-color">{{ __('E-Mail Address') }}</label> -->
+
                                 <div class="">
                                     <input id="email" type="email"
-                                        class="form-control form-control-lg {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                        placeholder="Email address" name="email" value="{{ old('email') }}" required autofocus>
+                                        class="form-control form-control-lg{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                        placeholder="Email address" name="email" value="{{ old('email') }}" required>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -94,20 +89,30 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mb-4">
                                 <!-- <label for="password"
                                     class="text-uppercase small font-weight-bold label-color">{{ __('Password') }}</label> -->
 
                                 <div class="">
                                     <input id="password" type="password"
                                         class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        placeholder="password" name="password" required>
+                                        placeholder="Password" name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('password') }}</strong>
                                         </span>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <!-- <label for="password-confirm"
+                                    class="text-uppercase small font-weight-bold label-color">{{ __('Confirm Password') }}</label> -->
+
+                                <div class="">
+                                    <input id="password-confirm" type="password" class="form-control form-control-lg"
+                                    placeholder="Confirm password" name="password_confirmation" required>
                                 </div>
                             </div>
 
@@ -118,29 +123,17 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="form-check custom-control custom-checkbox float-left">
-                                    <input class="form-check-input custom-control-input" type="checkbox" name="remember"
-                                        id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="remember">
-                                        {{ __('Remember me') }}
-                                    </label>
-                                </div>
-                                <a class="btn-text btn-block text-right" href="{{ route('password.request') }}">
-                                    {{ __('Forgot password?') }}
-                                </a>
-                            </div>
-
-                            <div class="form-group">
                                 <button type="submit" class="btn btn-lg btn-primary btn-block">
-                                    {{ __('Login') }}
+                                    {{ __('Register') }}
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <a class="btn-text btn-block text-center mt-3" href="{{ route('register') }}">{{ __('New user, Register')}}</a>
-                
-
+                <a class="btn-text btn-block text-center py-3" href="{{ route('login') }}">
+                    {{ __('Already member? Login') }}
+                </a>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

@@ -21,24 +21,24 @@ $features = Auth::user()->tbl_features;
 
                 <li class="nav-item">
                     <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <span class="mt-2"><ion-icon name="speedometer-outline"></ion-icon></span>
+                        <i class="nav-icon fas fa-tachometer-alt icon-size"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 @if ($features != null && $features->productleads == 1)
                                 <li class="nav-item">
                                     <a href="{{ url('leads/getproductleads/list') }}" class="nav-link nav-link-custom">
-                                    <ion-icon name="document-text-outline"></ion-icon>
+                                        <i class="far fa-circle nav-icon"></i>
                                         <p class="">Product Leads</p>
                                     </a>
                                 </li>
                             @endif
 
 
-            @if ($features != null)
+                            @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="business-outline"></ion-icon>
+                            <i class="nav-icon fas fa-address-card icon-size"></i>
                             <p>
                                 Company
                                 <i class="right fas fa-angle-left"></i>
@@ -47,12 +47,39 @@ $features = Auth::user()->tbl_features;
                         </a>
                         <ul class="nav nav-treeview">
 
-                        @if ($features != null && $features->companies == 1)
+                            @if ($features != null && $features->contacts == 1)
                                 <li class="nav-item">
-                                    <a href="{{ route('companies.index') }}"
+                                    <a href="{{ url('contacts') }}"
+                                        class="nav-link nav-link-custom {{ Request::is('contacts*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p class="sub-nav">Contacts</p>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if ($features != null && $features->accounts == 1)
+                                <li class="nav-item">
+                                    <a href="{{ url('accounts') }}"
                                         class="nav-link nav-link-custom {{ request()->is('accounts*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p class="sub-nav">All Companies</p>
+                                        <p class="sub-nav">Accounts</p>
+                                    </a>
+                                </li>
+                            @endif
+
+                        
+                        </ul>
+                    </li>
+
+                @endif
+
+
+                            @if ($features != null && $features->customers == 1)
+                                <li class="nav-item">
+                                    <a href="{{ url('customers') }}"
+                                        class="nav-link nav-link-custom {{ Request::is('customers*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p class="">Customers</p>
                                     </a>
                                 </li>
                             @endif
@@ -62,65 +89,45 @@ $features = Auth::user()->tbl_features;
                                     <a href="{{ route('companies.create') }}"
                                         class="nav-link nav-link-custom {{ request()->is('accounts*') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p class="sub-nav">Add New</p>
+                                        <p class="">Add Company</p>
                                     </a>
                                 </li>
                             @endif
-                        </ul>
-                    </li>
-                @endif
 
-            @if ($features != null)
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                        <ion-icon name="shirt-outline"></ion-icon>
-                            <p>
-                                Product
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                            @if ($features != null && $features->companies == 1)
+                                <li class="nav-item">
+                                    <a href="{{ route('companies.index') }}"
+                                        class="nav-link nav-link-custom {{ request()->is('accounts*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p class="">List of Company</p>
+                                    </a>
+                                </li>
+                            @endif
 
-                        </a>
-                        <ul class="nav nav-treeview">
-
-                        @if ($features != null && $features->products == 1)
-                    <li class="nav-item">
-                        <a href="{{ url('products') }}"
-                            class="nav-link nav-link-custom {{ Request::is('products*') ? 'active' : '' }}">
-                            <i class="nav-icon far fa-circle icon-size"></i>
-                            <p class="sub-nav">All Products</p>
-                        </a>
-                    </li>
-                     @endif
-
-                     @if ($features != null && $features->products == 1)
+         @if ($features != null && $features->products == 1)
                     <li class="nav-item">
                         <a href="{{ url('products/create') }}"
                             class="nav-link nav-link-custom {{ Request::is('products*') ? 'active' : '' }}">
                             <i class="nav-icon far fa-circle icon-size"></i>
-                            <p class="sub-nav">New Product</p>
+                            <p>Add Products</p>
                         </a>
                     </li>
                 @endif
-                        </ul>
+
+                @if ($features != null && $features->products == 1)
+                    <li class="nav-item">
+                        <a href="{{ url('products') }}"
+                            class="nav-link nav-link-custom {{ Request::is('products*') ? 'active' : '' }}">
+                            <i class="nav-icon far fa-circle icon-size"></i>
+                            <p>List of Products</p>
+                        </a>
                     </li>
                 @endif
-
-
-                            @if ($features != null && $features->customers == 1)
-                                <li class="nav-item">
-                                    <a href="{{ url('customers') }}"
-                                        class="nav-link nav-link-custom {{ Request::is('customers*') ? 'active' : '' }}">
-                                        <ion-icon name="people-outline"></ion-icon>
-                                        <p class="">Customers</p>
-                                    </a>
-                                </li>
-                            @endif
-
 
                 <li class="nav-item">
                                 <a href="{{ route('rfq-forms.index') }}"
                                     class="nav-link {{ request()->is('rfq') ? 'active' : '' }}">
-                                    <ion-icon name="notifications-outline"></ion-icon>
+                                    <i class="far fa-circle nav-icon icon-size text-danger"></i>
                                     <p class="">RFQ</p>
                                 </a>
                             </li>    
@@ -129,18 +136,18 @@ $features = Auth::user()->tbl_features;
                     <li class="nav-item">
                         <a href="{{ url('reports/leads') }}"
                             class="nav-link nav-link-custom {{ Request::is('reports/*') ? 'active' : '' }}">
-                            <ion-icon name="bar-chart-outline"></ion-icon>
+                            <i class="nav-icon fas fa-chart-pie icon-size"></i>
                             <p>Reports</p>
                         </a>
                     </li>
                 @endif
 
                 <li class="nav-header">CRM</li>
-                <hr>
+
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="call-outline"></ion-icon>
+                            <i class="nav-icon fas fa-address-card icon-size"></i>
                             <p>
                                 Contacts
                                 <i class="right fas fa-angle-left"></i>
@@ -179,7 +186,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="cart-outline"></ion-icon>
+                            <i class="nav-icon fas fa-cart-plus icon-size"></i>
                             <p>Sales
                                 <i class="right fas fa-angle-left"></i>
                             </p>
@@ -300,7 +307,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="briefcase-outline"></ion-icon>
+                            <i class="nav-icon fas fa-bullhorn icon-size"></i>
                             <p>
                                 Marketing
                                 <i class="right fas fa-angle-left"></i>
@@ -346,7 +353,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="easel-outline"></ion-icon>
+                            <i class="nav-icon fas fa-project-diagram icon-size"></i>
                             <p>
                                 Projects
                                 <i class="right fas fa-angle-left"></i>

@@ -138,7 +138,7 @@
                         </form>
                     </div>
                 </div>
-                <a class="btn-text btn-block text-center mt-3" href="{{ route('register') }}">{{ __('New user, Register')}}</a>
+                <a class="btn-text btn-block text-center mt-3" href="{{ route('register') }}">{{ __('Register')}}</a>
                 
 
             </div>

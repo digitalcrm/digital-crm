@@ -21,7 +21,7 @@ $features = Auth::user()->tbl_features;
 
                 <li class="nav-item">
                     <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <span class="mt-2"><ion-icon name="speedometer-outline"></ion-icon></span>
+                    <ion-icon name="speedometer-outline"></ion-icon>
                         <p>Dashboard</p>
                     </a>
                 </li>
@@ -136,7 +136,7 @@ $features = Auth::user()->tbl_features;
                 @endif
 
                 <li class="nav-header">CRM</li>
-                <hr>
+
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">

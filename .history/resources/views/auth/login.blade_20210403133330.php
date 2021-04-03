@@ -95,13 +95,13 @@
                             </div>
 
                             <div class="form-group">
-                                <!-- <label for="password"
-                                    class="text-uppercase small font-weight-bold label-color">{{ __('Password') }}</label> -->
+                                <label for="password"
+                                    class="text-uppercase small font-weight-bold label-color">{{ __('Password') }}</label>
 
                                 <div class="">
                                     <input id="password" type="password"
                                         class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        placeholder="password" name="password" required>
+                                        name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -125,12 +125,9 @@
                                         {{ __('Remember me') }}
                                     </label>
                                 </div>
-                                <a class="btn-text btn-block text-right" href="{{ route('password.request') }}">
-                                    {{ __('Forgot password?') }}
-                                </a>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group pt-5">
                                 <button type="submit" class="btn btn-lg btn-primary btn-block">
                                     {{ __('Login') }}
                                 </button>
@@ -138,8 +135,10 @@
                         </form>
                     </div>
                 </div>
-                <a class="btn-text btn-block text-center mt-3" href="{{ route('register') }}">{{ __('New user, Register')}}</a>
-                
+                <a class="btn-text btn-block text-center mt-3" href="{{ route('register') }}">{{ __('Register')}}</a>
+                <a class="btn-text btn-block text-center" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
 
             </div>
         </div>

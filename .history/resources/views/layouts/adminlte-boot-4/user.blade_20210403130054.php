@@ -40,7 +40,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
-        <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
         @livewireStyles
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">

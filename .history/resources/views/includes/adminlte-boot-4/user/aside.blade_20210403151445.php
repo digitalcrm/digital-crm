@@ -21,7 +21,7 @@ $features = Auth::user()->tbl_features;
 
                 <li class="nav-item">
                     <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <span class="mt-2"><ion-icon name="speedometer-outline"></ion-icon></span>
+                    <ion-icon name="speedometer-outline"></ion-icon>
                         <p>Dashboard</p>
                     </a>
                 </li>
@@ -120,7 +120,7 @@ $features = Auth::user()->tbl_features;
                 <li class="nav-item">
                                 <a href="{{ route('rfq-forms.index') }}"
                                     class="nav-link {{ request()->is('rfq') ? 'active' : '' }}">
-                                    <ion-icon name="notifications-outline"></ion-icon>
+                                    <i class="far fa-circle nav-icon icon-size text-danger"></i>
                                     <p class="">RFQ</p>
                                 </a>
                             </li>    
@@ -129,18 +129,18 @@ $features = Auth::user()->tbl_features;
                     <li class="nav-item">
                         <a href="{{ url('reports/leads') }}"
                             class="nav-link nav-link-custom {{ Request::is('reports/*') ? 'active' : '' }}">
-                            <ion-icon name="bar-chart-outline"></ion-icon>
+                            <i class="nav-icon fas fa-chart-pie icon-size"></i>
                             <p>Reports</p>
                         </a>
                     </li>
                 @endif
 
                 <li class="nav-header">CRM</li>
-                <hr>
+
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="call-outline"></ion-icon>
+                            <i class="nav-icon fas fa-address-card icon-size"></i>
                             <p>
                                 Contacts
                                 <i class="right fas fa-angle-left"></i>
@@ -179,7 +179,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="cart-outline"></ion-icon>
+                            <i class="nav-icon fas fa-cart-plus icon-size"></i>
                             <p>Sales
                                 <i class="right fas fa-angle-left"></i>
                             </p>
@@ -300,7 +300,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="briefcase-outline"></ion-icon>
+                            <i class="nav-icon fas fa-bullhorn icon-size"></i>
                             <p>
                                 Marketing
                                 <i class="right fas fa-angle-left"></i>
@@ -346,7 +346,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="easel-outline"></ion-icon>
+                            <i class="nav-icon fas fa-project-diagram icon-size"></i>
                             <p>
                                 Projects
                                 <i class="right fas fa-angle-left"></i>

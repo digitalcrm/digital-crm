@@ -21,7 +21,7 @@ $features = Auth::user()->tbl_features;
 
                 <li class="nav-item">
                     <a href="{{ url('dashboard') }}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-                    <span class="mt-2"><ion-icon name="speedometer-outline"></ion-icon></span>
+                    <ion-icon name="speedometer-outline"></ion-icon>
                         <p>Dashboard</p>
                     </a>
                 </li>
@@ -136,7 +136,7 @@ $features = Auth::user()->tbl_features;
                 @endif
 
                 <li class="nav-header">CRM</li>
-                <hr>
+
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
@@ -179,7 +179,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="cart-outline"></ion-icon>
+                            <i class="nav-icon fas fa-cart-plus icon-size"></i>
                             <p>Sales
                                 <i class="right fas fa-angle-left"></i>
                             </p>
@@ -300,7 +300,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="briefcase-outline"></ion-icon>
+                            <i class="nav-icon fas fa-bullhorn icon-size"></i>
                             <p>
                                 Marketing
                                 <i class="right fas fa-angle-left"></i>
@@ -346,7 +346,7 @@ $features = Auth::user()->tbl_features;
                 @if ($features != null)
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                        <ion-icon name="easel-outline"></ion-icon>
+                            <i class="nav-icon fas fa-project-diagram icon-size"></i>
                             <p>
                                 Projects
                                 <i class="right fas fa-angle-left"></i>
