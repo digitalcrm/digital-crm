@@ -117,6 +117,7 @@
                                         <select class="form-control required" id='company' name="company" tabindex="6" required>
                                             {!!$data['companyoption']!!}
                                         </select>
+                                        <span class="small float-right block"><a href="{{ route('companies.create') }}" target="_blank">+ Add new company</a></span>
                                         @error('company')
                                         <div class="error">{{ $message }}</div>
                                         @enderror
@@ -309,7 +310,7 @@
         // });
 
         // alert(prosubcaturl);
-        CKEDITOR.replace('description');
+        // CKEDITOR.replace('description');
 
         $(".sidebar-menu li").removeClass("active");
         $("#liproducts").addClass("active");
