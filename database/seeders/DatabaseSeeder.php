@@ -1,6 +1,8 @@
 <?php
 
+use Database\Seeders\AccountTypeSeeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\UnitSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AdminSeeder::class);
+        $this->call([
+            // AdminSeeder::class,
+            AccountTypeSeeder::class,
+            UnitSeeder::class,
+        ]);
     }
 }
