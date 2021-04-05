@@ -64,7 +64,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'mobile' => 'required|digits:10|unique:users,mobile,',
-            'company' => 'required|max:55|unique:companies,c_name',
+            'company' => 'required|string|max:55|',
             'password' => 'required|string|min:8|confirmed',
             'g-recaptcha-response' => 'required', new Captcha(),
         ], $messages);
