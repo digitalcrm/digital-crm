@@ -84,7 +84,7 @@
                                     <div class="form-group row">
                                         <label for="prosubcat_id" class="col-md-3 col-form-label text-right">Product Sub Category</label>
                                         <div class="col-md-9">
-                                        <input type="text" class="form-control required" name="prosubcatId" id="prosubcatId" placeholder="Sub Category" value="{{old('prosubcatId')}}" required>
+                                        <input type="text" class="form-control required" name="prosubcatId" id="prosubcatId" placeholder="Type sub category name" value="{{old('prosubcatId')}}" required>
                                         <span class="text-danger">{{ $errors->first('prosubcatId') }}</span>
                                         <input type="hidden" name="billtoId" id="billtoId" />
                                         <input type="hidden" name="billtolabel" id="billtolabel" />
