@@ -232,7 +232,7 @@ table.dataTable.no-footer {
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #ccc;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
@@ -965,13 +965,13 @@ input[type="text"].form-control-navbar::-webkit-input-placeholder {
 input.form-control  {
     font-size: 18px;
     font-weight: 600;
-    color: #b1b1b1;
+    
 }
 
 select.form-control {
 	font-size: 18px;
     font-weight: 600;
-    color: #b1b1b1;
+    
 }
 input.form-control-navbar  {
     color: #fff;
