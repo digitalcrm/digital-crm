@@ -56,13 +56,15 @@ class RegisterController extends Controller
 
         $messages = array(
             'required' => ':attribute field is required.',
-            'unique' => 'Email Id is already exists.',
+            'unique' => ':attribute is already exists.',
             'min' => 'The field has to be 8 chars long!',
         );
 
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'mobile' => 'required|digits:10|unique:users,mobile,',
+            'company' => 'required|max:55|unique:companies,c_name',
             'password' => 'required|string|min:8|confirmed',
             'g-recaptcha-response' => 'required', new Captcha(),
         ], $messages);
@@ -76,12 +78,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+        ]);
+
+        $user->company()->create([
+            'c_name' => $data['company'],
+            'personal_name' => $data['name'],
+            'c_email' => $data['email'],
+            'c_mobileNum' => $data['mobile'],
+            'c_whatsappNum' => $data['mobile'],
         ]);
 
         $verifyUser = tbl_verifyuser::create([

@@ -11,8 +11,8 @@
             }
 
             /* .navbar-laravel {
-                                display: none !important;
-                            } */
+                                        display: none !important;
+                                    } */
 
             .btn-primary {
                 background-color: #024A81 !important;
@@ -56,13 +56,11 @@
                             @csrf
 
                             <div class="form-group mb-2">
-                                <!-- <label for="name"
-                                    class="text-uppercase small font-weight-bold label-color">{{ __('Name') }}</label> -->
 
                                 <div class="">
                                     <input id="name" type="text"
                                         class="form-control form-control-lg{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                        placeholder="Your name" name="name" value="{{ old('name') }}" required autofocus>
+                                        placeholder="Your name" name="name" value="{{ old('name') }}"  autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -73,13 +71,11 @@
                             </div>
 
                             <div class="form-group mb-2">
-                                <!-- <label for="email"
-                                    class="text-uppercase small font-weight-bold label-color">{{ __('E-Mail Address') }}</label> -->
 
                                 <div class="">
                                     <input id="email" type="email"
                                         class="form-control form-control-lg{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                        placeholder="Email address" name="email" value="{{ old('email') }}" required>
+                                        placeholder="Email address" name="email" value="{{ old('email') }}" >
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -90,13 +86,41 @@
                             </div>
 
                             <div class="form-group mb-2">
-                                <!-- <label for="password"
-                                    class="text-uppercase small font-weight-bold label-color">{{ __('Password') }}</label> -->
+                                <div class="">
+                                    <input id="mobile" type="tel"
+                                        class="form-control form-control-lg{{ $errors->has('mobile') ? ' is-invalid' : '' }}"
+                                        placeholder="Your mobile" name="mobile" value="{{ old('mobile') }}"
+                                        autofocus>
+
+                                    @if ($errors->has('mobile'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('mobile') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <div class="">
+                                    <input id="company" type="text"
+                                        class="form-control form-control-lg{{ $errors->has('company') ? ' is-invalid' : '' }}"
+                                        placeholder="Your Company" name="company" value="{{ old('company') }}"
+                                        autofocus>
+
+                                    @if ($errors->has('company'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('company') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-2">
 
                                 <div class="">
                                     <input id="password" type="password"
                                         class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        placeholder="Password" name="password" required>
+                                        placeholder="Password" name="password" >
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -107,12 +131,10 @@
                             </div>
 
                             <div class="form-group mb-2">
-                                <!-- <label for="password-confirm"
-                                    class="text-uppercase small font-weight-bold label-color">{{ __('Confirm Password') }}</label> -->
 
                                 <div class="">
                                     <input id="password-confirm" type="password" class="form-control form-control-lg"
-                                    placeholder="Confirm password" name="password_confirmation" required>
+                                        placeholder="Confirm password" name="password_confirmation" >
                                 </div>
                             </div>
 
