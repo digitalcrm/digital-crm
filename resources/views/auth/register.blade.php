@@ -60,7 +60,7 @@
                                 <div class="">
                                     <input id="name" type="text"
                                         class="form-control form-control-lg{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                        placeholder="Your name" name="name" value="{{ old('name') }}"  autofocus>
+                                        placeholder="Your name" name="name" value="{{ old('name') }}" required autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
                                 <div class="">
                                     <input id="email" type="email"
                                         class="form-control form-control-lg{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                        placeholder="Email address" name="email" value="{{ old('email') }}" >
+                                        placeholder="Email address" name="email" value="{{ old('email') }}" required>
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                                 <div class="">
                                     <input id="mobile" type="tel"
                                         class="form-control form-control-lg{{ $errors->has('mobile') ? ' is-invalid' : '' }}"
-                                        placeholder="Your mobile" name="mobile" value="{{ old('mobile') }}"
+                                        placeholder="Your mobile" name="mobile" value="{{ old('mobile') }}" required
                                         autofocus>
 
                                     @if ($errors->has('mobile'))
@@ -104,7 +104,7 @@
                                 <div class="">
                                     <input id="company" type="text"
                                         class="form-control form-control-lg{{ $errors->has('company') ? ' is-invalid' : '' }}"
-                                        placeholder="Your Company" name="company" value="{{ old('company') }}"
+                                        placeholder="Your Company" name="company" value="{{ old('company') }}" required
                                         autofocus>
 
                                     @if ($errors->has('company'))
@@ -120,7 +120,7 @@
                                 <div class="">
                                     <input id="password" type="password"
                                         class="form-control form-control-lg{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                        placeholder="Password" name="password" >
+                                        placeholder="Password" name="password" required>
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
@@ -134,7 +134,7 @@
 
                                 <div class="">
                                     <input id="password-confirm" type="password" class="form-control form-control-lg"
-                                        placeholder="Confirm password" name="password_confirmation" >
+                                        placeholder="Confirm password" name="password_confirmation" required>
                                 </div>
                             </div>
 
