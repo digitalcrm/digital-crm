@@ -16,8 +16,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!---Google Captcha--->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     @stack('styles')
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
