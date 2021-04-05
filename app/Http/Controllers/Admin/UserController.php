@@ -52,7 +52,7 @@ class UserController extends Controller
         //with('Tbl_leads')->
         $users = User::with('Tbl_user_types')
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(15);
 
         // echo json_encode($users);
         // exit();
@@ -138,7 +138,15 @@ class UserController extends Controller
                 $usertable .= '<td><a href="' . url('admin/users/setfeatures/' . $userdetails->id) . '">Set Features</a></td>';
                 $usertable .= '</tr>';
             }
-            $usertable .= '</tbody>';
+            $usertable .= '</tbody>
+            <tfoot><tr>
+            <td colspan="9">
+            '.
+            $users->links()
+            .'
+            </td>
+            </tr>
+            </tfoot>';
             $usertable .= '</table>';
         } else {
             $usertable = 'No records available';
