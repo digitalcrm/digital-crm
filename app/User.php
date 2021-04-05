@@ -8,13 +8,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\PasswordResetNotification;
 use App\Traits\DefaultProfile;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 //use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
 
-    use HasApiTokens, Notifiable, DefaultProfile;
+    use HasApiTokens, Notifiable, DefaultProfile, SoftDeletes;
     //use HasRoles;
 
     // use HasApitokens;

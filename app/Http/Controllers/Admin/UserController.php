@@ -456,7 +456,7 @@ class UserController extends Controller
             return redirect('admin/users')->with('error', 'Please remove from projects and delete user');
         } else {
 
-            $userdata = User::find($id);
+            $userdata = User::findOrFail($id);
             //        echo json_encode($userdata);
             $userdata->delete();
             return redirect('admin/users')->with('success', 'Deleted Successfully...!');
