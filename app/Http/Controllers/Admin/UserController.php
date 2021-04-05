@@ -60,7 +60,7 @@ class UserController extends Controller
         //where('user_type', 1)->
 
 
-        $total = count($users);
+        $total = $users->total();
 
         if (count($users) > 0) {
             $usertable = '<table id="usersTable" class="table">';
