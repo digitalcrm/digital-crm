@@ -15,7 +15,7 @@
         </div>
         <!-- /.container-fluid -->
     </div>
-    
+
     <!-- Main content -->
     <section class="content mt-2 mx-0">
 	<div class="container-fluid">
@@ -35,7 +35,7 @@
                 @endif
                 <div class="card shadow card-primary card-outline">
 
-                    
+
 
                     <!-- /.card-header -->
                     <div class="card-body p-0">

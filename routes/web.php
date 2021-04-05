@@ -15,7 +15,7 @@ Route::middleware(['auth:admin'])->group(function () {
     });
 });
 
-Auth::routes(['verify' => false]);
+Auth::routes();
 
 
 Route::middleware(['isActive'])->group(function () {
