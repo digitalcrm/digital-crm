@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Mail;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 //  Controllers
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\Admin\DailyReportsController;
@@ -53,8 +53,8 @@ class DailyReportsAdmin extends Command
         $title = 'Digital CRM';
         $content = $message['title'] . '<br>';
         $content .= $message['message'];
-        $fromMail = 'userone@digitalcrm.com';
-        $toMail = 'admin@digitalcrm.com';
+        $fromMail = 'info@bigindia.com';
+        $toMail = 'admin@bigindia.com';
         $subject = $message['subject'];
         Mail::send(['html' => 'emails.default'], ['title' => $title, 'content' => $content], function ($message) use ($fromMail, $toMail, $subject) {
             $message->subject($subject);

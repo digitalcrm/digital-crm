@@ -15,12 +15,13 @@ Route::middleware(['auth:admin'])->group(function () {
     });
 });
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false]);
 
 
 Route::middleware(['isActive'])->group(function () {
 
-    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+    // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+    Route::get('/home', 'HomeController@index')->name('home');
 
     // ------------------------------------------------------------------------
 
