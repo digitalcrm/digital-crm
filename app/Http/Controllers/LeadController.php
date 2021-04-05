@@ -611,7 +611,7 @@ class LeadController extends Controller
                 //-------------Image Validation----------------------------------
                 //            $file = $request->file('userpicture');
                 $name = time() . '.' . $file->getClientOriginalExtension();   //getClientOriginalName()
-                $file->move('uploads/leads/', $name);   //public_path() 
+                $file->move('uploads/leads/', $name);   //public_path()
                 $filename = '/uploads/leads/' . $name;
                 //            $leads->picture = $filename;
             }
@@ -621,7 +621,7 @@ class LeadController extends Controller
             $leadname = $request->input('first_name') . ' ' . $request->input('last_name') . ' ' . date('m-d-Y-h-i-s');
             $ld_status = $request->input('leadstatus');
 
-            // Get Lead Details 
+            // Get Lead Details
             $leads = $this->getLeadDetails($id);
             $createDeal = 0;
 
@@ -1398,7 +1398,7 @@ class LeadController extends Controller
             $formstable .= '<th>Add Deal</th>';
             $formstable .= '<th>Add as Customer</th>';
             $formstable .= '<th>Action</th>';
-            $formstable .= '<th class="none">Notes</th>';    // 
+            $formstable .= '<th class="none">Notes</th>';    //
             $formstable .= '</tr>';
             $formstable .= '</thead>';
             $formstable .= '<tbody>';
@@ -1411,7 +1411,7 @@ class LeadController extends Controller
 
                 $dealstages = Tbl_deals::where('ld_id', $formdetails->ld_id)->where('deal_status', 0)->where('active', 1)->sum('value'); //->whereIn('sfun_id', [1, 2, 3, 4])
 
-                $leadimage = ($formdetails->picture != '') ? $formdetails->picture : '/uploads/default/leads.png';
+                $leadimage = $formdetails->profile_img;
 
                 $product = ($formdetails->tbl_products != '') ? $formdetails->tbl_products->name : '';
                 // $company = ($formdetails->tbl_products->companies != '') ? $formdetails->tbl_products->companies->c_name : '';
@@ -1426,7 +1426,7 @@ class LeadController extends Controller
                 $formstable .= '<tr>';
                 $formstable .= '<td><div class="custom-control custom-checkbox"><input type="checkbox" class="checkAll custom-control-input" id="' . $formdetails->ld_id . '"><label class="custom-control-label" for="' . $formdetails->ld_id . '"></label></div></td>';
                 $formstable .= '<td class="table-title">';
-                $formstable .= '<img src="' . url($leadimage) . '" class="avatar"> ';
+                $formstable .= '<img src="' . $leadimage . '" class="avatar"> ';
                 $formstable .= '<h6><a href="' . url('leads/product/' . $formdetails->ld_id) . '">' . substr($formdetails->first_name . ' ' . $formdetails->last_name, 0, 25) . '</a><h6>';
                 // $formstable .= '<h6><div class="t-email"><a class="text-muted" href="' . url('mails/mailsend/leads/' . $formdetails->ld_id) . '">' . $formdetails->email . '</a></h6></div><div class="t-mob text-muted">' . $formdetails->mobile . '</div>';
                 $formstable .= $customer_status;
@@ -1787,7 +1787,7 @@ class LeadController extends Controller
                 //-------------Image Validation----------------------------------
                 //            $file = $request->file('userpicture');
                 $name = time() . '.' . $file->getClientOriginalExtension();   //getClientOriginalName()
-                $file->move('uploads/leads/', $name);   //public_path() 
+                $file->move('uploads/leads/', $name);   //public_path()
                 $filename = '/uploads/leads/' . $name;
                 //            $leads->picture = $filename;
             }
@@ -1797,7 +1797,7 @@ class LeadController extends Controller
             $leadname = $request->input('first_name') . ' ' . $request->input('last_name') . ' ' . date('m-d-Y-h-i-s');
             $ld_status = $request->input('leadstatus');
 
-            // Get Lead Details 
+            // Get Lead Details
             $leads = $this->getLeadDetails($id);
             $createDeal = 0;
 

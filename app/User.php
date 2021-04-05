@@ -6,6 +6,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\PasswordResetNotification;
+use App\Traits\DefaultProfile;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 //use Spatie\Permission\Traits\HasRoles;
@@ -13,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
 
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, DefaultProfile;
     //use HasRoles;
 
     // use HasApitokens;
@@ -26,6 +27,7 @@ class User extends Authenticatable
     protected $table = 'users';
     //Primary key
     public $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'email',
@@ -61,17 +63,7 @@ class User extends Authenticatable
 
     public function getProfileImgAttribute()
     {
-        return $this->profileLogo();
-    }
-
-    public function profileLogo()
-    {
-        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl();
-    }
-
-    protected function defaultProfilePhotoUrl()
-    {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4AA';
+        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl($this->name);
     }
 
     public function currency()

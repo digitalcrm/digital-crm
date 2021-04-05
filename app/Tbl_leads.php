@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Traits\DefaultProfile;
 use Illuminate\Database\Eloquent\Model;
 
 class Tbl_leads extends Model
 {
 
+    use DefaultProfile;
     //Table Name
     protected $table = 'tbl_leads';
     //Primary key
@@ -22,6 +24,13 @@ class Tbl_leads extends Model
     protected $fillable = [
         'ld_id', 'uid', 'fl_id', 'first_name', 'last_name', 'email', 'picture', 'phone', 'mobile', 'website', 'notes', 'message', 'acc_id', 'ldsrc_id', 'ldstatus_id', 'intype_id', 'cnt_id', 'street', 'city', 'state', 'country', 'zip', 'latitude', 'longitude', 'active', 'company', 'assigned', 'sal_id', 'fblead_id', 'uploaded_from', 'uploaded_id', 'designation', 'pro_id', 'leadtype'
     ];
+
+    protected $appends = ['profile_img'];
+
+    public function getProfileImgAttribute()
+    {
+        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl($this->first_name);;
+    }
 
     public function tbl_leadsource()
     {

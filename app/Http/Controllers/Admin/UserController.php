@@ -105,10 +105,11 @@ class UserController extends Controller
 
                 $emailverification = ($userdetails->email_verified_at !== null) ? '<small class="badge badge-success"><i class="fa fa-check" aria-hidden="true"></i> Verified</small>' : '<small class="badge badge-danger"><i class="fa fa-times" aria-hidden="true"></i> Not Verivified</small>';
 
-                $userimg = ($userdetails->picture != '') ? $userdetails->picture : 'uploads/default/user.png';
+                $userimg = $userdetails->profile_img;
 
                 $usertable .= '<tr>';
-                $usertable .= '<td><a href="' . url('admin/users/' . $userdetails->id) . '"><img src="' . url($userimg) . '" class="avatar" style="width:25px; height:25px;">' . $userdetails->name . '</a>&nbsp;</td>';
+                $usertable .= '<td><a href="' . url('admin/users/' . $userdetails->id) . '">
+                <img src="' . $userimg . '" class="avatar" style="width:25px; height:25px;">' . $userdetails->name . '</a>&nbsp;</td>';
                 $usertable .= '<td><a href="' . url('admin/mails/mailsend/users/' . $userdetails->id) . '">' . $userdetails->email . '</a></td>';
                 $usertable .= '<td>' . $userdetails->mobile . '</td>';
                 $usertable .= '<td>' . $jobTitle . '</td>';
