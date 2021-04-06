@@ -640,7 +640,7 @@ class ProductController extends Controller
 
         $defaultCurrency = currency::where('status', 1)->first();
 
-        $query = DB::table('tbl_products')->where('tbl_products.active', 1);
+        $query = Tbl_products::has('users')->where('tbl_products.active', 1);
         if (($id > 0) && ($id != 'All')) {
             $query->where('tbl_products.uid', $id);
             $query->where('tbl_products.user_type', $user_type);
@@ -648,7 +648,7 @@ class ProductController extends Controller
         $query->leftJoin('tbl_product_category', 'tbl_products.procat_id', '=', 'tbl_product_category.procat_id');
         $query->leftJoin('tbl_units', 'tbl_products.unit', '=', 'tbl_units.unit_id');
         // $query->leftJoin('tbl_cart_orders', 'tbl_products.pro_id', '=', 'tbl_cart_orders.pro_id');
-        $query->orderBy('tbl_products.pro_id', 'desc');
+        // $query->orderBy('tbl_products.pro_id', 'desc');
         $query->select(
             'tbl_products.*',
             'tbl_product_category.procat_id',
@@ -656,7 +656,7 @@ class ProductController extends Controller
             'tbl_units.name as uname',
             'tbl_units.sortname',
         );
-        $products = $query->get();
+        $products = $query->latest()->paginate(15);
 
         // echo json_encode($products);
         // exit(0);
@@ -739,7 +739,9 @@ class ProductController extends Controller
                 $formstable .= '</td>';
                 $formstable .= '</tr>';
             }
-            $formstable .= '</tbody>';
+            $formstable .= '</tbody><tfoot><tr>
+            <td colspan="11">'.$products->links().'</td>
+            </tr></tfoot>';
             $formstable .= '</table>';
         } else {
             $formstable = 'No records available';
@@ -801,14 +803,14 @@ class ProductController extends Controller
     public function RemoveSpecialChar($str)
     {
 
-        // Using str_replace() function  
-        // to replace the word  
+        // Using str_replace() function
+        // to replace the word
         $res = str_replace(array(
             '\'', '"',
             ',', ';', '<', '>'
         ), ' ', $str);
 
-        // Returning the result  
+        // Returning the result
         return $res;
     }
 

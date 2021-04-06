@@ -83,6 +83,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+            'cr_id' => 47, // Rupees bydefault
+            'country' => 101, // India bydefault
         ]);
 
         $user->company()->create([

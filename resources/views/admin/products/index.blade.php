@@ -95,11 +95,11 @@
                 $("#total").text(res.total);
                 $("#table").html(res.table);
                 $('#example1').DataTable({
-                    'paging': true,
+                    'paging': false,
                     'lengthChange': true,
                     'searching': true,
                     'ordering': false,
-                    'info': true,
+                    'info': false,
                     'autoWidth': false,
                     'columnDefs': [{
                         type: 'date-uk',
@@ -107,11 +107,11 @@
                     }]
                 });
                 $('#example2').DataTable({
-                    'paging': true,
+                    'paging': false,
                     'lengthChange': true,
                     'searching': true,
                     'ordering': false,
-                    'info': true,
+                    'info': false,
                     'autoWidth': false
                 });
             });

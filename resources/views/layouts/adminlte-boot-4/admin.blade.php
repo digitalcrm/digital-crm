@@ -309,11 +309,11 @@
             });
 
             $('#example1').DataTable({
-                'paging': true,
+                'paging': false,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': true,
-                'info': true,
+                'info': false,
                 'autoWidth': true,
             });
 
