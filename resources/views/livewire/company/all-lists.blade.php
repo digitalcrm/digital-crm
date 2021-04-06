@@ -1,6 +1,6 @@
 <div>
     <!--<div class="content-header">
-		
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4">
@@ -84,6 +84,7 @@
                                                         <a class="dropdown-item"
                                                             href="{{ route('companies.edit', $company->slug) }}">Edit</a>
                                                         <button class="dropdown-item"
+                                                            onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
                                                             wire:click.prevent="deleteCompany('{{ $company->id }}')">
                                                             Delete
                                                         </button>

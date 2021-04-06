@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Company;
 use App\Tbl_deals;
 use App\Tbl_forms;
 use App\Tbl_leads;
@@ -26,6 +27,7 @@ use App\Policies\InvoicePolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\CampaignPolicy;
+use App\Policies\CompanyPolicy;
 use App\Policies\DocumentPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -54,6 +56,7 @@ class AuthServiceProvider extends ServiceProvider
         Tbl_projects::class => ProjectPolicy::class,
         Tbl_mails::class => MailPolicy::class,
         Tbl_campaigns::class => CampaignPolicy::class,
+        Company::class => CompanyPolicy::class,
     ];
 
     /**

@@ -5,16 +5,22 @@ namespace App\Http\Livewire\Company;
 use App\Company;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AllLists extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
 
     public $companies;
 
     public function deleteCompany($id)
     {
+        // Gate::authorize('delete', Company::class);
+
         $deleteComp = Company::findOrFail($id);
+
+        $this->authorize('delete', $deleteComp);
         // dd($deleteComp);
         $deleteComp->delete();
 

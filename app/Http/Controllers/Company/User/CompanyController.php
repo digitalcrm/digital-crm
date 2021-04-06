@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Company\User;
 
 use App\Company;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class CompanyController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        // $this->authorizeResource(Company::class, 'company');
     }
     /**
      * Display a listing of the resource.
@@ -62,6 +64,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        Gate::authorize('update', $company);
         return view('company.edit',compact('company'));
     }
 
