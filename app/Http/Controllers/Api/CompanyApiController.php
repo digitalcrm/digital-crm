@@ -21,7 +21,7 @@ class CompanyApiController extends Controller
         $comapnies = Company::whereHas('users', function ($query) {
             $query->where('active', 1);
         })->whereHas('tbl_products', function (Builder $query) {
-            $query->where('active', 1)->where('enable',1);
+            $query->where('active', 1)->where('enable', 1);
         })->isActive()->latest()->get();
 
         return new CompanyCollection($comapnies);
@@ -48,7 +48,11 @@ class CompanyApiController extends Controller
     {
         $company->increment('views');
 
-        $companyDetail = $company->with(['tbl_countries', 'tbl_states', 'tbl_products'])->findOrFail($company->id);
+        $companyDetail = $company->whereHas('users', function ($query) {
+            $query->where('active', 1);
+        })->whereHas('tbl_products', function (Builder $query) {
+            $query->where('active', 1)->where('enable', 1);
+        })->with(['tbl_countries', 'tbl_states', 'tbl_products'])->findOrFail($company->id);
 
         return new CompanyResource($companyDetail);
     }
