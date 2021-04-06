@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Company;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CompanyCollection;
-use App\Http\Resources\CompanyResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\CompanyResource;
+use App\Http\Resources\CompanyCollection;
+use Illuminate\Database\Eloquent\Builder;
 
 class CompanyApiController extends Controller
 {
@@ -17,7 +18,12 @@ class CompanyApiController extends Controller
      */
     public function index()
     {
-        $comapnies = Company::with(['tbl_products'])->isActive()->latest()->get();
+        $comapnies = Company::whereHas('users', function ($query) {
+            $query->where('active', 1);
+        })->whereHas('tbl_products', function (Builder $query) {
+            $query->where('active', 1)->where('enable',1);
+        })->isActive()->latest()->get();
+
         return new CompanyCollection($comapnies);
     }
 
