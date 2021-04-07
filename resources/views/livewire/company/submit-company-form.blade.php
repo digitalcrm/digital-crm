@@ -169,7 +169,7 @@
                         <label class="col-md-3 col-form-label text-right" for="c_gstNumber">Company Gst
                             Number</label>
                         <div class="col-md-9">
-                            <input wire:model="c_gstNumber" type="text" class="form-control required" name="c_gstNumber"
+                            <input wire:model="c_gstNumber" type="text" class="form-control" name="c_gstNumber"
                                 id="c_gstNumber" placeholder="">
                             @error('c_gstNumber') <span class="text-danger">{{ $message }}</span> @enderror
 
@@ -179,7 +179,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-right" for="employees">Employees</label>
                         <div class="col-md-9">
-                            <input wire:model="employees" type="number" class="form-control required" name="employees"
+                            <input wire:model="employees" type="number" min="0" class="form-control" name="employees"
                                 id="employees" placeholder="">
                             @error('employees') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
@@ -311,7 +311,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label text-right" for="zipcode">Zip</label>
                         <div class="col-md-9">
-                            <input wire:model="zipcode" type="text" class="form-control required" name="zipcode"
+                            <input wire:model="zipcode" type="number" class="form-control required" name="zipcode"
                                 id="zipcode" placeholder="">
                             @error('zipcode') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
@@ -343,7 +343,7 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer bg-white pull-right text-right">
-                <a href="#" class="btn btn-outline-secondary mr-1">Cancel</a>
+                <a href="{{ route('companies.index') }}" class="btn btn-outline-secondary mr-1">Cancel</a>
                 <button type="submit" class="btn btn-primary">{{ __('custom.submit') }}</button>
             </div>
             <!-- </form> -->

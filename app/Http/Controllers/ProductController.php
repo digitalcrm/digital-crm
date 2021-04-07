@@ -210,7 +210,8 @@ class ProductController extends Controller
             'prosubcatId' => 'required',
             'billtoId' => 'required|numeric',
             'picture' => 'required|image',
-            'company' => 'required', 'min_quantity' => 'required|numeric',
+            'company' => 'required',
+            'min_quantity' => 'nullable|numeric',
             // 'productid' => 'required|max:255',
             // 'productsku' => 'required|max:255',
             // 'qrcode' => 'required|max:255',
@@ -220,8 +221,8 @@ class ProductController extends Controller
             // 'location' => 'required|max:255',
             // 'stock' => 'required'
         ], [
-            'min_quantity.required' => 'Minimum order of quantity is required',
-            'min_quantity.numeric' => 'Check given value',
+            // 'min_quantity.required' => 'Minimum order of quantity is required',
+            // 'min_quantity.numeric' => 'Check given value',
             'billtoId.required' => 'Check given Sub category',
             'billtoId.numeric' => 'Check given Sub category',
             'prosubcatId.required' => 'Product Sub Category is required',
@@ -303,6 +304,12 @@ class ProductController extends Controller
         $location = '';
         $stock = 0;
 
+        if (empty(request('min_quantity'))) {
+            $min_quantity = 1;
+        } else {
+            $min_quantity = request('min_quantity');
+        }
+
         $formdata = array(
             'uid' => Auth::user()->id,
             'name' => $request->input('name'),
@@ -328,7 +335,7 @@ class ProductController extends Controller
             'company' => $request->input('company'),
             'location' => $location,
             'stock' => $stock,
-            'min_quantity' => $request->input('min_quantity')
+            'min_quantity' => $min_quantity,
         );
 
         //    echo json_encode($formdata);

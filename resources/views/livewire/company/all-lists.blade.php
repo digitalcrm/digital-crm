@@ -49,7 +49,7 @@
                                     @forelse($companies as $company)
                                         <tr>
                                             <td>
-                                                <a href="https://bigindia.vercel.app/company/{{ $company->slug }}" target="_new">
+                                                <a href="{{ config('custom_appdetail.company').$company->slug }}" target="_new" rel="noopener noreferrer">
                                                     <img src="{{ $company->companyLogo() }}" alt="{{ $company->c_name }}" width="45px" height="45px"
                                                         style="border-radius: 50%" />
                                                     {{ $company->c_name }}

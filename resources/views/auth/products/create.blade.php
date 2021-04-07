@@ -43,7 +43,7 @@
                         {{Form::open(['action'=>'ProductController@store','method'=>'Post','enctype'=>'multipart/form-data','id'=>'proCreate'])}}
                         @csrf
                         <div class="card-body">
-                                
+
                                     <div class="form-group row">
                                         <label for="name" class="col-md-3 col-form-label text-right">Product Name</label>
                                         <div class="col-md-9">
@@ -104,7 +104,7 @@
                                     <div class="form-group row">
                                         <label for="min_quantity" class="col-md-3 col-form-label text-right">Minimum Order of Quantity (MOQ)</label>
                                         <div class="col-md-9">
-                                        <input type="text" class="form-control required" name="min_quantity" id="min_quantity" placeholder="" value="{{old('min_quantity')}}">
+                                        <input type="number" min="1" class="form-control required" name="min_quantity" id="min_quantity" placeholder="" value="{{old('min_quantity')}}">
                                         @error('min_quantity')
                                         <div class="error">{{ $message }}</div>
                                         @enderror
@@ -190,7 +190,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- 
+                                    <!--
                                     <div class="form-group">
                                         <label for="prosubcat_id">Product Sub Category</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                         <select class="form-control" id='prosubcat_id' name="prosubcat_id" tabindex="5" required>

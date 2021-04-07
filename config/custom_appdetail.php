@@ -7,6 +7,8 @@ return [
 
 	'product' => 'https://www.bigindia.com/product/',
 
+	'company' => 'https://www.bigindia.com/company/',
+
     'mail_info' => env('MAIL_FROM_INFO', 'info@bigindia.com'),
 
     'mail_support' => env('MAIL_FROM_SUPPORT', 'support@bigindia.com'),

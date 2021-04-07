@@ -61,7 +61,7 @@ class SubmitCompanyForm extends Component
     public function updated()
     {
         $this->validate([
-            'position' => 'nullable|max:15',
+            'position' => 'nullable|max:45',
             'c_logo' => 'nullable|image|max:1024',
             'document' => 'nullable|mimes:jpg,bmp,png,pdf,docx,doc,ppt,pptx|max:2024',
             'c_cover' => 'nullable|image|max:1024',
@@ -112,9 +112,9 @@ class SubmitCompanyForm extends Component
         return [
             'personal_name' => 'required|max:25',
             'c_email' => 'email',
-            'position' => 'nullable|max:15',
-            'c_mobileNum' => 'required|digits:10|unique:companies,c_mobileNum,' . optional($this->company)->id,
-            'c_whatsappNum' => 'required|digits:10|unique:companies,c_whatsappNum,' . optional($this->company)->id,
+            'position' => 'nullable|max:45',
+            'c_mobileNum' => 'required|digits_between:10,15|unique:companies,c_mobileNum,' . optional($this->company)->id,
+            'c_whatsappNum' => 'required|digits_between:10,15|unique:companies,c_whatsappNum,' . optional($this->company)->id,
             'c_name' => 'required|max:55|unique:companies,c_name,' . optional($this->company)->id,
             'category_id' => 'required|not_in:0', //business type
             'actype_id' => 'required|not_in:0', // company type
@@ -123,8 +123,8 @@ class SubmitCompanyForm extends Component
             'document' => 'nullable|mimes:jpg,bmp,png,pdf,docx,doc,ppt,pptx|max:2024',
             'c_cover' => 'nullable|image|max:1024',
             'c_webUrl' => 'nullable|',
-            'c_gstNumber' => 'required|digits:15',
-            'employees' => 'required|min:1',
+            'c_gstNumber' => 'nullable|digits_between:12,15',
+            'employees' => 'nullable|min:0',
             'google_map_url' => 'nullable|max:500',
             'yt_video_link' => 'nullable',
             'fb_link' => 'nullable',
@@ -135,7 +135,7 @@ class SubmitCompanyForm extends Component
             'state_id' => 'required|not_in:0',
             'address' => 'required|max:255',
             'city' => 'required|max:45',
-            'zipcode' => 'required|digits:6',
+            'zipcode' => 'required|digits_between:5,6',
             'showLive' => 'accepted',
             'termsAccept' => 'accepted',
         ];
@@ -155,6 +155,10 @@ class SubmitCompanyForm extends Component
 
         if ($this->c_cover) {
             $data['c_cover'] = $this->c_cover->storePublicly('companyCover', 'public');
+        }
+
+        if (empty($this->employees)) {
+            $data['employees'] = 0;
         }
 
         Company::create($data);
@@ -187,7 +191,10 @@ class SubmitCompanyForm extends Component
                 unset($data['c_cover']);
             }
 
-            // dd($data);
+            if (empty($this->employees)) {
+                $data['employees'] = 0;
+            }
+
             $this->company->update($data);
 
             session()->flash('success', 'company updated successfully.');
