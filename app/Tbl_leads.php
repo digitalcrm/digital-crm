@@ -22,7 +22,40 @@ class Tbl_leads extends Model
      * @var array
      */
     protected $fillable = [
-        'ld_id', 'uid', 'fl_id', 'first_name', 'last_name', 'email', 'picture', 'phone', 'mobile', 'website', 'notes', 'message', 'acc_id', 'ldsrc_id', 'ldstatus_id', 'intype_id', 'cnt_id', 'street', 'city', 'state', 'country', 'zip', 'latitude', 'longitude', 'active', 'company', 'assigned', 'sal_id', 'fblead_id', 'uploaded_from', 'uploaded_id', 'designation', 'pro_id', 'leadtype'
+        'ld_id',
+        'uid',
+        'fl_id',
+        'first_name',
+        'last_name',
+        'email',
+        'picture',
+        'phone',
+        'mobile',
+        'website',
+        'notes',
+        'message',
+        'acc_id',
+        'ldsrc_id',
+        'ldstatus_id',
+        'intype_id',
+        'cnt_id',
+        'street',
+        'city',
+        'state',
+        'country',
+        'zip',
+        'latitude',
+        'longitude',
+        'active',
+        'company',
+        'assigned',
+        'sal_id',
+        'fblead_id',
+        'uploaded_from',
+        'uploaded_id',
+        'designation',
+        'pro_id',
+        'leadtype',
     ];
 
     protected $appends = ['profile_img'];
@@ -104,6 +137,11 @@ class Tbl_leads extends Model
     public function tbl_products()
     {
         return $this->belongsTo('App\Tbl_products', 'pro_id');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company');
     }
 
     public function todos()

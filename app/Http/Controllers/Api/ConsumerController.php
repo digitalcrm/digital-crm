@@ -138,7 +138,7 @@ class ConsumerController extends Controller
         //
     }
 
-    // logout function 
+    // logout function
     public function logout(Request $request)
     {
         Auth::guard('consumer')->logout();
@@ -384,7 +384,7 @@ class ConsumerController extends Controller
             'city' => $data['city'],
             'street' => $data['address'],
             'zip' => '',
-            'company' => '',
+            'company' => $productDetails->company,
             'sal_id' => 0,
             'designation' => '',
             'pro_id' => $id,

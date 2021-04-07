@@ -208,6 +208,7 @@ class CrudController extends Controller
             $proPicture = ($prodetails['product']->picture != '') ? url($prodetails['product']->picture) : url('/uploads/default/products.jpg');
 
             $prId = $prodetails['product']->pro_id;
+            $prCompany = $prodetails['product']->company;
             $prName = $prodetails['product']->name;
             $prPicture = '<img src="' . $proPicture . '" height="25" width="25">';
             $prBrand = $prodetails['product']->vendor;
@@ -226,7 +227,7 @@ class CrudController extends Controller
                 $urMobile = $cartOrder->mobile;
 
                 if ($cartOrder->email != '') {
-                    // Admin Mail 
+                    // Admin Mail
 
                     $department = Tbl_emailcategory::where('category', 'Cart Order Placed')->first();
                     $template = Tbl_emailtemplates::where('ecat_id', $department->ecat_id)->first();
@@ -271,13 +272,13 @@ class CrudController extends Controller
                     //  For Admin
                     $from_mail = $cartOrder->email;
                     $to_email = $tmpemail;
-                    $title = 'Digital CRM';
+                    $title = config('app.name');
                     $this->sendMail($from_mail, $to_email, $content, $subject, $title);
 
                     //  For Consumer
                     $from_mail = $tmpemail;
                     $to_email = $cartOrder->email;
-                    $title = 'Digital CRM';
+                    $title = config('app.name');
                     $this->sendMail($from_mail, $to_email, $content, $subject, $title);
                 }
 

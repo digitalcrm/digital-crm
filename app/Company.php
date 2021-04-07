@@ -140,8 +140,14 @@ class Company extends Model
 
     public function productLead()
     {
-        $data = Tbl_leads::has('tbl_products')->where('uid',auth()->id())->where('active', 1)->where('leadtype',2)->count();
+        // $data = Tbl_leads::has('tbl_products')->where('uid',auth()->id())->where('active', 1)->where('leadtype',2)->count();
+        $data = $this->leads()->where('uid',auth()->id())->where('active', 1)->where('leadtype',2)->count();
         return $data;
+    }
+
+    public function leads()
+    {
+        return $this->hasMany(Tbl_leads::class, 'company');
     }
 
     public function scopeSearch($query, $val)
