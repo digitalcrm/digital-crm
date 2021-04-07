@@ -22,8 +22,6 @@
                             @csrf
 
                             <div class="form-group mb-4">
-                                <!-- <label for="email"
-                                        class="text-uppercase small font-weight-bold label-color">{{ __('E-Mail Address') }}</label> -->
                                 <div class="">
                                     <input id="email" type="email"
                                         class="form-control form-control-lg {{ $errors->has('email') ? ' is-invalid' : '' }}"
@@ -39,8 +37,6 @@
                             </div>
 
                             <div class="form-group">
-                                <!-- <label for="password"
-                                        class="text-uppercase small font-weight-bold label-color">{{ __('Password') }}</label> -->
 
                                 <div class="">
                                     <input id="password" type="password"

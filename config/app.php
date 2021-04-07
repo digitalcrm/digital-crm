@@ -13,7 +13,7 @@ return [
       |
      */
 
-    'name' => env('APP_NAME', 'Digital CRM'),
+    'name' => env('APP_NAME', 'CRM'),
     /*
       |--------------------------------------------------------------------------
       | Application Environment

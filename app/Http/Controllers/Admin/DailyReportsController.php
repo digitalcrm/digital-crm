@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Mail;
-//  Models
-use App\Admin;
 use App\User;
-use App\Tbl_Accounts;
-use App\Tbl_leads;
-use App\Tbl_contacts;
-use App\Tbl_forms;
-use App\Tbl_formleads;
+use App\Admin;
 use App\Tbl_deals;
-//  Controllers
-use App\Http\Controllers\Admin\MailController;
+use App\Tbl_forms;
+//  Models
+use App\Tbl_leads;
+use App\Tbl_Accounts;
+use App\Tbl_contacts;
 use App\Tbl_products;
+use App\Tbl_formleads;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+//  Controllers
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Admin\MailController;
 
 class DailyReportsController extends Controller
 {
@@ -28,8 +28,8 @@ class DailyReportsController extends Controller
         $title = "Laravel Scheduler - CronJob Testing...";
         $subject = "CronJob Testing..." . date('d-m-Y h:i:s');
         $message = "CronJob Testing..." . date('d-m-Y h:i:s');
-        $from = "mainuser@digitalcrm.com";
-        $to = "admin@digitalcrm.com";
+        $from = config('custom_appdetail.mail_info');
+        $to = config('mail.from.address');
 
         Mail::send(['html' => 'emails.default'], ['title' => $title, 'content' => $message], function ($message) use ($from, $to, $subject) {
             $message->subject($subject);

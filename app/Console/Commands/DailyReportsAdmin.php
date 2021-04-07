@@ -50,11 +50,11 @@ class DailyReportsAdmin extends Command
         $drObj = new DailyReportsController();
         $message = $drObj->getDailyReport();
 
-        $title = 'Digital CRM';
+        $title = config('app.name');
         $content = $message['title'] . '<br>';
         $content .= $message['message'];
-        $fromMail = 'info@bigindia.com';
-        $toMail = 'admin@bigindia.com';
+        $fromMail = config('custom_appdetail.mail_info');
+        $toMail = config('mail.from.address');
         $subject = $message['subject'];
         Mail::send(['html' => 'emails.default'], ['title' => $title, 'content' => $content], function ($message) use ($fromMail, $toMail, $subject) {
             $message->subject($subject);
