@@ -51,17 +51,17 @@
                     Appointment
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('reports/productleads*') ? 'active-bg' : ''}}">
+            <li class="nav-item {{ request()->is('rreports/products') ? 'active-bg' : ''}}">
                 <a href="{{ url('reports/products') }}" class="nav-link">
                     Products
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('reports/productleads*') ? 'active-bg' : ''}}">
+            <li class="nav-item {{ request()->is('reports/companies') ? 'active-bg' : ''}}">
                 <a href="{{ url('reports/companies') }}" class="nav-link">
                     Companies
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('reports/productleads*') ? 'active-bg' : ''}}">
+            <li class="nav-item {{ request()->is('reports/productleads') ? 'active-bg' : ''}}">
                 <a href="{{ url('reports/productleads') }}" class="nav-link">
                     Product Leads
                 </a>

@@ -138,7 +138,7 @@ class LeadgenerateController extends Controller
         //----------------------Lead Mail-----------------------------
         // From Mail - Administrator
         // To Mail - User
-        //        $title = '6wresearch';
+        //        $title = 'config('app.name');
         //        $content = 'Thank you for contacting us';
         //'mail'
         //        Mail::send(['html' => 'emails.default'], ['title' => $title, 'content' => $message], function ($message) use($fromMail, $toMail, $subject) {
@@ -147,7 +147,7 @@ class LeadgenerateController extends Controller
         //            $message->to($toMail);   //'isandeep.1609@gmail.com'
         //        });
 
-        $title = '6wresearch';
+        $title = config('app.name');
 
         $mail = new MailController();
         return $mail->sendMail($fromMail, $toMail, $message, $subject, $title);
@@ -155,7 +155,7 @@ class LeadgenerateController extends Controller
 
     public function sendUserMail($uid, $first_name_ar, $email_ar, $mobile_ar, $website_ar, $notes_ar, $post_url_ar, $formdetails)
     {
-        $title = '6wresearch';
+        $title = config('app.name');
 
         $department = Tbl_emailcategory::where('category', 'Lead Added')->first();
         $template = Tbl_emailtemplates::where('ecat_id', $department->ecat_id)->first();
@@ -346,7 +346,7 @@ class LeadgenerateController extends Controller
             $captcha_script = '';
             $captcha_div = '';
             if (($form->site_key != '') && ($form->secret_key != '')) {
-                //                <div class="g-recaptcha" data-sitekey="6LdixH0UAAAAAJGo_rlykZn_tUtXU-6cMdFyqU_7"></div> 
+                //                <div class="g-recaptcha" data-sitekey="6LdixH0UAAAAAJGo_rlykZn_tUtXU-6cMdFyqU_7"></div>
                 //                <button class="g-recaptcha" data-sitekey="6LeE0n0UAAAAAL8EEDPDguDMws-RVzlb086O6Zhk" data-callback="YourOnSubmitFn">Submit</button>
 
 
@@ -387,16 +387,16 @@ class LeadgenerateController extends Controller
             $previewform .= '<input type="submit" name="submitLead"/><br><br>';
             $previewform .= '</form>';
         }
-        //        
-        //        
+        //
+        //
         //        return json_encode($request->input());
 
 
         return $previewform;
     }
-    
+
     public function receiveEmail(){
-        
+
         $fd = fopen("php://stdin", "r");
         $rawEmail = "";
         while (!feof($fd)) {
@@ -411,22 +411,22 @@ class LeadgenerateController extends Controller
         $from = $parser->getHeader('from');
         $subject = $parser->getHeader('subject');
         $text = $parser->getMessageBody('text');
-        
+
         $msg = array(
             'to_address'=>$to,
             'from_address'=>$from,
             'subject'=>$subject,
             'message' =>$text
             );
-        
-        
+
+
         $query = DB::table('tbl_mails_sample')->insert($msg);
-        
+
         if($query->mail_id){
             return TRUE;
         }else{
             return FALSE;
-        }    
-    
+        }
+
     }
 }

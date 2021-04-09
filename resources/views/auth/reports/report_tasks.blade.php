@@ -232,8 +232,8 @@
             labels: labels,
             datasets: [{
                     label: label,
-                    backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-                    borderColor: window.chartColors.blue,
+                    backgroundColor: '#3374FF',
+                    borderColor: '#3364FF',
                     borderWidth: 1,
                     data: data
                 }]

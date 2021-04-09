@@ -283,7 +283,7 @@
 
 
         // $("#submitForm").submit(function(event) {
-        //     event.preventDefault(); //prevent default action 
+        //     event.preventDefault(); //prevent default action
         //     var post_url = $(this).attr("action"); //get form action url
         //     var form_data = $(this).serialize(); //Encode form elements for submission
 
@@ -305,7 +305,7 @@
         //     $('#mobile-error').html("");
 
         //     $.ajax({
-        //         url: 'http://localhost/6wresearch/accounts',
+        //         url: '/accounts',
         //         type: 'POST',
         //         data: formData,
         //         success: function(data) {

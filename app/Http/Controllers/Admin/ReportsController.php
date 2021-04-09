@@ -34,7 +34,7 @@ class ReportsController extends Controller
         $this->middleware('test:reports', ['only' => ['index']]);
     }
 
-    //-----------------Leads------------------------------------    
+    //-----------------Leads------------------------------------
 
     public function leads()
     {

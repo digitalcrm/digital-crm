@@ -2642,21 +2642,23 @@ Route::namespace('Task')->group(function () {
 
 #=================================================Report Section Task User Panel================#
 
-Route::get('reports/tasks', 'Task\User\ReportsController@tasks')->name('reports.tasks');
-Route::get('reports/getDaytasks/{time}/{form_id}', 'Task\User\ReportsController@getDaytasks');
-Route::post('reports/getDaytasks/{time}/{form_id}', 'Task\User\ReportsController@getDaytasks');
-Route::get('reports/getMonthtasks/{time}/{form_id}', 'Task\User\ReportsController@getMonthtasks');
-Route::post('reports/getMonthtasks/{time}/{form_id}', 'Task\User\ReportsController@getMonthtasks');
-Route::get('reports/getWeektasks/{time}/{form_id}', 'Task\User\ReportsController@getWeektasks');
-Route::post('reports/getWeektasks/{time}/{form_id}', 'Task\User\ReportsController@getWeektasks');
-#=================================================Report Section Task Admin Panel================#
-Route::get('admin/reports/tasks', 'ReportsController@tasks')->name('admin.tasks.reports');
-Route::get('admin/reports/getDaytasks/{time}/{form_id}/{user_id}', 'ReportsController@getDaytasks');
-Route::post('admin/reports/getDaytasks/{time}/{form_id}/{user_id}', 'ReportsController@getDaytasks');
-Route::get('admin/reports/getMonthtasks/{time}/{form_id}/{user_id}', 'ReportsController@getMonthtasks');
-Route::post('admin/reports/getMonthtasks/{time}/{form_id}/{user_id}', 'ReportsController@getMonthtasks');
-Route::get('admin/reports/getWeektasks/{time}/{form_id}/{user_id}', 'ReportsController@getWeektasks');
-Route::post('admin/reports/getWeektasks/{time}/{form_id}/{user_id}', 'ReportsController@getWeektasks');
+Route::namespace('Task')->group(function () {
+    Route::get('reports/tasks', 'User\ReportsController@tasks')->name('reports.tasks');
+    Route::get('reports/getDaytasks/{time}/{form_id}', 'User\ReportsController@getDaytasks');
+    Route::post('reports/getDaytasks/{time}/{form_id}', 'User\ReportsController@getDaytasks');
+    Route::get('reports/getMonthtasks/{time}/{form_id}', 'User\ReportsController@getMonthtasks');
+    Route::post('reports/getMonthtasks/{time}/{form_id}', 'User\ReportsController@getMonthtasks');
+    Route::get('reports/getWeektasks/{time}/{form_id}', 'User\ReportsController@getWeektasks');
+    Route::post('reports/getWeektasks/{time}/{form_id}', 'User\ReportsController@getWeektasks');
+    #=================================================Report Section Task Admin Panel================#
+    Route::get('admin/reports/tasks', 'ReportsController@tasks')->name('admin.tasks.reports');
+    Route::get('admin/reports/getDaytasks/{time}/{form_id}/{user_id}', 'ReportsController@getDaytasks');
+    Route::post('admin/reports/getDaytasks/{time}/{form_id}/{user_id}', 'ReportsController@getDaytasks');
+    Route::get('admin/reports/getMonthtasks/{time}/{form_id}/{user_id}', 'ReportsController@getMonthtasks');
+    Route::post('admin/reports/getMonthtasks/{time}/{form_id}/{user_id}', 'ReportsController@getMonthtasks');
+    Route::get('admin/reports/getWeektasks/{time}/{form_id}/{user_id}', 'ReportsController@getWeektasks');
+    Route::post('admin/reports/getWeektasks/{time}/{form_id}/{user_id}', 'ReportsController@getWeektasks');
+});
 
 
 #=============================================Ticketing==================#
