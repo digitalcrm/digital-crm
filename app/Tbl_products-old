@@ -68,11 +68,6 @@ class Tbl_products extends Model
         return $this->belongsTo('App\Tbl_product_subcategory', 'prosubcat_id');
     }
 
-    public function tbl_pro_subcategory()
-    {
-        return $this->hasMany('App\Tbl_pro_subcategory', 'pro_id');
-    }
-
     public function tbl_deals()
     {
         return $this->hasMany('App\Tbl_products', 'pro_id');

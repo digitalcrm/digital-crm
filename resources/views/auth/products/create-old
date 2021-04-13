@@ -44,7 +44,7 @@
                             @csrf
                             <div class="card-body">
 
-                                {{-- <div class="form-group row">
+                                <div class="form-group row">
                                     <label for="name" class="col-md-3 col-form-label text-right">Product Type</label>
                                     <div class="col-md-9">
                                         <select id="proType" name="proType">
@@ -55,7 +55,7 @@
                                             <div class="error">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div> --}}
+                                </div>
 
                                 <div class="form-group row">
                                     <label for="name" class="col-md-3 col-form-label text-right">Product Name</label>
@@ -103,7 +103,7 @@
                                         Category</label>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control required" name="prosubcatId" id="prosubcatId"
-                                            placeholder="Enter your mulitple keywords/business category" value="{{ old('prosubcatId') }}"
+                                            placeholder="Type sub category name" value="{{ old('prosubcatId') }}"
                                             required>
                                         <span class="text-danger">{{ $errors->first('prosubcatId') }}</span>
                                         <input type="hidden" name="billtoId" id="billtoId" />
@@ -162,7 +162,7 @@
                                 <div class="form-group row">
                                     <label for="description" class="col-md-3 col-form-label text-right">Description</label>
                                     <div class="col-md-9">
-                                        <div class="">
+                                        <div class="required">
                                             <textarea class="form-control required" name="description" id="description"
                                                 rows="5" tabindex="3" required>{{ old('description') }}</textarea>
                                             @error('description')
@@ -220,35 +220,35 @@
                                 </div>
 
                                 <!--
-                                                    <div class="form-group">
-                                                        <label for="prosubcat_id">Product Sub Category</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
-                                                        <select class="form-control" id='prosubcat_id' name="prosubcat_id" tabindex="5" required>
-                                                        </select>
-                                                        @error('prosubcat_id')
-                                                                            <div class="error">{{ $message }}</div>
-                                                        @enderror
-                                                    </div> -->
+                                            <div class="form-group">
+                                                <label for="prosubcat_id">Product Sub Category</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
+                                                <select class="form-control" id='prosubcat_id' name="prosubcat_id" tabindex="5" required>
+                                                </select>
+                                                @error('prosubcat_id')
+                                                        <div class="error">{{ $message }}</div>
+                                                @enderror
+                                            </div> -->
 
                                 <!-- <div class="form-group">
-                                                        <label for="picture">Product SlideShow Pictures</label><br>
-                                                        <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_2" />
-                                                        <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
-                                                    </div>
+                                                <label for="picture">Product SlideShow Pictures</label><br>
+                                                <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_2" />
+                                                <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
+                                            </div>
 
-                                                    <div class="form-group">
-                                                        <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_3" tabindex="" />
-                                                        <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
-                                                    </div>
+                                            <div class="form-group">
+                                                <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_3" tabindex="" />
+                                                <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
+                                            </div>
 
-                                                    <div class="form-group">
-                                                        <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_4" tabindex="" />
-                                                        <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
-                                                    </div>
+                                            <div class="form-group">
+                                                <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_4" tabindex="" />
+                                                <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
+                                            </div>
 
-                                                    <div class="form-group">
-                                                        <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_5" tabindex="" />
-                                                        <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
-                                                    </div> -->
+                                            <div class="form-group">
+                                                <input type="file" class="btn btn-default" name="slideshowpics[]" id="pic_5" tabindex="" />
+                                                <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('slideshowpics') }}</strong></span>
+                                            </div> -->
                                 @error('slideshowpics')
                                     <!-- <div class="error">{{ $message }}</div> -->
                                 @enderror
@@ -299,14 +299,12 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    {{-- <script src="{{ asset('assets/bower_components/ckeditor/ckeditor.js') }}"></script> --}}
+    <script src="{{ asset('assets/bower_components/ckeditor/ckeditor.js') }}"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-            <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> -->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> -->
     <style>
         .ui-autocomplete {
             max-height: 200px;
@@ -316,24 +314,22 @@
         }
 
         /* IE 6 doesn't support max-height
-                 * we use height instead, but this forces the menu to always be this tall
-                 */
+             * we use height instead, but this forces the menu to always be this tall
+             */
         * html .ui-autocomplete {
             height: 200px;
         }
 
     </style>
 
-    <!-- <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"> -->
-
+    <link rel="stylesheet" type="text/css"
+        href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
     <script>
         // var url = "{{ url('admin/ajax/getUserCurrency') }}";
         var prosubcaturl = "{{ url('products/ajaxgetproductsubcategory/{id}') }}";
-        var prosubcaturlAuto = "{{ url('products/getproductsubcategory/autocompleteoptions/{id}/{keyword}') }}";
-        // var prosubcaturlSelect = "{{ url('products/getproductsubcategory/selectoptions/{id}') }}";
 
         $(function() {
-            // $('.select2').select2();
+
             // $("#proCreate").submit(function() {
             //     alert('form Submit');
             //     // var editor1 = document.getElementById('description').value;
@@ -346,31 +342,12 @@
             // });
 
             // alert(prosubcaturl);
-
             // CKEDITOR.replace('description');
 
             $(".sidebar-menu li").removeClass("active");
             $("#liproducts").addClass("active");
 
             // $("#tags").val();
-            // $("#birds").autocomplete({
-            //     source: function(request, response) {
-            //         $.get(prosubcaturlAuto, {
-            //             keyword: request.term
-            //         }, function(data) {
-            //             response($.map(data, function(item) {
-            //                 return {
-            //                     label: item.value,
-            //                     value: item.id
-            //                 }
-            //             }))
-            //         }, "json");
-            //     },
-            //     minLength: 1,
-            //     dataType: "json",
-            //     cache: false
-            // });
-
 
 
             $("#selectUser").change(function() {
@@ -385,157 +362,61 @@
                 });
             });
 
-            // $("#prosubcatId").click(function() {
-            //     // alert('click');
-            //     var catId = $("#procat_id").val();
-            //     if (catId > 0) {
-            //         autoCompleteProSubCategory(catId);
-            //     }
-            // });
+
+            $("#proType").change(function() {
+
+                var type = $(this).val();
+
+                $.get('', {}, function(result, status) {
+
+                });
+            });
+
 
             $("#procat_id").change(function() {
                 var catId = $(this).val();
                 if (catId > 0) {
-                    // $.get(prosubcaturl, {
-                    //     'procat_id': catId
-                    // }, function(result) {
-                    //     // alert(result);
-                    //     // $("#prosubcat_id").html(result);
-                    //     $("#prosubcatId").val('');
-                    //     $("#prosubcatId").autocomplete({
-                    //         appendTo: $("#projectDiv"),
-                    //         source: eval("(" + result + ")"), //countries_starting_with_A
-                    //         minLength: 1,
-                    //         select: function(event, ui) {
-                    //             // alert("Id : " + ui.item.id + " Label : " + ui.item.label); //+ " Value : " + ui.item.value
-                    //             $("#billtoId").val(ui.item.id);
-                    //             $("#billtolabel").val(ui.item.label);
-                    //             // $("#billtovalue").val(ui.item.value);
-                    //         },
-                    //         open: function(event, ui) {
-                    //             var len = $('.ui-autocomplete > li').length;
-                    //         },
-                    //         close: function(event, ui) {},
-                    //         change: function(event, ui) {
-                    //             if (ui.item === null) {
-                    //                 $(this).val('');
-                    //             }
-                    //         }
-                    //     }).autocomplete("instance")._renderItem = function(ul, item) {
-                    //         return $("<li>")
-                    //             .append("<div>" + item.label + "</div>") //   "<br>" + item.value +
-                    //             .appendTo(ul);
-                    //     };
-                    //     //        });
+                    $.get(prosubcaturl, {
+                        'procat_id': catId
+                    }, function(result) {
+                        // alert(result);
+                        // $("#prosubcat_id").html(result);
+                        $("#prosubcatId").val('');
+                        $("#prosubcatId").autocomplete({
+                            appendTo: $("#projectDiv"),
+                            source: eval("(" + result + ")"), //countries_starting_with_A
+                            minLength: 1,
+                            select: function(event, ui) {
+                                // alert("Id : " + ui.item.id + " Label : " + ui.item.label); //+ " Value : " + ui.item.value
+                                $("#billtoId").val(ui.item.id);
+                                $("#billtolabel").val(ui.item.label);
+                                // $("#billtovalue").val(ui.item.value);
+                            },
+                            open: function(event, ui) {
+                                var len = $('.ui-autocomplete > li').length;
+                            },
+                            close: function(event, ui) {},
+                            change: function(event, ui) {
+                                if (ui.item === null) {
+                                    $(this).val('');
+                                }
+                            }
+                        }).autocomplete("instance")._renderItem = function(ul, item) {
+                            return $("<li>")
+                                .append("<div>" + item.label +
+                                    "</div>") //   "<br>" + item.value +
+                                .appendTo(ul);
+                        };
+                        //        });
 
-                    //     // mustMatch (no value) implementation
-                    //     $("#prosubcatId").focusout(function() {});
-                    // });
-
-                    $("#prosubcatId").val('');
-                    autoCompleteProSubCategory(catId);
-                    // selectTwoOptions(catId);
-
+                        // mustMatch (no value) implementation
+                        $("#prosubcatId").focusout(function() {});
+                    });
                 }
             });
 
 
         });
-
-        function autoCompleteProSubCategory(catId) {
-            //  birds
-            // $("#prosubcatId").autocomplete({
-            //     source: function(request, response) {
-            //         $.get(prosubcaturlAuto, {
-            //             id: catId,
-            //             keyword: request.term
-            //         }, function(data) {
-            //             // alert(eval("(" + data + ")"));
-            //             response($.map(data, function(item) {
-            //                 return {
-            //                     label: item.value,
-            //                     value: item.value,
-            //                     key: item.key
-            //                 }
-            //             }))
-            //         }, "json");
-            //     },
-            //     minLength: 1,
-            //     dataType: "json",
-            //     cache: false,
-            //     select: function(event, ui) {
-            //         // alert("Id : " + ui.item.value + " Label : " + ui.item.label + " Key : " + ui.item.key); //+ " Value : " + ui.item.value
-            //         $("#billtoId").val(ui.item.key);
-            //         $("#billtolabel").val(ui.item.label);
-            //         // $("#billtovalue").val(ui.item.value);
-            //     },
-            // });
-
-            $("#prosubcatId")
-                // don't navigate away from the field on tab when selecting an item
-                .on("keydown", function(event) {
-                    if (event.keyCode === $.ui.keyCode.TAB &&
-                        $(this).autocomplete("instance").menu.active) {
-                        event.preventDefault();
-                    }
-                })
-                .autocomplete({
-                    source: function(request, response) {
-                        $.getJSON(prosubcaturlAuto, {
-                            id: catId,
-                            keyword: extractLast(request.term)
-                        }, response);
-                    },
-                    search: function() {
-                        // custom minLength
-                        var term = extractLast(this.value);
-                        if (term.length < 2) {
-                            return false;
-                        }
-                    },
-                    focus: function() {
-                        // prevent value inserted on focus
-                        return false;
-                    },
-                    select: function(event, ui) {
-                        var terms = split(this.value);
-                        // alert(terms);
-                        // remove the current input
-                        terms.pop();
-                        // add the selected item
-                        terms.push(ui.item.value);
-                        // alert(ui.item.value);
-                        // add placeholder to get the comma-and-space at the end
-                        terms.push("");
-                        this.value = terms.join(", ");
-                        // alert(terms);
-                        return false;
-                    }
-                });
-
-            $("#prosubcatId").blur();
-
-
-
-        }
-
-        function split(val) {
-            return val.split(/,\s*/);
-        }
-
-        function extractLast(term) {
-            return split(term).pop();
-        }
-
-        function selectTwoOptions(catId) {
-            // alert(prosubcaturlSelect);
-            $.get(prosubcaturlSelect, {
-                'id': catId
-            }, function(result) {
-                // alert(result);
-                $("#select2").html(result);
-            });
-        }
 
     </script>
 

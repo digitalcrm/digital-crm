@@ -78,9 +78,10 @@ $picUrl = ($data['product']->picture != '') ? url($data['product']->picture) : u
                                     if ($data['product']->tbl_productcategory != '') {
                                         echo '<li class="breadcrumb-item"><a href=' . url('/shop/sitemap/products/category/' . $data['product']->tbl_productcategory->slug) . '>' . (($data['product']->tbl_productcategory != '') ? $data['product']->tbl_productcategory->category : '') . '</a></li>';
                                     }
-                                    // if ($data['product']->tbl_product_subcategory != '') {
-                                    //     echo '<li class="breadcrumb-item"><a href=' . url('/shop/sitemap/products/subcategory/' . $data['product']->tbl_product_subcategory->slug) . '>' . (($data['product']->tbl_product_subcategory != '') ? $data['product']->tbl_product_subcategory->category : '') . '</a></li>';
-                                    // }
+                                    if ($data['product']->tbl_product_subcategory != '') {
+                                        //  /sitemap/products/subcategory/
+                                        echo '<li class="breadcrumb-item"><a href=' . url('/shop/sitemap/products/subcategory/' . $data['product']->tbl_product_subcategory->slug) . '>' . (($data['product']->tbl_product_subcategory != '') ? $data['product']->tbl_product_subcategory->category : '') . '</a></li>';
+                                    }
 
                                     ?>
 
@@ -89,7 +90,8 @@ $picUrl = ($data['product']->picture != '') ? url($data['product']->picture) : u
                             <div class="card-tools">
                                 <ul class="nav nav-pills ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" target="_blank" href="{{url('shop/product/'.$data['product']->slug)}}"><small>Go to Store</small></a>
+                                        <!-- <a class="nav-link" target="_blank" href="{{url('shop/product/'.$data['product']->slug)}}"><small>Go to Store</small></a> -->
+                                        <a class="nav-link" target="_blank" href="{{ config('custom_appdetail.product') .$data['product']->slug  }}"><small>Go to Store</small></a>
                                     </li>
                                 </ul>
                             </div>

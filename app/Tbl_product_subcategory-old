@@ -21,7 +21,7 @@ class Tbl_product_subcategory extends Model
      *
      * @var array
      */
-    protected $fillable = ['prosubcat_id', 'procat_id', 'category', 'slug'];
+    protected $fillable = ['prosubcat_id', 'procat_id', 'category','slug'];
 
     public function tbl_products()
     {
@@ -31,10 +31,5 @@ class Tbl_product_subcategory extends Model
     public function tbl_product_category()
     {
         return $this->belongsTo('App\Tbl_productcategory', 'procat_id');
-    }
-
-    public function tbl_pro_subcategory()
-    {
-        return $this->hasMany('App\Tbl_pro_subcategory', 'prosubcat_id');
     }
 }

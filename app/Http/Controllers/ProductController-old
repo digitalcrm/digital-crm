@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
+use App\User;
+use App\Company;
+use App\currency;
+use App\Tbl_units;
+use App\Tbl_Accounts;
 use App\Tbl_products;
 use App\Tbl_productcategory;
-use App\Tbl_product_subcategory;
-use App\Tbl_units;
-use App\User;
-use App\currency;
-use App\Tbl_Accounts;
-use App\Company;
-// use Excel;
-use App\Imports\ProductsImport;
+use Illuminate\Http\Request;
 use App\Exports\ProductsExport;
-use App\Tbl_pro_subcategory;
+use App\Imports\ProductsImport;
+use Illuminate\Validation\Rule;
+use App\Tbl_product_subcategory;
+use Illuminate\Support\Facades\DB;
+// use Excel;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 
 class ProductController extends Controller
@@ -34,6 +33,8 @@ class ProductController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('test:products', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'delete', 'deleteAll', 'import', 'importData', 'export', 'exportData']]);
+        $this->middleware('verified');
+        $this->middleware('isActive');
     }
 
     /**
@@ -115,7 +116,7 @@ class ProductController extends Controller
                 $formstable .= '<td>' . $category . '</td>';
                 $formstable .= '<td>' . $c_name . '</td>';  //  $formdetails->vendor
                 $formstable .= '<td>' . $formdetails->views . '</td>';
-                $formstable .= '<td>' . $cartOrders . '</td>';
+                $formstable .= '<td><a href="'.url('/leads/getproductleads/list').'">' . $cartOrders . '</a></td>';
                 $formstable .= '<td>' . $storeStat . '</td>';
                 $formstable .= '<td>' . date('m-d-Y', strtotime($formdetails->created_at)) . '</td>';
                 $formstable .= '<td>';
@@ -207,7 +208,7 @@ class ProductController extends Controller
             'procat_id' => 'required|numeric',
             // 'prosubcat_id' => 'required',
             'prosubcatId' => 'required',
-            // 'billtoId' => 'required|numeric',
+            'billtoId' => 'required|numeric',
             'picture' => 'required|image',
             'company' => 'required',
             'min_quantity' => 'nullable|numeric',
@@ -288,12 +289,9 @@ class ProductController extends Controller
         $store = ($request->input('store') != '') ? 1 : 0;
         $units = ($request->input('units') > 0) ? $request->input('units') : 0;
         // $prosubcat_id = ($request->input('prosubcat_id') != '') ? $request->input('prosubcat_id') : 0;
-        // $prosubcat_id = ($request->input('billtoId') != '') ? $request->input('billtoId') : 0;
-        $prosubcat_id = $request->input('prosubcatId');
+        $prosubcat_id = ($request->input('billtoId') != '') ? $request->input('billtoId') : 0;
         $slideshowpics = (count($slideimags) > 0) ? implode(",", $slideimags) : '';
         $slug = $this->createSlug($request->input('name'));
-
-        $select2 = $request->input('select2');
         $current_stock = 0;
         // $supply_price = ($request->input('supply_price') != '') ? $request->input('supply_price') : 0;
         // $stock = ($request->input('stock') != '') ? $request->input('stock') : 0;
@@ -306,28 +304,11 @@ class ProductController extends Controller
         $location = '';
         $stock = 0;
 
-        $prosubcat_id = str_replace('"', "", $prosubcat_id);
-        $proSubcats = array_map('trim', explode(",", $prosubcat_id));
-
-        // echo $prosubcat_id;
-        // exit();
-
-        // $proSubcats =  '"' . implode('","', explode(",", $prosubcat_id)) . '"';
-
-        // echo $proSubcats;
-        // echo json_encode($proSubcats);
-        // echo json_encode(explode(",", $proSubcats));
-        // exit();
-
-        $proSubCatIds = Tbl_product_subcategory::whereIn('category', $proSubcats)->get(['prosubcat_id']);
-
         if (empty(request('min_quantity'))) {
             $min_quantity = 1;
         } else {
             $min_quantity = request('min_quantity');
         }
-        // echo json_encode($proSubCatIds);
-        // exit();
 
         $formdata = array(
             'uid' => Auth::user()->id,
@@ -354,7 +335,7 @@ class ProductController extends Controller
             'company' => $request->input('company'),
             'location' => $location,
             'stock' => $stock,
-            'min_quantity' => $min_quantity
+            'min_quantity' => $min_quantity,
         );
 
         //    echo json_encode($formdata);
@@ -362,13 +343,6 @@ class ProductController extends Controller
 
         $accounts = Tbl_products::create($formdata);
         if ($accounts->pro_id > 0) {
-
-            Tbl_pro_subcategory::where('pro_id', $accounts->pro_id)->delete();
-
-            foreach ($proSubCatIds as $subcatId) {
-                Tbl_pro_subcategory::create(['pro_id' => $accounts->pro_id, 'prosubcat_id' => $subcatId->prosubcat_id]);
-            }
-
             return redirect('/products')->with('success', 'Created Successfully');
         } else {
             return redirect('/products')->with('error', 'Error occurred. Please try again...!');
@@ -384,11 +358,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $products = Tbl_products::with('Tbl_units')->with('Tbl_productcategory')->with('Tbl_pro_subcategory.Tbl_product_subcategory')->with('company')->find($id);
-        // ->with('Tbl_product_subcategory')
-
-        // echo json_encode($products);
-        // exit();
+        $products = Tbl_products::with('Tbl_units')->with('Tbl_productcategory')->with('Tbl_product_subcategory')->with('company')->find($id);
 
         if ($user->can('view', $products)) {
 
@@ -582,9 +552,9 @@ class ProductController extends Controller
                 'procat_id' => 'required|numeric',
                 // 'prosubcat_id' => 'required|numeric',
                 'prosubcatId' => 'required',
-                // 'billtoId' => 'required|numeric',
+                'billtoId' => 'required|numeric',
                 'company' => 'required',
-                'min_quantity' => 'nullable|numeric',
+                'min_quantity' => 'required|numeric',
                 // 'picture' => 'required|image',
 
                 // 'productid' => 'required|max:255',
@@ -595,8 +565,8 @@ class ProductController extends Controller
                 // 'location' => 'required|max:255',
                 // 'stock' => 'required'
             ], [
-                // 'min_quantity.required' => 'Minimum order of quantity is required',
-                // 'min_quantity.numeric' => 'Check given value',
+                'min_quantity.required' => 'Minimum order of quantity is required',
+                'min_quantity.numeric' => 'Check given value',
                 'billtoId.required' => 'Check given Sub category',
                 'billtoId.numeric' => 'Check given Sub category',
                 'prosubcatId.required' => 'Product Sub Category is required',
@@ -632,21 +602,12 @@ class ProductController extends Controller
                 $slideimags[] = $filename;
             }
 
-            if (empty(request('min_quantity'))) {
-                $min_quantity = 1;
-            } else {
-                $min_quantity = request('min_quantity');
-            }
 
             $units = ($request->input('units') > 0) ? $request->input('units') : 0;
             $store = ($request->input('store') != '') ? 1 : 0;
             // $prosubcat_id = ($request->input('prosubcat_id') != '') ? $request->input('prosubcat_id') : 0;
-            // $prosubcat_id = ($request->input('billtoId') != '') ? $request->input('billtoId') : 0;
-            $prosubcat_id = $request->input('prosubcatId');
+            $prosubcat_id = ($request->input('billtoId') != '') ? $request->input('billtoId') : 0;
 
-            $prosubcat_id = str_replace('"', "", $prosubcat_id);
-            $proSubcats = array_map('trim', explode(",", $prosubcat_id));
-            $proSubCatIds = Tbl_product_subcategory::whereIn('category', $proSubcats)->get(['prosubcat_id']);
             // echo 'prosubcat_id : ' . $prosubcat_id;
             // exit();
 
@@ -689,14 +650,8 @@ class ProductController extends Controller
             $product->company = $request->input('company');
             $product->location = $location;
             $product->stock = $stock;
-            $product->min_quantity = $min_quantity;
+            $product->min_quantity = $request->input('min_quantity');
             $product->save();
-
-            Tbl_pro_subcategory::where('pro_id', $id)->delete();
-
-            foreach ($proSubCatIds as $subcatId) {
-                Tbl_pro_subcategory::create(['pro_id' => $id, 'prosubcat_id' => $subcatId->prosubcat_id]);
-            }
 
             return redirect('/products')->with('success', 'Updated Successfully');
         } else {
@@ -1187,46 +1142,4 @@ class ProductController extends Controller
     //     }
     //     return $productoption;
     // }
-
-    public function getProductSubCategoryAutoCompleteOptions(Request $request)  //$id, $keyword
-    {
-
-        // echo json_encode($request->input());
-        // exit();
-        $id = $request->input('id');
-        $keyword = $request->input('keyword');
-
-        // // where('procat_id', $id)
-        // //     ->
-        // Tbl_product_subcategory::
-        $categorys = '';
-        $categorys = DB::table('tbl_product_subcategory')->where('procat_id', $id)->where('category', 'like', $keyword . '%')
-            ->get(['prosubcat_id as id', 'prosubcat_id as key', 'category as value']);
-
-        echo json_encode($categorys);
-    }
-
-    public function getProductSubCategorySelectOptions(Request $request)  //$id, $keyword
-    {
-
-        // echo json_encode($request->input());
-        // exit();
-        $id = $request->input('id');
-        // $keyword = $request->input('keyword');
-
-        // // where('procat_id', $id)
-        // //     ->
-        // Tbl_product_subcategory::
-        // $categorys = '';
-        $categorys = DB::table('tbl_product_subcategory')->where('procat_id', $id)
-            ->get(['prosubcat_id', 'category']);
-
-        // ->where('category', 'like', $keyword . '%')
-
-        $categoryoption = '<option value="">Select ...</option>';
-        foreach ($categorys as $category) {
-            $categoryoption .= '<option value="' . $category->prosubcat_id . '">' . $category->category . '</option>';
-        }
-        echo $categoryoption;
-    }
 }

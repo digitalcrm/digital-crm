@@ -243,6 +243,8 @@ Route::middleware(['isActive'])->group(function () {
 
     Route::get('products/ajaxgetproductsubcategory/{id}', 'ProductController@ajaxGetProductSubCategory');
 
+    Route::get('products/getproductsubcategory/autocompleteoptions/{id}/{keyword}', 'ProductController@getProductSubCategoryAutoCompleteOptions');
+
     Route::get('products/inventory/list', 'ProductController@getInventory');
 
     Route::get('products/company/list', 'ProductController@getCompanyList');

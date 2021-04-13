@@ -139,7 +139,7 @@
 
                                     <div class="form-group">
                                         <label for="prosubcat_id">Product Sub Category</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
-                                        <input type="text" class="form-control required" name="prosubcatId" id="prosubcatId" placeholder="Sub Category" value="{{$data['product']->prosubcat_id}}" required>
+                                        <input type="text" class="form-control required" name="prosubcatId" id="prosubcatId" placeholder="Sub Category" value="{{$data['billtolabel']}}" required>
                                         <span class="text-danger">{{ $errors->first('prosubcatId') }}</span>
                                         <input type="hidden" name="billtoId" id="billtoId" value="" />
                                         <input type="hidden" name="billtolabel" id="billtolabel" value="" />
@@ -266,12 +266,10 @@
 <!-- /.content-wrapper -->
 <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<!-- <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> -->
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"> -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
     .ui-autocomplete {
         max-height: 200px;
@@ -288,7 +286,7 @@
     }
 </style>
 
-<!-- <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"> -->
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css">
 <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
 
 <script>
@@ -297,14 +295,12 @@
     var billtolabel = '<?php echo $data['billtolabel']; ?>';
     var url = "{{url('admin/ajax/getStateoptions')}}";
     var prosubcaturl = "{{url('products/ajaxgetproductsubcategory/{id}')}}";
-    var prosubcaturlAuto = "{{url('products/getproductsubcategory/autocompleteoptions/{id}/{keyword}')}}";
-
     $(function() {
         // alert(billtoId + ' ' + billtolabel);
         // alert(leadArray);
-        // autoCompleteProSubCategory(leadArray);
+        autoCompleteProSubCategory(leadArray);
 
-        // AutoCompleteDefaultVal('', billtolabel)
+        AutoCompleteDefaultVal('', billtolabel)
 
         CKEDITOR.replace('description');
 
@@ -337,129 +333,50 @@
         $("#procat_id").change(function() {
             var catId = $(this).val();
             if (catId > 0) {
-                // $.get(prosubcaturl, {
-                //     'procat_id': catId
-                // }, function(result) {
-                //     // alert(result);
-                //     // $("#prosubcat_id").html(result);
-                //     $("#prosubcatId").val('');
-                //     autoCompleteProSubCategory(result);
-                // });
-                $("#prosubcatId").val('');
-                autoCompleteProSubCategory(catId);
+                $.get(prosubcaturl, {
+                    'procat_id': catId
+                }, function(result) {
+                    // alert(result);
+                    // $("#prosubcat_id").html(result);
+                    $("#prosubcatId").val('');
+                    autoCompleteProSubCategory(result);
+                });
             }
         });
 
     });
 
     function autoCompleteProSubCategory(result) {
-        // $("#prosubcatId").autocomplete({
-        //     appendTo: $("#projectDiv"),
-        //     source: eval("(" + result + ")"), //countries_starting_with_A
-        //     minLength: 1,
-        //     select: function(event, ui) {
-        //         // alert("Id : " + ui.item.id + " Label : " + ui.item.label); //+ " Value : " + ui.item.value
-        //         $("#billtoId").val(ui.item.id);
-        //         $("#billtolabel").val(ui.item.label);
-        //         // $("#billtovalue").val(ui.item.value);
-        //     },
-        //     open: function(event, ui) {
-        //         var len = $('.ui-autocomplete > li').length;
-        //     },
-        //     close: function(event, ui) {},
-        //     change: function(event, ui) {
-        //         if (ui.item === null) {
-        //             $(this).val('');
-        //         }
-        //     }
-        // }).autocomplete("instance")._renderItem = function(ul, item) {
-        //     return $("<li>")
-        //         .append("<div>" + item.label + "</div>") //   "<br>" + item.value +
-        //         .appendTo(ul);
-        // };
-
-
-        // $("#prosubcatId").autocomplete({
-        //     source: function(request, response) {
-        //         $.get(prosubcaturlAuto, {
-        //             id: result,
-        //             keyword: request.term
-        //         }, function(data) {
-        //             // alert(eval("(" + data + ")"));
-        //             response($.map(data, function(item) {
-        //                 return {
-        //                     label: item.value,
-        //                     value: item.value,
-        //                     key: item.key
-        //                 }
-        //             }))
-        //         }, "json");
-        //     },
-        //     minLength: 1,
-        //     dataType: "json",
-        //     cache: false,
-        //     select: function(event, ui) {
-        //         // alert("Id : " + ui.item.value + " Label : " + ui.item.label + " Key : " + ui.item.key); //+ " Value : " + ui.item.value
-        //         $("#billtoId").val(ui.item.key);
-        //         $("#billtolabel").val(ui.item.label);
-        //         // $("#billtovalue").val(ui.item.value);
-        //     },
-        // });
-
-
-        $("#prosubcatId")
-            // don't navigate away from the field on tab when selecting an item
-            .on("keydown", function(event) {
-                if (event.keyCode === $.ui.keyCode.TAB &&
-                    $(this).autocomplete("instance").menu.active) {
-                    event.preventDefault();
+        $("#prosubcatId").autocomplete({
+            appendTo: $("#projectDiv"),
+            source: eval("(" + result + ")"), //countries_starting_with_A
+            minLength: 1,
+            select: function(event, ui) {
+                // alert("Id : " + ui.item.id + " Label : " + ui.item.label); //+ " Value : " + ui.item.value
+                $("#billtoId").val(ui.item.id);
+                $("#billtolabel").val(ui.item.label);
+                // $("#billtovalue").val(ui.item.value);
+            },
+            open: function(event, ui) {
+                var len = $('.ui-autocomplete > li').length;
+            },
+            close: function(event, ui) {},
+            change: function(event, ui) {
+                if (ui.item === null) {
+                    $(this).val('');
                 }
-            })
-            .autocomplete({
-                source: function(request, response) {
-                    $.getJSON(prosubcaturlAuto, {
-                        id: result,
-                        keyword: extractLast(request.term)
-                    }, response);
-                },
-                search: function() {
-                    // custom minLength
-                    var term = extractLast(this.value);
-                    if (term.length < 2) {
-                        return false;
-                    }
-                },
-                focus: function() {
-                    // prevent value inserted on focus
-                    return false;
-                },
-                select: function(event, ui) {
-                    var terms = split(this.value);
-                    // alert(terms);
-                    // remove the current input
-                    terms.pop();
-                    // add the selected item
-                    terms.push(ui.item.value);
-                    // alert(ui.item.value);
-                    // add placeholder to get the comma-and-space at the end
-                    terms.push("");
-                    this.value = terms.join(", ");
-                    // alert(terms);
-                    return false;
-                }
-            });
+            }
+        }).autocomplete("instance")._renderItem = function(ul, item) {
+            return $("<li>")
+                .append("<div>" + item.label + "</div>") //   "<br>" + item.value +
+                .appendTo(ul);
+        };
+        //        });
 
         // mustMatch (no value) implementation
         $("#prosubcatId").blur();
     }
 
-    function split(val) {
-        return val.split(/,\s*/);
-    }
-
-    function extractLast(term) {
-        return split(term).pop();
-    }
 
     function AutoCompleteDefaultVal(labelTextBox, Label) {
         // alert(labelTextBox + ' ' + Label);

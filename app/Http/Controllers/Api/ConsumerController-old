@@ -24,7 +24,6 @@ use App\Tbl_notifications;
 use App\Tbl_leads;
 use App\Company;
 use App\Tbl_search_keywords;
-use App\Tbl_pro_subcategory;
 
 class ConsumerController extends Controller
 {
@@ -139,7 +138,7 @@ class ConsumerController extends Controller
         //
     }
 
-    // logout function 
+    // logout function
     public function logout(Request $request)
     {
         Auth::guard('consumer')->logout();
@@ -164,14 +163,13 @@ class ConsumerController extends Controller
         $proUrl = url('/');
         $catVal = '';
         $subcatVal = '';
-        $proArr = array();
+
         if (($procatId == 0) && ($keyword != '')) {
 
             $catVal = $this->findProCategoryByKeyword($keyword);
             $procatId = (($catVal != '')) ? $catVal->procat_id : 0; //   && ($catVal > 0)
             // echo json_encode($catVal);
             // exit();
-
         }
 
         if (($prosubcatId == 0) && ($keyword != '')) {
@@ -179,35 +177,16 @@ class ConsumerController extends Controller
             $prosubcatId = (($subcatVal != '')) ? $subcatVal->prosubcat_id : 0; //    && ($subcatVal > 0)
             // echo json_encode($subcatVal);
             // exit();
-
-            $pros = Tbl_pro_subcategory::where('prosubcat_id', $prosubcatId)->get(['pro_id']);
-
-            if ($pros != '') {
-                foreach ($pros as $pro) {
-                    $proArr[] = $pro->pro_id;
-                }
-            }
         }
 
         // echo $procatId . ' ' . $prosubcatId;
         // exit();
         //  DB::table('tbl_products')->
-        // where('tbl_products.prosubcat_id', '>', 0)->
-        // ->where('tbl_products.company', '>', 0)
-        // ->where('tbl_products.procat_id', '>', 0)
-
-        $query = Tbl_products::has('Tbl_productcategory')->has('Tbl_pro_subcategory')->has('Company')
-            ->with('Tbl_productcategory')
-            ->with('Tbl_pro_subcategory.Tbl_product_subcategory')
-            ->with('Tbl_units')
-            ->with('Company')
-            ->where('tbl_products.user_type', 2)
-            ->with('users.currency');
-
+        $query = Tbl_products::where('tbl_products.procat_id', '>', 0)->where('tbl_products.user_type', 2)->where('tbl_products.prosubcat_id', '>', 0)->where('tbl_products.company', '>', 0)->where('tbl_products.user_type', 2)->with('users.currency');
         $query->join('companies', 'tbl_products.company', '=', 'companies.id');
         $query->leftJoin('tbl_product_category', 'tbl_products.procat_id', '=', 'tbl_product_category.procat_id');
-        // $query->leftJoin('tbl_product_subcategory', 'tbl_products.prosubcat_id', '=', 'tbl_product_subcategory.prosubcat_id');
-        // $query->leftJoin('tbl_units', 'tbl_products.unit', '=', 'tbl_units.unit_id');
+        $query->leftJoin('tbl_product_subcategory', 'tbl_products.prosubcat_id', '=', 'tbl_product_subcategory.prosubcat_id');
+        $query->leftJoin('tbl_units', 'tbl_products.unit', '=', 'tbl_units.unit_id');
 
 
         if ($keyword != '') {
@@ -221,10 +200,8 @@ class ConsumerController extends Controller
             if ($procatId > 0) {
                 $query->orWhere('tbl_products.procat_id', $procatId);
             }
-            if (($prosubcatId > 0) && (count($proArr) > 0)) {
-                // $query->orWhere('tbl_products.prosubcat_id', $prosubcatId);
-
-                $query->whereIn('tbl_products.pro_id', $proArr);
+            if ($prosubcatId > 0) {
+                $query->orWhere('tbl_products.prosubcat_id', $prosubcatId);
             }
         }
 
@@ -259,23 +236,19 @@ class ConsumerController extends Controller
         $query->select(
             'tbl_products.*',
             DB::raw('CONCAT("' . $proUrl . '", "", tbl_products.picture) AS picture'),
-
+            'tbl_product_category.procat_id',
+            'tbl_product_category.category',
+            'tbl_product_category.slug as category_slug',
+            'tbl_product_subcategory.prosubcat_id',
+            'tbl_product_subcategory.category as subcategory',
+            'tbl_product_subcategory.slug as subcategory_slug',
+            'tbl_units.name as uname',
+            'tbl_units.sortname',
+            'companies.id as c_id',
+            'companies.c_name',
+            'companies.slug as c_slug',
+            'companies.city as c_city',
         );
-        // 'tbl_product_category.procat_id',
-        // 'tbl_product_category.category',
-        // 'tbl_product_category.slug as category_slug',
-
-        // 'tbl_product_subcategory.prosubcat_id',
-        // 'tbl_product_subcategory.category as subcategory',
-        // 'tbl_product_subcategory.slug as subcategory_slug',
-
-        // 'tbl_units.name as uname',
-        // 'tbl_units.sortname',
-
-        // 'companies.id as c_id',
-        // 'companies.c_name',
-        // 'companies.slug as c_slug',
-        // 'companies.city as c_city',
 
         $products = $query->get();
         // return $products;
@@ -286,7 +259,7 @@ class ConsumerController extends Controller
         $this->setCountSearchkeyword($keyword, $results);
         if ($results > 0) {
             if ($keyword != '') {
-                $products = $query->paginate(16);
+                $products = $query->paginate(50);
                 $products->setpath('');
                 $products->appends(
                     array(
@@ -294,7 +267,7 @@ class ConsumerController extends Controller
                     )
                 );
             } else {
-                $products = $query->paginate(16);
+                $products = $query->paginate(50);
             }
             return $products;
         } else {
@@ -411,7 +384,7 @@ class ConsumerController extends Controller
             'city' => $data['city'],
             'street' => $data['address'],
             'zip' => '',
-            'company' => '',
+            'company' => $productDetails->company,
             'sal_id' => 0,
             'designation' => '',
             'pro_id' => $id,
@@ -961,28 +934,13 @@ class ConsumerController extends Controller
     {
         $data = array();
         // $products = Tbl_products::with('Tbl_units')->with('Tbl_productcategory')->with('Tbl_product_subcategory')->where('active', 1)->find($id);
-        $products = Tbl_products::has('Tbl_productcategory')->has('Tbl_pro_subcategory')->has('Company')
+        $products = Tbl_products::with('Tbl_units')->with('users.currency')
             ->with('Tbl_productcategory')
-            ->with('Tbl_pro_subcategory.Tbl_product_subcategory')
-            ->with('Tbl_units')
-            ->with('users.currency:cr_id,name,code,html_code')
-            ->with('users.tbl_countries')
-            ->with('users.tbl_states')
-            ->with('Company')
+            ->with('Tbl_product_subcategory')
+            ->with('company')
+            ->where('active', 1)
             ->where('slug', $slug)
-            ->where('user_type', 2)
             ->first();
-
-
-        // $query = Tbl_products::has('Tbl_productcategory')->has('Tbl_pro_subcategory')->has('Company')
-        // ->with('Tbl_productcategory')
-        // ->with('Tbl_pro_subcategory.Tbl_product_subcategory')
-        // ->with('Tbl_units')
-        // ->with('Company')
-        // ->where('tbl_products.user_type', 2)
-        // ->with('users.currency');
-
-
         // return json_encode($products);
         // echo $products->company;
         // exit();
@@ -1002,7 +960,7 @@ class ConsumerController extends Controller
                 $user = User::with('currency')->find($uid);
             }
 
-            // $data['user'] = $user;
+            $data['user'] = $user;
             $data['picture'] = url($products->picture);
             //  Slide show pics
             $slidePics = array();
@@ -1475,46 +1433,39 @@ class ConsumerController extends Controller
 
             $procatId = $soneq->procat_id;
 
-            // $defaultCurrency = currency::where('status', 1)->first();
+            $defaultCurrency = currency::where('status', 1)->first();
 
-            // $products = Tbl_products::has('Tbl_productcategory')
-            //     ->has('Tbl_product_subcategory')
-            //     ->has('company')
-            //     ->with('Tbl_units')
-            //     ->with('Tbl_productcategory')
-            //     ->with('Tbl_product_subcategory')
-            //     ->with('users.currency')
-            //     ->with('company')
-            //     ->where('active', 1)
-            //     ->where('tbl_products.procat_id', $procatId)
-            //     ->where('tbl_products.user_type', 2)
-            //     ->select("tbl_products.*", DB::raw("CONCAT('" . $proUrl . "','',tbl_products.picture) as picture"))
-            //     ->orderByDesc('tbl_products.pro_id');
+            $products = Tbl_products::has('Tbl_productcategory')->with('users.currency')
+                ->has('Tbl_product_subcategory')
+                ->has('company')
+                ->with('Tbl_units')
+                ->with('Tbl_productcategory')
+                ->with('Tbl_product_subcategory')
+                ->with('company')
+                ->where('active', 1)
+                ->where('tbl_products.procat_id', $procatId)
+                ->where('tbl_products.user_type', 2)
+                ->select("tbl_products.*", DB::raw("CONCAT('" . $proUrl . "','',tbl_products.picture) as picture"))
+                ->orderByDesc('tbl_products.pro_id');
             // echo json_encode($products);
             // exit();
             // $data = array();
 
-
-            $products = Tbl_products::has('Tbl_productcategory')->has('Tbl_pro_subcategory')->has('Company')
-                ->with('Tbl_productcategory')
-                ->with('Tbl_pro_subcategory.Tbl_product_subcategory')
-                ->with('Tbl_units')
-                ->with('Company')
-                ->where('tbl_products.user_type', 2)
-                ->with('users.currency');
-            $products->join('companies', 'tbl_products.company', '=', 'companies.id');
-            $products->leftJoin('tbl_product_category', 'tbl_products.procat_id', '=', 'tbl_product_category.procat_id');
-            $products->where('tbl_products.procat_id', $procatId);
-            $products->where('tbl_products.active', 1);
-            $products->where('tbl_products.store', 1);
-            $products->orderByDesc('tbl_products.pro_id');
-            $products->select(
-                'tbl_products.*',
-                DB::raw('CONCAT("' . $proUrl . '", "", tbl_products.picture) AS picture'),
-            );
-
             $pros = $products->get();
-
+            if (count($pros) > 0) {
+                foreach ($pros as $pro) {
+                    if ($pro->user_type == 1) {
+                        $uid = $pro->uid;
+                        $user = Admin::with('currency')->find($uid);
+                        $pro->currency = $user->currency;
+                    } else {
+                        $uid = $pro->uid;
+                        $user = User::with('currency')->find($uid);
+                        $pro->currency = $user->currency;
+                    }
+                    // $data[] = $pro;
+                }
+            }
 
             if (count($pros) > 0) {
 
@@ -1544,6 +1495,49 @@ class ConsumerController extends Controller
 
                 return $products;
             }
+
+
+            // $query = DB::table('tbl_products');
+            // $query->leftJoin('tbl_product_category', 'tbl_products.procat_id', '=', 'tbl_product_category.procat_id');
+            // $query->leftJoin('tbl_units', 'tbl_products.unit', '=', 'tbl_units.unit_id');
+
+            // if ($procatId > 0) {
+            //     $query->where('tbl_products.procat_id', $procatId);
+            // }
+
+            // $query->where('active', 1); //  tbl_products.
+            // $query->where('store', 1);  //  tbl_products.
+
+            // $query->select(
+            //     'tbl_products.*',
+            //     DB::raw('CONCAT("' . $proUrl . '", "", tbl_products.picture) AS picture'),
+            //     'tbl_product_category.procat_id',
+            //     'tbl_product_category.category',
+            //     'tbl_units.name as uname',
+            //     'tbl_units.sortname'
+            // );
+
+            // $products = $query->get();
+
+            // $data = array();
+            // if (count($products) > 0) {
+            //     foreach ($products as $pro) {
+            //         if ($pro->user_type == 1) {
+            //             $uid = $pro->uid;
+            //             $user = Admin::with('currency')->find($uid);
+            //             $pro->currency = $user->currency;
+            //         } else {
+            //             $uid = $pro->uid;
+            //             $user = User::with('currency')->find($uid);
+            //             $pro->currency = $user->currency;
+            //         }
+            //         $data[] = $pro;
+            //     }
+            // }
+
+            // return $data;
+
+
         } else {
             return $products;
         }
@@ -1552,43 +1546,63 @@ class ConsumerController extends Controller
     public function getProductsBySubCategory($keyword)
     {
         $proUrl = url('/');
+
+        // echo $keyword;
+        // exit();
         $products = array();
-        $proArr = array();
-        $subcatVal = $this->findProSubCategoryByKeyword($keyword);
-        $prosubcatId = (($subcatVal != '')) ? $subcatVal->prosubcat_id : 0; //    && ($subcatVal > 0)
-        // echo json_encode($subcatVal);
+        $stwoq = DB::table('tbl_product_subcategory')
+            ->where('tbl_product_subcategory.category', 'like', '%' . $keyword . '%')
+            ->orWhere('tbl_product_subcategory.slug', 'like', '%' . $keyword . '%')
+            ->select('tbl_product_subcategory.prosubcat_id')
+            ->first();
+
+        // echo json_encode($stwoq);
         // exit();
 
-        $pros = Tbl_pro_subcategory::where('prosubcat_id', $prosubcatId)->get(['pro_id']);
 
-        if ($pros != '') {
-            foreach ($pros as $pro) {
-                $proArr[] = $pro->pro_id;
+        if ($stwoq != '') {
+            $prosubcatId = $stwoq->prosubcat_id;
+
+            $defaultCurrency = currency::where('status', 1)->first();
+
+
+            $proUrl = url('/');
+            $products = Tbl_products::has('Tbl_productcategory')->with('users.currency')
+                ->has('Tbl_product_subcategory')
+                ->has('company')
+                ->with('Tbl_units')
+                ->with('Tbl_productcategory')
+                ->with('Tbl_product_subcategory')
+                ->with('company')
+                ->where('active', 1)
+                ->where('tbl_products.user_type', 2)
+                ->where('tbl_products.prosubcat_id', $prosubcatId)
+                ->select("tbl_products.*", DB::raw("CONCAT('" . $proUrl . "','',tbl_products.picture) as picture"))
+                ->orderByDesc('tbl_products.pro_id');
+
+            // return $products;
+
+            // $data = array();
+
+            $pros = $products->get();
+            if (count($pros) > 0) {
+                foreach ($pros as $pro) {
+                    if ($pro->user_type == 1) {
+                        $uid = $pro->uid;
+                        $user = Admin::with('currency')->find($uid);
+                        $pro->currency = $user->currency;
+                    } else {
+                        $uid = $pro->uid;
+                        $user = User::with('currency')->find($uid);
+                        $pro->currency = $user->currency;
+                    }
+                    // $data[] = $pro;
+                }
             }
 
-            $query = Tbl_products::has('Tbl_productcategory')->has('Tbl_pro_subcategory')->has('Company')
-                ->with('Tbl_productcategory')
-                ->with('Tbl_pro_subcategory.Tbl_product_subcategory')
-                ->with('Tbl_units')
-                ->with('Company')
-                ->where('tbl_products.user_type', 2)
-                ->with('users.currency');
-            $query->join('companies', 'tbl_products.company', '=', 'companies.id');
-            $query->leftJoin('tbl_product_category', 'tbl_products.procat_id', '=', 'tbl_product_category.procat_id');
-            $query->whereIn('tbl_products.pro_id', $proArr);
-            $query->where('tbl_products.active', 1);
-            $query->where('tbl_products.store', 1);
-            $query->orderByDesc('tbl_products.pro_id');
-            $query->select(
-                'tbl_products.*',
-                DB::raw('CONCAT("' . $proUrl . '", "", tbl_products.picture) AS picture'),
-
-            );
-            $products = $query->get();
-            $results = count($products);
-            if ($results > 0) {
+            if (count($pros) > 0) {
                 if ($keyword != '') {
-                    $products = $query->paginate(16);
+                    $products = $products->paginate(16);
                     $products->setpath('');
                     $products->appends(
                         array(
@@ -1596,58 +1610,58 @@ class ConsumerController extends Controller
                         )
                     );
                 } else {
-                    $products = $query->paginate(16);
+                    $products = $products->paginate(16);
                 }
                 return $products;
             } else {
+
+                $products = array(
+                    'status' => 'error',
+                    'message' => 'No products available'
+                );
+
                 return $products;
             }
+
+
+            // return $data;
         }
-        return $products;
+
+        //     $query = DB::table('tbl_products');
+        //     $query->leftJoin('tbl_product_category', 'tbl_products.procat_id', '=', 'tbl_product_category.procat_id');
+        //     $query->leftJoin('tbl_units', 'tbl_products.unit', '=', 'tbl_units.unit_id');
+
+        //     if ($prosubcatId > 0) {
+        //         $query->where('tbl_products.prosubcat_id', $prosubcatId);
+        //     }
+
+        //     // $query->limit(8);
+        //     // $query->paginate(8);
+        //     $query->where('active', 1); //  tbl_products.
+        //     $query->where('store', 1);  //  tbl_products.
+        //     $query->skip($skip);
+        //     $query->take($take);
 
 
+        //     $query->select(
+        //         'tbl_products.*',
+        //         DB::raw('CONCAT("' . $proUrl . '", "", tbl_products.picture) AS picture'),
+        //         'tbl_product_category.procat_id',
+        //         'tbl_product_category.category',
+        //         'tbl_units.name as uname',
+        //         'tbl_units.sortname'
+        //     );
+        //     // echo $keyword;
+        //     // exit();
 
-        //////////////////////////////////////////////////
-        // echo $keyword;
-        // exit();
-        // $products = array();
-        // $stwoq = DB::table('tbl_product_subcategory')
-        //     ->where('tbl_product_subcategory.category', 'like', '%' . $keyword . '%')
-        //     ->orWhere('tbl_product_subcategory.slug', 'like', '%' . $keyword . '%')
-        //     ->select('tbl_product_subcategory.prosubcat_id')
-        //     ->first();
-
-        // echo json_encode($stwoq);
-        // exit();
-
-
-        // if ($stwoq != '') {
-        //     $prosubcatId = $stwoq->prosubcat_id;
-
-        //     $defaultCurrency = currency::where('status', 1)->first();
+        //     $products = $query->get();
+        //     // echo json_encode($products);
+        //     // exit();
 
 
-        //     $proUrl = url('/');
-        //     $products = Tbl_products::has('Tbl_productcategory')->with('users.currency')
-        //         ->has('Tbl_product_subcategory')
-        //         ->has('company')
-        //         ->with('Tbl_units')
-        //         ->with('Tbl_productcategory')
-        //         ->with('Tbl_product_subcategory')
-        //         ->with('company')
-        //         ->where('active', 1)
-        //         ->where('tbl_products.user_type', 2)
-        //         ->where('tbl_products.prosubcat_id', $prosubcatId)
-        //         ->select("tbl_products.*", DB::raw("CONCAT('" . $proUrl . "','',tbl_products.picture) as picture"))
-        //         ->orderByDesc('tbl_products.pro_id');
-
-        //     // return $products;
-
-        //     // $data = array();
-
-        //     $pros = $products->get();
-        //     if (count($pros) > 0) {
-        //         foreach ($pros as $pro) {
+        //     $data = array();
+        //     if (count($products) > 0) {
+        //         foreach ($products as $pro) {
         //             if ($pro->user_type == 1) {
         //                 $uid = $pro->uid;
         //                 $user = Admin::with('currency')->find($uid);
@@ -1657,32 +1671,12 @@ class ConsumerController extends Controller
         //                 $user = User::with('currency')->find($uid);
         //                 $pro->currency = $user->currency;
         //             }
-        //             // $data[] = $pro;
+        //             $data[] = $pro;
         //         }
         //     }
-
-        //     if (count($pros) > 0) {
-        //         if ($keyword != '') {
-        //             $products = $products->paginate(16);
-        //             $products->setpath('');
-        //             $products->appends(
-        //                 array(
-        //                     'keyword' => $keyword
-        //                 )
-        //             );
-        //         } else {
-        //             $products = $products->paginate(16);
-        //         }
-        //         return $products;
-        //     } else {
-
-        //         $products = array(
-        //             'status' => 'error',
-        //             'message' => 'No products available'
-        //         );
-
-        //         return $products;
-        //     }
+        //     return $data;
+        // } else {
+        //     return $products;
         // }
     }
 
@@ -1850,12 +1844,12 @@ class ConsumerController extends Controller
         //         ->get();
 
         $proUrl = url('/');
-        $products = Tbl_products::has('Tbl_productcategory')->where('tbl_products.user_type', 2)->with('users.currency')
-            ->has('Tbl_pro_subcategory')
+        $products = Tbl_products::has('Tbl_productcategory')
+            ->has('Tbl_product_subcategory')
             ->has('company')
             ->with('Tbl_units')
             ->with('Tbl_productcategory')
-            ->with('Tbl_pro_subcategory.Tbl_product_subcategory')
+            ->with('Tbl_product_subcategory')
             ->with('company')
             ->where('active', 1)
             ->select("tbl_products.*", DB::raw("CONCAT('" . $proUrl . "','',tbl_products.picture) as picture"))
@@ -1863,10 +1857,6 @@ class ConsumerController extends Controller
             ->skip($skip)
             ->take($take)
             ->get();
-
-        // ->has('Tbl_product_subcategory')
-        // ->with('Tbl_product_subcategory')
-
 
         // return $products;
 
