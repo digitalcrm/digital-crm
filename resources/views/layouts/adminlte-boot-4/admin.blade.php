@@ -9,6 +9,7 @@
     <meta name="description" content="Digital CRM">
     <meta name="keywords" content="Digital CRM">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('public/bigindiafav.png') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('assets/adminlte-boot-4/plugins/fontawesome-free/css/all.min.css')}}">
     {{-- google source https://www.bootstrapcdn.com/fontawesome/ --}}
