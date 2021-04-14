@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -93,11 +93,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="type">Type</label>&nbsp;
-                                <select class="form-control" name="type" id="type"> 
+                                <select class="form-control" name="type" id="type">
                                     <?php echo $data['typeoptions']; ?>
                                 </select>
                             </div>
-                            <!--                            
+                            <!--
                                                         <div class="form-group">
                                                             <label>Start Time</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                                             <div class="input-group">
@@ -129,7 +129,7 @@
                         <section class="col-lg-6">
                             <div class="form-group">
                                 <label for="name">Related to</label>&nbsp;
-                                <select class="form-control" name="category" id="category"> 
+                                <select class="form-control" name="category" id="category">
                                     <option value="0">Select ...</option>
                                     <option value="1" <?php echo $data['Accountcategory']; ?>>Accounts</option>
                                     <option value="2" <?php echo $data['Contactscategory']; ?>>Contacts</option>
@@ -141,7 +141,7 @@
                         <section class="col-lg-6">
                             <div class="form-group">
                                 <label for="name">Name</label>&nbsp;
-                                <select class="form-control" name="user" id="user"> 
+                                <select class="form-control" name="user" id="user">
                                     <?php echo $data['option']; ?>
                                 </select>
                                 <span class="text-danger">{{ $errors->first('user') }}</span>

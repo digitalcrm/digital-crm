@@ -1,51 +1,10 @@
-@extends('layouts.app')
-@push('styles')
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ecf1f7 !important;
-        }
-
-        /* .navbar-laravel {
-            display: none !important;
-        } */
-
-        .btn-primary {
-            background-color: #024A81 !important;
-            border-color: #024A81 !important;
-            color: #fff !important;
-        }
-
-        .btn-primary:hover {
-            background-color: #0d5e9c !important;
-            border-color: #0d5e9c !important;
-            color: #fff !important;
-
-            .shadowTop {
-                box-shadow: 0 0 0px rgba(0, 0, 0, .125), 0 0px 0px rgba(0, 0, 0, .2) !important;
-                border: 1px solid #e5e5e5 !important;
-                border-top: 3px solid #60a5fa !important;
-            }
-
-            .form-control-lg {
-                padding: .6rem 1rem !important;
-                font-size: 14px !important;
-            }
-
-            .label-color {
-                color: #898989 !important;
-            }
-
-            .shadows {
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            }
-
-    </style>
-@endpush
-@section('content')
+<x-layout>
+    <x-slot name="title">
+        {{ __('Reset Password')}}
+    </x-slot>
+    @push('styles')
+        <link href="{{ asset('css/login-register.css') }}" rel="stylesheet">
+    @endpush
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -99,4 +58,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-layout>

@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -6,7 +6,7 @@
 <!--    <section class="content-header">
         <h1>
             Create Lead
-             <small>Control panel</small> 
+             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -85,7 +85,7 @@
                                     <label for="last_name">Last Name</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                     <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="{{old('last_name')}}" required>
                                     <span class="text-danger">{{ $errors->first('last_name') }}</span>
-                                </div>                                 
+                                </div>
                                 <div class="form-group">
                                     <label for="userpicture">Profile Picture</label>
                                     <input type="file" class="btn btn-default" name="userpicture" id="userpicture" />

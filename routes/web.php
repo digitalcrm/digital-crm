@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::middleware(['isActive'])->group(function () {
 
-    // Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+    // Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
 
     // ------------------------------------------------------------------------
@@ -512,7 +512,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Dashboard Controller----------------------
 
-    Route::get('/dashboard', 'HomeController@dashboard')->middleware('verified');
+    Route::get('/dashboard', 'HomeController@dashboard');
 
 
 
@@ -2922,7 +2922,7 @@ Route::group(['namespace' => 'Bookings'], function () {
 // });
 
 #=============================Companies===========================#
-Route::resource('companies', 'Company\User\CompanyController')->middleware('verified');
+Route::resource('companies', 'Company\User\CompanyController');
 
 #=============================RFQs user routes===========================#
 Route::resource('rfq-forms', 'RFQ\user\RfqController');

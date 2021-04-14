@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 
@@ -79,7 +79,7 @@
                                 <label for="frommail">Account</label>
                                 <p><?php echo ($data['contact']['tbl__accounts'] != null) ? $data['contact']['tbl__accounts']['name'] : ''; ?></p>
                             </div>
-                            
+
                         </section>
 
                         <section class="col-lg-4">

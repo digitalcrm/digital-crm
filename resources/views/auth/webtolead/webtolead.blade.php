@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 <!--Style-->
@@ -97,7 +97,7 @@
             </div>
 
             <div class="modal-body">
-                <p id="tab_2">         
+                <p id="tab_2">
                 </p>
             </div>
             <div class="modal-footer">

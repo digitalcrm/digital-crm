@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -77,7 +77,7 @@
                                 </select>
 
                                 <span class="text-danger">{{ $errors->first('dealstage') }}</span>
-                            </div>                                 
+                            </div>
                             <div class="form-group">
                                 <label for="userpicture">Amount</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                 <div class="input-group">

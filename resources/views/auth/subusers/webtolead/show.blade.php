@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!--style css-->
 <style>
@@ -24,7 +24,7 @@
 <!--    <section class="content-header">
         <h1>
             View Form
-             <small>Control panel</small> 
+             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

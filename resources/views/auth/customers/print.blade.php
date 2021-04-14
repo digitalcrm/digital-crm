@@ -14,7 +14,7 @@
 
                     <div class="box-header">
                         <h1 class="box-title">Customers &nbsp;<small class="badge" id="total">{{$data['total']}}</small></h1>
-                    </div> 
+                    </div>
                     <!-- /.box-header -->
                     <div class="box-body">
 

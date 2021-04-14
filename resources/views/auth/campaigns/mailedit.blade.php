@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -30,7 +30,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <!-- <form role="form" > -->
-                    {{Form::open(['action'=>['CampaignController@updateCampaignMail',$data['camp_id']],'method'=>'Post','enctype'=>'multipart/form-data'])}} 
+                    {{Form::open(['action'=>['CampaignController@updateCampaignMail',$data['camp_id']],'method'=>'Post','enctype'=>'multipart/form-data'])}}
                     <!--store-->
                     @csrf
                     <div class="box-body">
@@ -74,7 +74,7 @@
 
                         <div class="form-group">
                             <label for="message">Message</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
-                            <textarea class="form-control" name="message" id="message" required>{{$data['message']}}</textarea> 
+                            <textarea class="form-control" name="message" id="message" required>{{$data['message']}}</textarea>
                             <span class="text-danger">{{ $errors->first('message') }}</span>
                         </div>
                         <div class="form-group">

@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -7,7 +7,7 @@
         .fc-event{
             padding: 5px;
         }
-    </style>   
+    </style>
     <!-- Main content -->
     <section class="content mt-2 mx-0">
 	<div class="container-fluid">
@@ -34,8 +34,8 @@
                             <div class="btn-group btn-flat pull-right">
                                 <a class="btn bg-blue" href="{{url('calendar/create')}}"><i class="fas fa-plus"></i>&nbsp;New Event</a>
                             </div>
-                        </div> 
-                        <!--/.box-header--> 
+                        </div>
+                        <!--/.box-header-->
                         <div class="box-body">
                             <div class="no-padding with-border">
                                 <!-- THE CALENDAR -->

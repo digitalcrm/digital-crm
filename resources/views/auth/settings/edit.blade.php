@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -295,7 +295,7 @@
 
 //            alert('productData ' + productData);
 //            alert('quantityVal ' + quantityVal);
-            //            alert('priceVal ' + priceVal); 
+            //            alert('priceVal ' + priceVal);
             var proData = productData.split('-');
             var proId = Number(proData[0]);
             var productNameVal = proData[1];
@@ -429,7 +429,7 @@
             $("#billTo").focusout(function() {
             });
         });
-    }); //]]> 
+    }); //]]>
 
 </script>
 @endsection

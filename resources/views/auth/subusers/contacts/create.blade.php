@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -65,7 +65,7 @@
                                 <label for="last_name">Last Name</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                 <input type="text" class="form-control" name="last_name" id="last_name" placeholder="" value="{{old('last_name')}}" required>
                                 <span class="text-danger">{{ $errors->first('last_name') }}</span>
-                            </div>                                 
+                            </div>
 
                             <div class="form-group">
                                 <label for="phone">Phone</label>
@@ -147,7 +147,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <a href="{{url('contacts')}}" class="btn btn-primary">Back</a> 
+                        <a href="{{url('contacts')}}" class="btn btn-primary">Back</a>
                         {{Form::submit('Save',['class'=>"btn btn-primary pull-right"])}}
                     </div>
                     <!-- </form> -->

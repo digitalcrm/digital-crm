@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Digital CRM</title>
+    <title>@yield('title','AdminPanel |'.config('app.name')) </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="description" content="Digital CRM">
     <meta name="keywords" content="Digital CRM">

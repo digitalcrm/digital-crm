@@ -1,5 +1,7 @@
-@extends('layouts.app')
-@section('content')
+<x-layout>
+    <x-slot name="title">
+        {{ __('custom.login') }}
+    </x-slot>
     @push('styles')
         <link href="{{ asset('css/login-register.css') }}" rel="stylesheet">
     @endpush
@@ -7,11 +9,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center mt-5 pb-4">
-                    @if (session('error'))
-                        <div class='text-danger pb-3' style="width:350px;">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     <x-logo />
                 </div>
                 <div class="card shadows border"
@@ -80,8 +77,6 @@
                 </div>
                 <a class="btn-text btn-block text-center mt-3"
                     href="{{ route('register') }}">{{ __('New user, Register') }}</a>
-
-
             </div>
         </div>
-    @endsection
+</x-layout>

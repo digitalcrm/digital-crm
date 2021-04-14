@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -6,7 +6,7 @@
 <!--    <section class="content-header">
         <h1>
             Create Account
-             <small>Control panel</small> 
+             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -41,7 +41,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <!-- <form role="form" > -->
-                    {{Form::open(['action'=>'AccountController@importData','method'=>'Post','enctype'=>'multipart/form-data'])}} 
+                    {{Form::open(['action'=>'AccountController@importData','method'=>'Post','enctype'=>'multipart/form-data'])}}
                     @csrf
                     <div class="box-body">
                         <!-- Left col -->

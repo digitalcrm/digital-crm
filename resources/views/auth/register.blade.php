@@ -1,7 +1,9 @@
-@extends('layouts.app')
-@section('content')
+<x-layout>
+    <x-slot name="title">
+        {{ __('custom.register') }}
+    </x-slot>
     @push('styles')
-    <link href="{{ asset('css/login-register.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/login-register.css') }}" rel="stylesheet">
     @endpush
     <div class="container">
         <div class="row">
@@ -21,7 +23,8 @@
                                 <div class="">
                                     <input id="name" type="text"
                                         class="form-control form-control-lg{{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                        placeholder="Your name" name="name" value="{{ old('name') }}" required autofocus>
+                                        placeholder="Your name" name="name" value="{{ old('name') }}" required
+                                        autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
@@ -65,8 +68,8 @@
                                 <div class="">
                                     <input id="company" type="text"
                                         class="form-control form-control-lg{{ $errors->has('company') ? ' is-invalid' : '' }}"
-                                        placeholder="Your Company" name="company" value="{{ old('company') }}" required
-                                        autofocus>
+                                        placeholder="Your Company" name="company" value="{{ old('company') }}"
+                                        required autofocus>
 
                                     @if ($errors->has('company'))
                                         <span class="invalid-feedback" role="alert">
@@ -119,4 +122,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-layout>

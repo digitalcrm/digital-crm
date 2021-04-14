@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -28,8 +28,8 @@
                             <a class="btn bg-blue" href="{{url('newsletter/create')}}"><i class="fas fa-plus"></i>&nbsp; Create</a>
                         </div>
 
-                    </div> 
-                    <!--/.box-header--> 
+                    </div>
+                    <!--/.box-header-->
                     <div class="box-body">
                         {!!$data['table']!!}
                     </div>

@@ -12,4 +12,5 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')   ///assets
-   .sass('resources/sass/app.scss', 'public/css'); ///assets
+   .sass('resources/sass/app.scss', 'public/css')
+   .sass('resources/sass/login-register.scss', 'public/css'); ///assets

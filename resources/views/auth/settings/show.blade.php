@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 
@@ -29,7 +29,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">
-                            <?php echo $data->name; ?>                        
+                            <?php echo $data->name; ?>
                         </h3>
                         <a href="{!!$data['editLink']!!}" class="btn btn-primary pull-right">Edit</a>
                     </div>
@@ -37,7 +37,7 @@
                         <!-- Main content -->
                         <section class="invoice">
                             <!-- title row -->
-                            <!--                            
+                            <!--
                                                         <div class="row">
                                                             <div class="col-xs-12">
                                                                 <h2 class="page-header">

@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 <!-- Content Wrapper. Contains page content -->
@@ -31,8 +31,8 @@
 
                         </div>
 
-                    </div> 
-                    <!--/.box-header--> 
+                    </div>
+                    <!--/.box-header-->
                     <div class="box-body">
                         {!!$data['table']!!}
                     </div>

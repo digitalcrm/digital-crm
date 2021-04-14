@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -6,7 +6,7 @@
 <!--    <section class="content-header">
         <h1>
             Edit Lead
-             <small>Control panel</small> 
+             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -85,7 +85,7 @@
                                 <label for="email">Email</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                 <input type="email" class="form-control" name="email" id="usermail" placeholder="" value="{{$data['accountarr']['email']}}" required>
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
-                            </div>     
+                            </div>
                             <div class="form-group">
                                 <label for="phone">Phone</label>
                                 <input type="text" class="form-control" name="phone" id="phone" placeholder="" pattern="^\d{15}$" value="{{$data['accountarr']['phone']}}">

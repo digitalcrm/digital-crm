@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 
@@ -41,7 +41,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <!-- <form role="form" > -->
-                    {{Form::open(['action'=>'AccountController@importData','method'=>'Post','enctype'=>'multipart/form-data'])}} 
+                    {{Form::open(['action'=>'AccountController@importData','method'=>'Post','enctype'=>'multipart/form-data'])}}
                     @csrf
                     <div class="box-body">
                         <!-- Left col -->
@@ -65,7 +65,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <div class="btn-group btn-flat pull-right">
-                            <a href="{{url('/accounts')}}" class="btn btn-default">Back</a>                            
+                            <a href="{{url('/accounts')}}" class="btn btn-default">Back</a>
                             {{Form::submit('Save',['class'=>"btn btn-primary"])}}
                         </div>
                     </div>

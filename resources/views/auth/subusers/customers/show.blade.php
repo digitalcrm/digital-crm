@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 
@@ -36,7 +36,7 @@
                 </div>
                 @endif
                 <!-- general form elements -->
-                
+
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">
@@ -87,7 +87,7 @@
                             <a href="{{url('customers')}}" class="btn text-primary pull-right">Back</a>
                         </div>
                     </div>
-                
+
 
                 <!-- /.box -->
 

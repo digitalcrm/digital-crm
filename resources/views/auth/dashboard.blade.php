@@ -105,7 +105,7 @@
                             <h3 class="card-title p-3">
                                 Latest Deals <span class="badge badge-secondary"><?php echo $data['latestDeals']['total']; ?></span>
                             </h3>
-                            
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body p-0">
@@ -522,7 +522,7 @@
     }
 </script>
 
-<script src="{{asset('assets/funnelChart/dist/chart.funnel.bundled.js')}}"></script> 
+<script src="{{asset('assets/funnelChart/dist/chart.funnel.bundled.js')}}"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script>

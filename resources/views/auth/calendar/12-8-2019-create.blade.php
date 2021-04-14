@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -43,7 +43,7 @@
                             Create Event
                         </h3>
                     </div>
-                    {{Form::open(['action'=>'CalendarController@store','method'=>'Post','enctype'=>'multipart/form-data'])}} 
+                    {{Form::open(['action'=>'CalendarController@store','method'=>'Post','enctype'=>'multipart/form-data'])}}
                     @csrf
                     <div class="box-body">
                         <section class="col-lg-6">
@@ -55,7 +55,7 @@
 
                             <div class="form-group">
                                 <label for="name">Start Date/ Time</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
-                                <div class="input-group my-group"> 
+                                <div class="input-group my-group">
                                     <input type="text" class="form-control" name="startDate" id="startDate" placeholder="" value="{{old('startDate')}}" required>
                                     <span class="text-danger">{{ $errors->first('startDate') }}</span>
                                     <input type="text" class="form-control timepicker" id="startTime" name="startTime" value="{{old('startTime')}}" required>
@@ -65,7 +65,7 @@
 
                             <div class="form-group">
                                 <label for="name">End Date</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
-                                <div class="input-group my-group"> 
+                                <div class="input-group my-group">
                                     <input type="text" class="form-control" name="endDate" id="endDate" placeholder="" value="{{old('endDate')}}" required>
                                     <span class="text-danger">{{ $errors->first('endDate') }}</span>
                                     <input type="text" class="form-control timepicker" id="endTime" name="endTime" value="{{old('endTime')}}" required>
@@ -102,7 +102,7 @@
                                                             </div>
                                                             <span class="text-danger">{{ $errors->first('startTime') }}</span>
                                                         </div>-->
-                            <!--                            
+                            <!--
                                                         <div class="form-group">
                                                             <label>End Time</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
                                                             <div class="input-group">
@@ -118,7 +118,7 @@
 
                             <div class="form-group">
                                 <label for="type">Type</label>&nbsp;
-                                <select class="form-control" name="type" id="type"> 
+                                <select class="form-control" name="type" id="type">
                                     <?php echo $data['typeoptions']; ?>
                                 </select>
                             </div>
@@ -129,7 +129,7 @@
                         <section class="col-lg-6">
                             <div class="form-group">
                                 <label for="name">Related to</label>&nbsp;
-                                <select class="form-control" name="category" id="category"> 
+                                <select class="form-control" name="category" id="category">
                                     <option value="0">Select </option>
                                     <option value="1">Accounts</option>
                                     <option value="2">Contacts</option>
@@ -141,7 +141,7 @@
                         <section class="col-lg-6">
                             <div class="form-group">
                                 <label for="user">Name</label>&nbsp;
-                                <select class="form-control" name="user" id="user"> 
+                                <select class="form-control" name="user" id="user">
                                     <option value="0">Select</option>
                                 </select>
                                 <span class="text-danger">{{ $errors->first('user') }}</span>

@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -53,7 +53,7 @@
                             <label for="frommail">From Mail</label>
                             <input type="text" class="form-control" name="from_mail" id="from_mail" placeholder="From Mail Id" value="{{$form->from_mail}}">
                             <span class="text-danger">{{ $errors->first('from_mail') }}</span>
-                        </div> 
+                        </div>
                         <div class="form-group">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Google Catcha</h3>

@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -6,7 +6,7 @@
 <!--    <section class="content-header">
         <h1>
             Edit Lead
-             <small>Control panel</small> 
+             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>&nbsp;<i class="fa fa-asterisk text-danger"></i>
-                            <textarea class="form-control" name="message" id="message"><?php echo $data->message; ?></textarea> 
+                            <textarea class="form-control" name="message" id="message"><?php echo $data->message; ?></textarea>
                             <span class="text-danger">{{ $errors->first('message') }}</span>
                         </div>
                         <div class="form-group">

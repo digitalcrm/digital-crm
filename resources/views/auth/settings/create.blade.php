@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -46,7 +46,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <!-- <form role="form" > -->
-                    {{Form::open(['action'=>'InvoiceController@store','method'=>'Post','enctype'=>'multipart/form-data'])}} 
+                    {{Form::open(['action'=>'InvoiceController@store','method'=>'Post','enctype'=>'multipart/form-data'])}}
                     @csrf
                     <div class="box-body">
                         <section class="col-lg-4">
@@ -99,7 +99,7 @@
                                 <span class="text-danger">{{ $errors->first('cmp_logo') }}</span>
                             </div>
                         </section>
-                        <!--                        
+                        <!--
                                                 <section class="col-lg-2">
                                                     <div class="form-group" id="project-label">Select a project (type "a" for a start):</div>
                                                     <input id="project">
@@ -363,7 +363,7 @@
 
 //            alert('productData ' + productData);
 //            alert('quantityVal ' + quantityVal);
-            //            alert('priceVal ' + priceVal); 
+            //            alert('priceVal ' + priceVal);
             var proData = productData.split('-');
             var proId = Number(proData[0]);
             var productNameVal = proData[1];
@@ -501,7 +501,7 @@
             $("#billTo").focusout(function() {
             });
         });
-    }); //]]> 
+    }); //]]>
 
 </script>
 

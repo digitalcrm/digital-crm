@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'login' => 'Login',
+    'register' => 'Register',
     'empty_table' => 'Data table is empty.',
     'new' => 'New',
     'edit' => 'Edit',

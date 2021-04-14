@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 
 
@@ -41,7 +41,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <!-- <form role="form" > -->
-                    {{Form::open(['action'=>'LeadController@importData','method'=>'Post','enctype'=>'multipart/form-data'])}} 
+                    {{Form::open(['action'=>'LeadController@importData','method'=>'Post','enctype'=>'multipart/form-data'])}}
                     @csrf
                     <div class="box-body">
                         <!-- Left col -->

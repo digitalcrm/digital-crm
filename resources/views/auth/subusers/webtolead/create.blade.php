@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.adminlte-boot-4.user')
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -98,7 +98,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <a href="{{url('/webtolead')}}" class="btn btn-primary pull-right">Back</a> 
+                        <a href="{{url('/webtolead')}}" class="btn btn-primary pull-right">Back</a>
                         {{Form::submit('Save',['class'=>"btn btn-primary"])}}
                     </div>
                     <!-- </form> -->

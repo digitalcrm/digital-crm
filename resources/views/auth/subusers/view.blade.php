@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    
+
 		<div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -119,8 +119,8 @@
           </div>
           <!-- ./col -->
         </div>
-			
-		
+
+
 		<div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -136,8 +136,8 @@
 			  </a>
             </div>
           </div>
-		  
-									
+
+
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -153,7 +153,7 @@
 			  </a>
             </div>
           </div>
-		  
+
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -170,7 +170,7 @@
 			 </a>
             </div>
           </div>
-		  
+
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
