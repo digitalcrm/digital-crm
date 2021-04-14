@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-
-use App\Admin;
 use App\User;
-use App\Tbl_leads;
-use App\Tbl_contacts;
+use App\Admin;
+use App\Company;
+use App\currency;
 use App\Tbl_deals;
-use App\Tbl_countries;
+
+use App\Tbl_leads;
+use App\Tbl_events;
 use App\Tbl_states;
-use App\Tbl_industrytypes;
+use App\Tbl_invoice;
+use App\Tbl_Accounts;
+use App\Tbl_contacts;
+use App\Tbl_products;
+use App\Tbl_countries;
 use App\Tbl_leadsource;
 use App\Tbl_leadstatus;
-use App\Tbl_Accounts;
-use App\Tbl_invoice;
-use App\currency;
-use App\Tbl_salutations;
-use App\Tbl_events;
-use App\Tbl_products;
 use App\Tbl_cart_orders;
-use App\Company;
+use App\Tbl_salutations;
+use App\Tbl_industrytypes;
+use App\Exports\LeadsExport;
+use App\Imports\LeadsImport;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 // use Excel;
 
-use App\Imports\LeadsImport;
-use App\Exports\LeadsExport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\ProductLeadsImport;
 use App\Exports\ProductLeadsExport;
-// Controllers
+use App\Imports\ProductLeadsImport;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\DealController;
+// Controllers
+use Illuminate\Support\Facades\Validator;
 
 class LeadController extends Controller
 {

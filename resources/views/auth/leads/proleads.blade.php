@@ -29,7 +29,7 @@
                             <!-- <a class="btn btn-sm btn-primary mr-1" href="{{url('leads/create')}}"><i class="far fa-plus-square mr-1"></i> New Lead</a>
                             <a class="btn btn-sm btn-outline-secondary" href="{{url('leads/import/csv')}}"><i class="fas fa-upload"></i></a>
                             <a class="btn btn-sm btn-outline-secondary" href="{{url('leads/export/csv')}}"><i class="fas fa-download"></i></a>
-                            
+
                             <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal2">
                                 <i class="fa fa-filter"></i>
                             </button> -->
@@ -66,7 +66,7 @@
                     <div class="card shadow card-primary card-outline">
                         <div class="card-header">
                             <!-- <h5>
-                                
+
                             </h5> -->
                         </div>
                         <!--/.card-header-->
