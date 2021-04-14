@@ -46,30 +46,10 @@
             <!-- Small cardes (Stat card) -->
             <div class="row">
                 <div class="col-lg-12 p-0">
-                    @if(session('success'))
-                    <div class='alert alert-success'>
-                        {{session('success')}}
-                    </div>
-                    @endif
-
-                    @if(session('error'))
-                    <div class='alert alert-danger'>
-                        {{session('error')}}
-                    </div>
-                    @endif
-
-                    @if(session('info'))
-                    <div class='alert alert-warning'>
-                        {{session('info')}}
-                    </div>
-                    @endif
+                    <x-alert />
                     <div class="card shadow card-primary card-outline">
                         <div class="card-header">
-                            <!-- <h5>
-
-                            </h5> -->
                         </div>
-                        <!--/.card-header-->
 
                         <div class="card-body p-0" id="leadsTableDiv">
 
@@ -84,7 +64,6 @@
                         </div>
 
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
             <!-- /.row -->
@@ -232,11 +211,11 @@
             $("#leadsTableDiv").html(res.table);
 
             $('#leadsTable').DataTable({
-                'paging': true,
+                'paging': false,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': false,
-                'info': true,
+                'info': false,
                 'autoWidth': false,
                 'responsive': true,
             });

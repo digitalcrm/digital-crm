@@ -1316,8 +1316,6 @@ class LeadController extends Controller
         $day = '';
         $weekDay = '';
 
-        // echo $user;
-        // exit();
         $orders = $this->getProductLeadsList($user, $weekDay, $day, $proId);
 
         $orders['oldDate'] = $this->getProLeadsOldDate();
@@ -1325,7 +1323,6 @@ class LeadController extends Controller
         $orders['timer'] = 'All';
         $orders['productOptions'] = $this->productOptions();
         $orders['leadStatusVal'] = 'All';
-
 
         return view('auth.leads.proleads')->with('data', $orders);
     }
@@ -1373,7 +1370,7 @@ class LeadController extends Controller
         $query->with('Tbl_products');
         // $query->with('Tbl_products.companies');
         $query->orderByDesc('ld_id');
-        $leads = $query->get();
+        $leads = $query->paginate(10);
 
         // echo json_encode($leads);
         // exit();
@@ -1473,7 +1470,9 @@ class LeadController extends Controller
                 // <a class="dropdown-item text-default text-btn-space" href="' . url('leads/assign/' . $formdetails->ld_id) . '">Assign to Subuser</a>
             }
             $formstable .= '</tbody>';
-            $formstable .= '</table></div>';
+            $formstable .= '</table>
+            <div class="mt-2 pl-1">'.$leads->links().'</div>
+            </div>';
         } else {
             $formstable = 'No records available';
         }

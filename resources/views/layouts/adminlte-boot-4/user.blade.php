@@ -165,11 +165,11 @@ $(function() {
     });
 
     $('#leadsTable').DataTable({
-        'paging': true,
+        'paging': false,
         'lengthChange': true,
         'searching': true,
         'ordering': false,
-        'info': true,
+        'info': false,
         'autoWidth': false,
         'responsive': true
 //        'columnDefs': [
