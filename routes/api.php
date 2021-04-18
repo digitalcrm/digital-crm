@@ -139,6 +139,15 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
 });
 
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
+/**
+ * Version 1 apis
+ */
+
+ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
+    
+    // company list
     Route::get('list-company', 'V1\CompanyV1Controller@byCity');
+    
+    //product api's
+    
 });
