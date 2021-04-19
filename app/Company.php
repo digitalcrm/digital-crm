@@ -52,16 +52,23 @@ class Company extends Model
         'admin_id'
     ];
 
-    protected $appends = ['logo','cover_img','catalog'];
+    protected $appends = [
+        'logo',
+        'cover_img',
+    ];
 
     public function getLogoAttribute()
     {
         return $this->companyLogo();
     }
 
-    public function getCatalogAttribute()
+    public function downloadCatalog()
     {
-        return $this->document ? response()->download('public/storage/' . $this->document) : null;
+        try {
+            return response()->download(asset('public/storage/'.$this->document));
+        } catch (\Throwable $th) {
+            return abort(404);
+        }
     }
 
     public function getCoverImgAttribute()

@@ -19,7 +19,37 @@ class Tbl_products extends Model
      *
      * @var array
      */
-    protected $fillable = ['pro_id', 'name', 'picture', 'description', 'size', 'price', 'unit', 'uid', 'views', 'active', 'procat_id', 'enable', 'user_type', 'store', 'prosubcat_id', 'vendor', 'tags', 'slideshowpics', 'slug', 'featured', 'productid', 'productsku', 'qrcode', 'supply_price', 'current_stock', 'company', 'location', 'stock', 'min_quantity'];
+    protected $fillable = [
+        'pro_id', 
+        'name', 
+        'picture', 
+        'description', 
+        'size', 
+        'price', 
+        'unit', 
+        'uid', 
+        'views', 
+        'active', 
+        'procat_id', 
+        'enable', 
+        'user_type', 
+        'store', 
+        'prosubcat_id', 
+        'vendor', 
+        'tags', 
+        'slideshowpics', 
+        'slug', 
+        'featured', 
+        'productid', 
+        'productsku', 
+        'qrcode', 
+        'supply_price', 
+        'current_stock', 
+        'company', 
+        'location', 
+        'stock', 
+        'min_quantity',
+    ];
 
     protected $appends = ['product_img'];
 
@@ -111,5 +141,17 @@ class Tbl_products extends Model
     public function tickets()
     {
         return $this->hasMany('App\Ticket', 'product_id');
+    }
+
+    public function scopeIsActive($query)
+    {
+        return $query->where('enable',1)->where('active',1)->where('store',1);
+    }
+
+    public function scopeIsFeatured($query, $value)
+    {
+        $query->when(($value === 'true'), function($query) {
+            return $query->where('featured',1);
+        });
     }
 }

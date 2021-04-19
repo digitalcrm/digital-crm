@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Company;
 use Illuminate\Http\Request;
@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CompanyApiController extends Controller
 {
+    public $paginateData = 10;
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +23,13 @@ class CompanyApiController extends Controller
             $query->where('active', 1);
         })->whereHas('tbl_products', function (Builder $query) {
             $query->where('active', 1)->where('enable', 1);
-        })->isActive()->latest()->get();
+        })
+        ->when(request('sort'), function($q) {
+            $this->paginateData = request('sort');
+        })
+        ->isActive()
+        ->latest()
+        ->paginate($this->paginateData)->withQueryString();
 
         return new CompanyCollection($comapnies);
     }

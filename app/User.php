@@ -271,6 +271,11 @@ class User extends Authenticatable
         return $this->hasMany(Rfq::class, 'user_id');
     }
 
+    public function scopeIsActive($query)
+    {
+        return $query->where('active',1);
+    }
+
     public static function boot()
     {
         parent::boot();

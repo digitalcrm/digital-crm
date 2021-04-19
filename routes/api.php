@@ -108,14 +108,6 @@ Route::get('get/country/list/', 'Api\CrudController@getCountryList');
 
 Route::get('/search/product/vendor/{keyword}', 'Api\CrudController@searchProductByVendor');
 
-Route::apiResource('companies', 'Api\CompanyApiController')->names([
-    'index' => 'api.companies.index',
-    'show' => 'api.companies.show',
-    'store' => 'api.companies.store',
-    'update' => 'api.companies.update',
-    'destroy' => 'api.companies.delete',
-]);
-
 Route::get('get/products/category/options/list', 'Api\CrudController@getProductCategoryOptionList');
 
 Route::get('get/products/subcategory/options/list/{id}', 'Api\CrudController@getProductSubCategoryOptionList');
@@ -135,7 +127,7 @@ Route::apiResource('rfq/leads', 'Api\RfqLeadApiController')->names([
 ]);
 
 Route::get('downloads/{company:slug}', function (App\Company $company) {
-    return $company->catalog;
+    return $company->downloadCatalog();
 });
 
 
@@ -143,11 +135,28 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
  * Version 1 apis
  */
 
- Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
+ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
     
     // company list
-    Route::get('list-company', 'V1\CompanyV1Controller@byCity');
+    Route::get('list-company', 'CompanyV1Controller@byCity');
+
+    // companies
+    Route::apiResource('companies', 'CompanyApiController')->names([
+        'index' => 'api.companies.index',
+        'show' => 'api.companies.show',
+        'store' => 'api.companies.store',
+        'update' => 'api.companies.update',
+        'destroy' => 'api.companies.delete',
+    ]);
     
     //product api's
-    
+    Route::apiResource('products','ProductV1Controller')->names([
+        'index' => 'v1products.index',
+        'show' => 'v1products.show',
+        'store' => 'v1products.store',
+        'update' => 'v1products.update',
+        'destroy' => 'v1products.delete',
+    ])->parameters([
+        'products' => 'product:slug'
+    ]);
 });
