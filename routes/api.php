@@ -149,7 +149,7 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
         'destroy' => 'api.companies.delete',
     ]);
     
-    //product api's
+    // product api's
     Route::apiResource('products','ProductV1Controller')->names([
         'index' => 'v1products.index',
         'show' => 'v1products.show',
@@ -159,4 +159,5 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
     ])->parameters([
         'products' => 'product:slug'
     ]);
+
 });
