@@ -67,7 +67,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         'destroy' => 'prod.delete',
     ]);
 
-    Route::get('get/companies/options/list', 'Api\CompanyApiController@getCompaniesOptionList');
+    // Route::get('get/companies/options/list', 'Api\CompanyApiController@getCompaniesOptionList');
 });
 
 //	Shop Api's
@@ -147,7 +147,7 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
         'store' => 'api.companies.store',
         'update' => 'api.companies.update',
         'destroy' => 'api.companies.delete',
-    ]);
+    ]);  
     
     // product api's
     Route::apiResource('products','ProductV1Controller')->names([
@@ -160,4 +160,5 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
         'products' => 'product:slug'
     ]);
 
+    Route::get('product/leads', 'ProductV1Controller@leads')->name('v1products.leads');
 });

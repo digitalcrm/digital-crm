@@ -8,9 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CompanyResource;
 use App\Http\Resources\CompanyCollection;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\StoreCompanyRequest;
 
 class CompanyApiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only(['store','update','destroy']);
+    }
+
     public $paginateData = 10;
     /**
      * Display a listing of the resource.
@@ -40,9 +46,31 @@ class CompanyApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCompanyRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('c_logo')) {
+            $validatedData['c_logo'] = request('c_logo')->storePublicly('companyLogo', 'public');
+        }
+
+        if ($request->hasFile('document')) {
+            $validatedData['document'] = request('document')->storePublicly('companyCatalog', 'public');
+        }
+
+        if ($request->hasFile('c_cover')) {
+            $validatedData['c_cover'] = request('c_cover')->storePublicly('companyCover', 'public');
+        }
+
+        if (empty($request->employees)) {
+            $validatedData['employees'] = 0;
+        }
+
+        $createdData = auth()->user()->company()->create($validatedData);
+        
+        $response = new CompanyResource($createdData);
+
+        return response()->json(['status' => 'success','company' => $response]);
     }
 
     /**
@@ -87,12 +115,12 @@ class CompanyApiController extends Controller
         //
     }
 
-    public function getCompaniesOptionList()
-    {
-        $uid = auth()->user()->id;
+    // public function getCompaniesOptionList()
+    // {
+    //     $uid = auth()->user()->id;
 
-        $companies = Company::where('user_id', $uid)->get();
+    //     $companies = Company::where('user_id', $uid)->get();
 
-        return $companies;
-    }
+    //     return $companies;
+    // }
 }

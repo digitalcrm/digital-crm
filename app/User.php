@@ -77,6 +77,15 @@ class User extends Authenticatable
         return $this->hasMany('App\Tbl_leads', 'uid');
     }
 
+    /** get products leads where leadtype 2 */
+    public function product_leads()
+    {
+        return $this->hasMany('App\Tbl_leads', 'uid')
+                    ->where('leadtype',2)
+                    ->where('active',1)
+                    ->latest();
+    }
+
     public function tbl_accounts()
     {
         return $this->hasMany('App\Tbl_Accounts', 'uid');

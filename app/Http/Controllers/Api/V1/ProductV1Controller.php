@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Tbl_leads;
 use App\Tbl_products;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductCollection;
+use App\Http\Resources\LeadResource;
 use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductCollection;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreProductRequest;
 
 class ProductV1Controller extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only(['store','update','destroy','leads']);
+    }
+
     public $paginateData = 5;
+    
     /**
      * Display a listing of the resource.
      *
@@ -54,9 +66,38 @@ class ProductV1Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        $validatedData['uid'] = auth()->user()->id;
+
+        $validatedData['store'] = 1;
+        
+        if (empty(request('min_quantity'))) {
+            $validatedData['min_quantity'] = 1;
+        } else {
+            $validatedData['min_quantity'] = request('min_quantity');
+        }
+
+        if (empty(request('unit'))) {
+            $validatedData['unit'] = 0;
+        } else {
+            $validatedData['unit'] = request('unit');
+        }
+
+        if($request->hasFile('picture')){
+            $file = request('picture');
+            $fname = time() . '.' . $file->getClientOriginalExtension();   
+            $file->move('uploads/products/', $fname);
+            $validatedData['picture'] = '/uploads/products/' . $fname;
+        }
+        
+        $createdData = Tbl_products::create($validatedData);
+
+        $response =  new ProductResource($createdData);
+
+        return response()->json(['status' => 'success', 'data' => $response]);
     }
 
     /**
@@ -109,5 +150,17 @@ class ProductV1Controller extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * get product leads where leadtype 2 in tbl_leads table
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function leads()
+    {
+        $productLead = auth()->user()->product_leads()->paginate(15);
+
+        return LeadResource::collection($productLead);
     }
 }
