@@ -236,6 +236,7 @@ class CompanyController extends Controller
                 ->with('Tbl_accounttypes')
                 ->with('tbl_product_category')
                 ->orderBy('id', 'desc')
+                ->latest()
                 ->get();
         } else {
             $accounts = Company::where('isActive', 1)
@@ -243,6 +244,7 @@ class CompanyController extends Controller
                 ->with('tbl_product_category')
                 ->orderBy('id', 'desc')
                 ->where('user_id', $uid)
+                ->latest()
                 ->get();
         }
 

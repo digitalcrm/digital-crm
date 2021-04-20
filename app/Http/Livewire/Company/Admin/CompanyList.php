@@ -28,9 +28,9 @@ class CompanyList extends Component
         $searchTerm = '%' . $this->searchTerm . '%';
         $companys = [];
         if ($uid == 'All') {
-            $companys = Company::where('c_name', 'like', $searchTerm)->paginate(10);
+            $companys = Company::where('c_name', 'like', $searchTerm)->latest()->paginate(10)->withQueryString();
         } else {
-            $companys = Company::where('c_name', 'like', $searchTerm)->where('user_id', $uid)->paginate(10);
+            $companys = Company::where('c_name', 'like', $searchTerm)->where('user_id', $uid)->latest()->paginate(10)->withQueryString();
         }
 
 

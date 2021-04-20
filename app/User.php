@@ -285,6 +285,17 @@ class User extends Authenticatable
         return $query->where('active',1);
     }
 
+    public function userHaveCompany()
+    {
+        $company = $this->company()->get()->map(function($comp) {
+            return $comp->c_name;
+        })->implode(', ');
+
+        if ($company == '') return '';
+
+        return $company;
+    }
+
     public static function boot()
     {
         parent::boot();

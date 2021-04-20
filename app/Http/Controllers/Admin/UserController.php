@@ -68,6 +68,7 @@ class UserController extends Controller
             $usertable .= '<tr>';
             $usertable .= '<th>Name</th>';
             $usertable .= '<th>Email</th>';
+            $usertable .= '<th>Company</th>';
             $usertable .= '<th>Mobile</th>';
             $usertable .= '<th>Job Title</th>';
             // $usertable .= '<th>Lead Quota</th>';
@@ -111,6 +112,7 @@ class UserController extends Controller
                 $usertable .= '<td><a href="' . url('admin/users/' . $userdetails->id) . '">
                 <img src="' . $userimg . '" class="avatar" style="width:25px; height:25px;">' . $userdetails->name . '</a>&nbsp;</td>';
                 $usertable .= '<td><a href="' . url('admin/mails/mailsend/users/' . $userdetails->id) . '">' . $userdetails->email . '</a></td>';
+                $usertable .= '<td>' . $userdetails->userHaveCompany() . '</td>';
                 $usertable .= '<td>' . $userdetails->mobile . '</td>';
                 $usertable .= '<td>' . $jobTitle . '</td>';
                 // $usertable .= '<td>' . $userdetails->quota . ' %' . '</td>';
