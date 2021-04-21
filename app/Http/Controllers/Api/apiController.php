@@ -24,10 +24,16 @@ use App\Http\Resources\AccountResourceCollection;
 
 class apiController extends Controller
 {
+
     public $successStatus = 200;
+    
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only(['logout','profile']);
+    }
     /*
-Admin Login/Register
-*/
+        Admin Login/Register
+    */
     public function adminlogin(Request $req)
     {
         #Not working this comment code leter will fixed
@@ -82,8 +88,8 @@ Admin Login/Register
         $name =  $user->name;
         return response()->json(['success' => $token, 'username' => $name], $this->successStatus);
     }
-    
-    
+
+
     /*
     User Login/Register
     */
@@ -124,7 +130,7 @@ Admin Login/Register
         $input['country'] = 101;
 
         $user = User::create($input);
-        
+
         $user->company()->create([
             'c_name' => $input['company'],
             'personal_name' => $input['name'],

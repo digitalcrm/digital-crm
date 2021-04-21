@@ -3,74 +3,36 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*Admin Login/Register*/
+/*
+    |--------------------------------------------------------------------------
+    | Authenticated API
+    |--------------------------------------------------------------------------
+    |
+    |These api are for admin login/register and user login register 
+    |
+*/
 
 Route::post('admin/login', 'Api\apiController@adminlogin');
 Route::post('admin/register', 'Api\apiController@adminregister');
 
-
 /*User Login/Register*/
 Route::post('login', 'Api\apiController@userlogin');
 Route::post('register', 'Api\apiController@userregister');
-
+Route::post('logout', 'Api\apiController@logout');
 /*User Forgot Password*/
 Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'Api\ResetPasswordController@reset');
 
-Route::get('account/lists', 'Api\apiController@getaccountLists');
+//User profile
+Route::get('profile/{profile}', 'Api\apiController@profile');
 
-Route::get('lead/lists', 'Api\apiController@getleadLists');
+/*
+    |--------------------------------------------------------------------------
+    | Shop API
+    |--------------------------------------------------------------------------
+    |
+*/
 
-
-/*User detail other Routes*/
-Route::group(['middleware' => 'auth:api'], function () {
-
-    Route::get('profile/{profile}', 'Api\apiController@profile');
-
-    Route::get('all/users/', 'Api\apiController@details');
-
-    Route::post('logout', 'Api\apiController@logout'); #logout user route
-
-    Route::post('update/user/{user}', 'Api\apiController@updateuserdetails');
-
-    Route::get('currency', 'Api\apiController@getcurrency');
-
-    Route::get('accounttypes', 'Api\apiController@accounttypes');
-
-    Route::get('leadtypes', 'Api\apiController@leadtypes');
-
-    Route::get('industrytypes', 'Api\apiController@industrytypes');
-
-    Route::get('account/details', 'Api\apiController@getaccountDetails');
-
-    Route::get('lead/details', 'Api\apiController@getleadDetails');
-
-    Route::get('get/productleads/list', 'Api\apiLeadController@getProductLeads');
-
-    Route::get('get/productlead/details/{id}', 'Api\apiLeadController@getProductLeadDetails');
-
-    Route::apiResource('account', 'Api\apiAccountController');
-
-    Route::apiResource('leads', 'Api\apiLeadController')->names([
-        'index' => 'lead.index',
-        'show' => 'lead.show',
-        'store' => 'lead.store',
-        'update' => 'lead.update',
-        'destroy' => 'lead.delete',
-    ]);
-
-    Route::apiResource('products', 'Api\ProductController')->names([
-        'index' => 'prod.index',
-        'show' => 'prod.show',
-        'store' => 'prod.store',
-        'update' => 'prod.update',
-        'destroy' => 'prod.delete',
-    ]);
-
-    // Route::get('get/companies/options/list', 'Api\CompanyApiController@getCompaniesOptionList');
-});
-
-//	Shop Api's
 Route::get('get/products/all/{skip}/{take}', 'Api\CrudController@getProductsList');
 
 Route::get('get/products/list', 'Api\CrudController@getProducts');
@@ -78,7 +40,6 @@ Route::get('get/products/list', 'Api\CrudController@getProducts');
 Route::get('get/products/latest/featured/{skip}/{take}', 'Api\CrudController@getProductsLatestFeatured');
 
 Route::get('get/products/args', 'Api\AjaxController@ajaxGetProducts');
-//{skip}/{min_price}/{max_price}/{procatId}/{prosubcatId}/{keyword}/{sortby}
 
 Route::get('get/products/category/list/{skip}/{take}', 'Api\CrudController@getProductCategoryList');
 
@@ -126,31 +87,89 @@ Route::apiResource('rfq/leads', 'Api\RfqLeadApiController')->names([
     'store'
 ]);
 
+############################### Need changes ##################################################
+Route::get('account/lists', 'Api\apiController@getaccountLists');
+
+Route::get('lead/lists', 'Api\apiController@getleadLists');
+
+Route::group(['middleware' => 'auth:api'], function () {
+
+    Route::get('all/users/', 'Api\apiController@details');
+
+    Route::post('update/user/{user}', 'Api\apiController@updateuserdetails');
+
+    Route::get('currency', 'Api\apiController@getcurrency');
+
+    Route::get('accounttypes', 'Api\apiController@accounttypes');
+
+    Route::get('leadtypes', 'Api\apiController@leadtypes');
+
+    Route::get('industrytypes', 'Api\apiController@industrytypes');
+
+    Route::get('account/details', 'Api\apiController@getaccountDetails');
+
+    Route::get('lead/details', 'Api\apiController@getleadDetails');
+    
+    Route::apiResource('account', 'Api\apiAccountController');
+    
+    Route::apiResource('leads', 'Api\apiLeadController')->names([
+        'index' => 'lead.index',
+        'show' => 'lead.show',
+        'store' => 'lead.store',
+        'update' => 'lead.update',
+        'destroy' => 'lead.delete',
+        ]);
+        
+    // Route::get('get/productleads/list', 'Api\apiLeadController@getProductLeads');
+
+    // Route::get('get/productlead/details/{id}', 'Api\apiLeadController@getProductLeadDetails');
+
+    // Route::apiResource('products', 'Api\ProductController')->names([
+    //     'index' => 'prod.index',
+    //     'show' => 'prod.show',
+    //     'store' => 'prod.store',
+    //     'update' => 'prod.update',
+    //     'destroy' => 'prod.delete',
+    // ]);
+
+    // Route::get('get/companies/options/list', 'Api\CompanyApiController@getCompaniesOptionList');
+});
+
+/*
+    |--------------------------------------------------------------------------
+    | Version 1 APi's
+    |--------------------------------------------------------------------------
+    |
+*/
+
 Route::get('downloads/{company:slug}', function (App\Company $company) {
     return $company->downloadCatalog();
 });
 
+Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
-/**
- * Version 1 apis
- */
-
- Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
-    
-    // company list
+    /*
+        |--------------------------------------------------------------------------
+        | Company APi's
+        |--------------------------------------------------------------------------
+        |
+    */
     Route::get('list-company', 'CompanyV1Controller@byCity');
-
-    // companies
     Route::apiResource('companies', 'CompanyApiController')->names([
         'index' => 'api.companies.index',
         'show' => 'api.companies.show',
         'store' => 'api.companies.store',
         'update' => 'api.companies.update',
         'destroy' => 'api.companies.delete',
-    ]);  
-    
-    // product api's
-    Route::apiResource('products','ProductV1Controller')->names([
+    ]);
+
+    /*
+        |--------------------------------------------------------------------------
+        | Products APi's
+        |--------------------------------------------------------------------------
+        |
+    */
+    Route::apiResource('products', 'ProductV1Controller')->names([
         'index' => 'v1products.index',
         'show' => 'v1products.show',
         'store' => 'v1products.store',
@@ -159,6 +178,9 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
     ])->parameters([
         'products' => 'product:slug'
     ]);
-
     Route::get('product/leads', 'ProductV1Controller@leads')->name('v1products.leads');
+
+    
 });
+
+
