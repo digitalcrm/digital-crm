@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class RfqApiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only(['store']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,16 +31,6 @@ class RfqApiController extends Controller
         ])->isActive()->latest()->get();
 
         return new RfqCollection($rfqs);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -68,17 +62,6 @@ class RfqApiController extends Controller
         ])->findOrFail($rfq->id);
 
         return new RfqResource($rfqDetails);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Rfq  $rfq
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rfq $rfq)
-    {
-        //
     }
 
     /**

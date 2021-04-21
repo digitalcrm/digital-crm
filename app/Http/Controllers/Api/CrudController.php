@@ -351,12 +351,6 @@ class CrudController extends Controller
         }
     }
 
-    public function getCountryList()
-    {
-        $country = Tbl_countries::all();
-        return $country;
-    }
-
     public function searchProductKeyword($keyword)
     {
         $consumerObj = new ConsumerController();

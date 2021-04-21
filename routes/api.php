@@ -65,29 +65,14 @@ Route::get('/search/product/{keyword}', 'Api\CrudController@searchProductKeyword
 
 Route::post('action/product/buynow/{slug}', 'Api\CrudController@StoreProductByNow');
 
-Route::get('get/country/list/', 'Api\CrudController@getCountryList');
-
 Route::get('/search/product/vendor/{keyword}', 'Api\CrudController@searchProductByVendor');
 
 Route::get('get/products/category/options/list', 'Api\CrudController@getProductCategoryOptionList');
 
 Route::get('get/products/subcategory/options/list/{id}', 'Api\CrudController@getProductSubCategoryOptionList');
 
-Route::apiResource('rfq', 'Api\RfqApiController')->only([
-    'index', 'show', 'create'
-]);
-
-Route::apiResource('rfq/leads', 'Api\RfqLeadApiController')->names([
-    'index' => 'leadss.index',
-    'show' => 'leadss.show',
-    'store' => 'leadss.store',
-    'update' => 'leadss.update',
-    'destroy' => 'leadss.delete',
-])->only([
-    'store'
-]);
-
 ############################### Need changes ##################################################
+
 Route::get('account/lists', 'Api\apiController@getaccountLists');
 
 Route::get('lead/lists', 'Api\apiController@getleadLists');
@@ -98,14 +83,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('update/user/{user}', 'Api\apiController@updateuserdetails');
 
-    Route::get('currency', 'Api\apiController@getcurrency');
-
-    Route::get('accounttypes', 'Api\apiController@accounttypes');
-
-    Route::get('leadtypes', 'Api\apiController@leadtypes');
-
-    Route::get('industrytypes', 'Api\apiController@industrytypes');
-
     Route::get('account/details', 'Api\apiController@getaccountDetails');
 
     Route::get('lead/details', 'Api\apiController@getleadDetails');
@@ -113,11 +90,11 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('account', 'Api\apiAccountController');
     
     Route::apiResource('leads', 'Api\apiLeadController')->names([
-        'index' => 'lead.index',
-        'show' => 'lead.show',
-        'store' => 'lead.store',
-        'update' => 'lead.update',
-        'destroy' => 'lead.delete',
+        'index' => 'apilead.index',
+        'show' => 'apilead.show',
+        'store' => 'apilead.store',
+        'update' => 'apilead.update',
+        'destroy' => 'apilead.delete',
         ]);
         
     // Route::get('get/productleads/list', 'Api\apiLeadController@getProductLeads');
@@ -137,10 +114,26 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 /*
     |--------------------------------------------------------------------------
-    | Version 1 APi's
+    | Version 0 & 1 APi's
     |--------------------------------------------------------------------------
     |
 */
+
+Route::group(['namespace' => 'Api'], function () {
+    
+    /*
+        |--------------------------------------------------------------------------
+        | RFQ APi's
+        |--------------------------------------------------------------------------
+        |
+    */
+    Route::apiResource('rfq', 'RfqApiController')->only([
+        'index', 'show', 'store'
+    ]);
+    
+    Route::apiResource('rfq/leads', 'RfqLeadApiController')->names(['store' => 'rfqlead.store'])->only(['store']);    
+});
+
 
 Route::get('downloads/{company:slug}', function (App\Company $company) {
     return $company->downloadCatalog();
@@ -180,7 +173,33 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
     ]);
     Route::get('product/leads', 'ProductV1Controller@leads')->name('v1products.leads');
 
-    
+    /*
+        |--------------------------------------------------------------------------
+        | Settings Lists Data APi's
+        |--------------------------------------------------------------------------
+        |
+    */
+    Route::get('currencies', 'CommonListController@getcurrency');
+
+    Route::get('account-type', 'CommonListController@accounttypes');
+
+    Route::get('lead-type', 'CommonListController@leadtypes');
+
+    Route::get('lead-source', 'CommonListController@leadSource');
+
+    Route::get('industry-type', 'CommonListController@industrytypes');
+
+    Route::get('units', 'CommonListController@units');
+
+    Route::get('deal-type', 'CommonListController@dealType');
+
+    Route::get('countries/{sortname?}', 'CommonListController@country');
+
+    Route::get('states/{country_id?}', 'CommonListController@state');
+
+    Route::get('list-category', 'CommonListController@listCategory');
+
+    Route::get('list-subcategory/{catgory_id?}', 'CommonListController@listSubCategory');
 });
 
 

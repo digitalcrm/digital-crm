@@ -205,35 +205,7 @@ class apiController extends Controller
 
         return response()->json(['updated Data' => $userdata, 'message' => 'Profile Successfully Updated ' . $user->name], Response::HTTP_CREATED);
     }
-
-    public function getcurrency()
-    {
-        $getcurrency = currency::all();
-
-        return response()->json(['currency' => $getcurrency], $this->successStatus);
-    }
-
-    public function accounttypes()
-    {
-        $accounttypes = Tbl_accounttypes::all();
-
-        return response()->json(['currency' => $accounttypes], $this->successStatus);
-    }
-
-    public function leadtypes()
-    {
-        $accounttypes = Tbl_leadstatus::all();
-
-        return response()->json(['currency' => $accounttypes], $this->successStatus);
-    }
-
-    public function industrytypes()
-    {
-        $accounttypes = Tbl_industrytypes::all();
-
-        return response()->json(['currency' => $accounttypes], $this->successStatus);
-    }
-
+    
     public function getaccountDetails()
     {
         //for each login user account details
