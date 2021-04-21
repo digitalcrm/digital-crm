@@ -13,9 +13,12 @@ use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreProductRequest;
+use App\Traits\ProductSlugTrait;
 
 class ProductV1Controller extends Controller
 {
+
+    use ProductSlugTrait;
 
     public function __construct()
     {
@@ -69,6 +72,8 @@ class ProductV1Controller extends Controller
     public function store(StoreProductRequest $request)
     {
         $validatedData = $request->validated();
+
+        $validatedData['slug'] = $this->createSlug(request('name'));
 
         $validatedData['uid'] = auth()->user()->id;
 

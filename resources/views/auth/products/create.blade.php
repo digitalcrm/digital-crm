@@ -125,7 +125,7 @@
                                     <label for="min_quantity" class="col-md-3 col-form-label text-right">Minimum Order of
                                         Quantity (MOQ)</label>
                                     <div class="col-md-9">
-                                        <input type="number" min="1" class="form-control required" name="min_quantity"
+                                        <input type="number" min="1" class="form-control" name="min_quantity"
                                             id="min_quantity" placeholder="" value="{{ old('min_quantity') }}">
                                         @error('min_quantity')
                                             <div class="error">{{ $message }}</div>
