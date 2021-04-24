@@ -85,6 +85,13 @@ class User extends Authenticatable
                     ->where('active',1)
                     ->latest();
     }
+    /** get all leads product plus normal leads */
+    public function all_leads()
+    {
+        return $this->hasMany('App\Tbl_leads', 'uid')
+                    ->where('active',1)
+                    ->latest();
+    }
 
     public function tbl_accounts()
     {

@@ -164,7 +164,11 @@ class ProductV1Controller extends Controller
      */
     public function leads()
     {
-        $productLead = auth()->user()->product_leads()->paginate(15);
+        if (request('all') === 'true') {
+            $productLead = auth()->user()->all_leads()->paginate(15)->withQueryString();
+        } else {
+            $productLead = auth()->user()->product_leads()->paginate(15)->withQueryString();
+        }
 
         return LeadResource::collection($productLead);
     }
