@@ -48,11 +48,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <div class="">
                                     <x-captcha />
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group">
                                 <div class="form-check custom-control custom-checkbox float-left">

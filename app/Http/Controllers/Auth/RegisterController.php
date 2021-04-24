@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'mobile' => 'required|digits:10|unique:users,mobile',
             'company' => 'required|max:55|string',
             'password' => 'required|string|min:8|confirmed',
-            'g-recaptcha-response' => 'required', new Captcha(),
+            // 'g-recaptcha-response' => 'required', new Captcha(),
         ], $messages);
     }
 
