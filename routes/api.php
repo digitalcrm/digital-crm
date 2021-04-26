@@ -23,8 +23,6 @@ Route::post('logout', 'Api\apiController@logout');
 Route::post('password/email', 'Api\ForgotPasswordController@sendResetLinkEmail');
 Route::post('password/reset', 'Api\ResetPasswordController@reset');
 
-//User profile
-Route::get('profile/{profile}', 'Api\apiController@profile');
 
 /*
     |--------------------------------------------------------------------------
@@ -140,6 +138,18 @@ Route::get('downloads/{company:slug}', function (App\Company $company) {
 });
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
+
+    /*
+        |--------------------------------------------------------------------------
+        | Auth Profile, Auth products, Auth companies APi's
+        |--------------------------------------------------------------------------
+        |
+    */
+    Route::get('profile', 'DashboardController@profile');
+
+    Route::get('auth/product', 'DashboardController@product');
+
+    Route::get('auth/company', 'DashboardController@company');
 
     /*
         |--------------------------------------------------------------------------

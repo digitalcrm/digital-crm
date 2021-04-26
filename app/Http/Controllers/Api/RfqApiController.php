@@ -41,7 +41,39 @@ class RfqApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'product_name' => 'required',
+            'product_category_id' => 'required|not_in:0',
+            'sub_category_id' => 'required|not_in:0',
+            'company_id' => 'required|not_in:0',
+            'product_quantity' => 'nullable|numeric',
+            'unit_id' => 'nullable|numeric|not_in:0',
+            'purchase_price' => 'nullable',
+            'city' => 'nullable|string|max:255',
+            // 'isChecked' => 'required|accepted',
+            'details' => 'required|string|min:5',
+            'images' => 'nullable',
+            'images.*' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp,pdf,docx|max:1024',
+        ]);
+
+        $storedData = auth()->user()->rfqs()->create($validatedData);
+
+        if ($request->hasFile('images')) {
+            // foreach ($request->images as $photo) {
+                $path_url = request('images')->storePublicly('rfqs', 'public');
+                $storedData->images()->create([
+                    'file_name' => request('images')->getClientOriginalName(),
+                    'mime_type' => request('images')->getMimeType(),
+                    'file_path' => $path_url,
+                ]);
+            // }
+
+        }
+
+        $response =  new RfqResource($storedData);
+
+        return response()->json(['status' => 'success', 'data' => $response]);
+
     }
 
     /**

@@ -174,14 +174,6 @@ class apiController extends Controller
         return response()->json(['success' => 'succesfully logout from all devices'], $this->successStatus);
     }
 
-    public function profile(User $profile)
-    {
-        // $profile = Auth::user();
-        // return response()->json(['user'=>$profile]);
-
-        return new UserResource($profile);
-    }
-
     public function updateuserdetails(Request $request, User $user)
     {
         $userdata = [
