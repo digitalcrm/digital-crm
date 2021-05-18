@@ -61,7 +61,7 @@
                                             <td>{{ $service->serviceCategory->name }}</td>
                                             <td>{{ $service->company->c_name }}</td>
                                             <td>{{ $service->views ?? '0' }}</td>
-                                            <td>Null</td>
+                                            <td>{{ $service->countServiceLeads() ?? '' }}</td>
                                             <td>{{ ($service->isActive) ? 'active' : 'inactive' }}
                                             </td>
                                             <td>{{ $service->created_at->isoFormat('D/MM/Y') }}

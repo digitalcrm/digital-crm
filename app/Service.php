@@ -72,6 +72,16 @@ class Service extends Model
         return $this->belongsTo(Company::class, 'company_id');
     }
 
+    public function serviceLeads()
+    {
+        return $this->hasMany(Tbl_leads::class, 'service_id');
+    }
+
+    public function countServiceLeads()
+    {
+        $data = $this->serviceLeads()->where('uid',auth()->id())->where('active', 1)->where('leadtype',3)->count();
+        return $data;
+    }
 
     public function scopeIsActive($query)
     {
