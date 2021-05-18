@@ -86,6 +86,13 @@ $features = Auth::user()->tbl_features;
                         <p class="sub-nav">All Products</p>
                     </a>
                 </li>
+                    <li class="nav-item">
+                        <a href="{{url('products/inventory/list')}}"
+                        class="nav-link nav-link-custom {{ Request::is('products/inventory/list') ? 'active' : '' }}">
+                        <i class="nav-icon far fa-circle icon-size"></i>
+                        <p class="sub-nav">Inventory</p>
+                    </a>
+                </li>
                 @endif
                 
                 @if ($features != null && $features->products == 1)

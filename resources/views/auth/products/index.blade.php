@@ -13,7 +13,7 @@
                 <div class="col-sm-8">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a class="btn btn-sm btn-default mr-1" href="{{url('products/inventory/list')}}"><i class="fas mr-1"></i>Inventory</a>
+                            <a class="btn btn-sm btn-default mr-1" href="{{ route('services.create') }}"><i class="fas mr-1"></i>New Services</a>
                             <a class="btn btn-sm btn-primary mr-1" href="{{url('products/create')}}"><i class="far fa-plus-square mr-1"></i>New Product</a>
                             <a class="btn btn-sm btn-outline-secondary" href="{{url('products/import/csv')}}"><i class="fas fa-upload"></i></a>
                             <a class="btn btn-sm btn-outline-secondary" href="{{url('products/export/csv')}}"><i class="fas fa-download"></i></a>
