@@ -74,7 +74,7 @@ class ServiceV1Controller extends Controller
             $createdData->serviceSubcategories()->attach($request->serv_subcategory_id);
         }
 
-        return response()->json(['status' => 200, 'id' => $createdData->id]);
+        return response()->json(['status' => 200, 'title' => $createdData->title]);
 
     }
 

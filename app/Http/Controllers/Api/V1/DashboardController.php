@@ -68,7 +68,7 @@ class DashboardController extends Controller
             return ServiceResource::collection($services);
             
         } catch (\Throwable $th) {
-            return abort(404);
+            return response()->json(['error' => $th->getMessage()]);
         }
         
     }
