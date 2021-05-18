@@ -716,7 +716,7 @@ class ProductController extends Controller
                 $formstable .= '<img src="' . url($img) . '" class="avatar">';
                 $formstable .= '<a href="' . url('admin/products/' . $formdetails->pro_id) . '">' . $formdetails->name . '</a>&nbsp;';
                 $formstable .= '</td>';
-                $formstable .= '<td><span>' .$formdetails->uid . $currency->html_code . '</span>&nbsp;' . $formdetails->price . '</td>';
+                $formstable .= '<td><span>' .$currency->html_code . '</span>&nbsp;' . $formdetails->price . '</td>';
                 $formstable .= '<td>' . $formdetails->category . '</td>';   // ($formdetails->tbl_productcategory != '') ? $formdetails->tbl_productcategory->category : ''
                 $formstable .= '<td>' . $formdetails->size . ' ' . $sortname . '</span></td>';
                 $formstable .= '<td>' . $formdetails->vendor . '</td>';
