@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ServiceResource;
 
 class DashboardController extends Controller
 {
@@ -50,5 +51,25 @@ class DashboardController extends Controller
         } catch (\Throwable $th) {
             return abort(404);
         }
+    }
+    
+    protected function authServiceLists(Request $request)
+    {
+        $request->validate([
+            'limit' => 'nullable|numeric',
+        ]);
+
+        try {
+            if (request('limit')) {
+                $services = auth()->user()->services()->latest()->paginate(request('limit'))->WithQueryString();
+            } else {
+                $services = auth()->user()->services()->latest()->get();
+            }
+            return ServiceResource::collection($services);
+            
+        } catch (\Throwable $th) {
+            return abort(404);
+        }
+        
     }
 }

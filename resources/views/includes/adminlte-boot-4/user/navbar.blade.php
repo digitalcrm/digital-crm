@@ -17,9 +17,12 @@
     </form>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+        <div class="navbar-search-block">
+        </div>
         <!-- Notifications Dropdown Menu -->
-        <li class=""><a href="{{ route('companies.create') }}" class="btn btn-sm btn-primary mr-4"><i class="far fa-plus-square mr-1"></i> Add Company</a></li>
-        <li class=""><a href="{{ url('products/create') }}" class="btn btn-sm btn-primary"><i class="far fa-plus-square mr-1"></i> Add Product</a></li> 
+        <li class=""><a href="{{ route('companies.create') }}" class="btn btn-sm btn-primary mr-4 ml-4"><i class="far fa-plus-square mr-1"></i> Add Company</a></li>
+        <li class=""><a href="{{ url('products/create') }}" class="btn btn-sm btn-primary"><i class="far fa-plus-square mr-1"></i> Add Product</a></li>
+        <li class=""><a href="{{ route('services.create') }}" class="btn btn-sm btn-primary mr-4 ml-4"><i class="far fa-plus-square mr-1"></i> Add Services</a></li>
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
@@ -29,9 +32,9 @@
             </div>
         </li>
 
-        @can('isUser')
+        {{-- @can('isUser')
             <li class="nav-item"><a class="nav-link" href="{{ url('/subusers') }}"><i class="fas fa-user-plus"></i></a></li>
-        @endcan
+        @endcan --}}
         <li class="nav-item"><a class="nav-link" href="{{ url('/calendar') }}"><i class="far fa-calendar-alt"></i></a>
         </li>
         <li class="nav-item dropdown">

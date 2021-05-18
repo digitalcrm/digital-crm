@@ -29,6 +29,8 @@ use App\Policies\ProjectPolicy;
 use App\Policies\CampaignPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\DocumentPolicy;
+use App\Policies\ServicePolicy;
+use App\Service;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -57,6 +59,7 @@ class AuthServiceProvider extends ServiceProvider
         Tbl_mails::class => MailPolicy::class,
         Tbl_campaigns::class => CampaignPolicy::class,
         Company::class => CompanyPolicy::class,
+        Service::class => ServicePolicy::class,
     ];
 
     /**

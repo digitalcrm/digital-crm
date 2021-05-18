@@ -35,23 +35,7 @@
             <!-- Small cardes (Stat card) -->
             <div class="row">
                 <div class="col-lg-12">
-                    @if(session('success'))
-                    <div class='alert alert-success'>
-                        {{session('success')}}
-                    </div>
-                    @endif
-
-                    @if(session('error'))
-                    <div class='alert alert-success'>
-                        {{session('error')}}
-                    </div>
-                    @endif
-
-                    @if(session('info'))
-                    <div class='alert alert-warning'>
-                        {{session('info')}}
-                    </div>
-                    @endif
+                    <x-alert />
                     <div class="card shadow card-primary card-outline card-primary card-outline">
 
                         <!-- /.card-header -->

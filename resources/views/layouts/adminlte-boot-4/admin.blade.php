@@ -68,15 +68,15 @@
         <!-- /.footer -->
 
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
+        {{-- <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
-        </aside>
+        </aside> --}}
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 	@livewireScripts
     <!-- jQuery -->
-    <script src="{{asset('assets/adminlte-boot-4/plugins/jquery/jquery.min.js')}}"></script>
+    {{-- <script src="{{asset('assets/adminlte-boot-4/plugins/jquery/jquery.min.js')}}"></script> --}}
     <!-- jQuery UI 1.11.4 -->
     <script src="{{asset('assets/adminlte-boot-4/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -246,11 +246,11 @@
 
             $('#formleadsTable').DataTable({
                 "aaSorting": [],
-                'paging': true,
+                'paging': false,
                 'lengthChange': true,
                 'searching': true,
                 'ordering': false,
-                'info': true,
+                'info': false,
                 'autoWidth': false,
                 'columnDefs': [{
                     type: 'date-uk',
@@ -311,11 +311,11 @@
 
             $('#example1').DataTable({
                 'paging': false,
-                'lengthChange': true,
+                'lengthChange': false,
                 'searching': true,
-                'ordering': true,
+                'ordering': false,
                 'info': false,
-                'autoWidth': true,
+                'autoWidth': false,
             });
 
             $('#example2').DataTable({

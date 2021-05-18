@@ -292,6 +292,20 @@ class User extends Authenticatable
         return $query->where('active',1);
     }
 
+    /**
+     * this is used for query data for selected user id
+     *
+     * @param [int] $userId
+     */
+    public function scopeSelectedUser($query, $userId)
+    {
+        if ($userId) {
+            return $query->where('id', $userId);
+        }
+
+        return false;
+    }
+
     public function userHaveCompany()
     {
         $company = $this->company()->get()->map(function($comp) {
@@ -302,6 +316,11 @@ class User extends Authenticatable
 
         return $company;
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class,'user_id');
+    }    
 
     public static function boot()
     {

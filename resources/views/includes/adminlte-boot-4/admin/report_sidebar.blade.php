@@ -50,6 +50,11 @@
                                                 Companies
                                             </a>
                                         </li>
+                                        <li class="nav-item {{ request()->is('admin/reports/services') ? 'active-bg' : ''}}">
+                                            <a href="{{ url('admin/reports/services') }}" class="nav-link">
+                                                Services
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <!-- /.card-body -->

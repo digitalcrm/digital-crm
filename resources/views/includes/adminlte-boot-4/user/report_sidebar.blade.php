@@ -56,14 +56,19 @@
                     Products
                 </a>
             </li>
+            <li class="nav-item {{ request()->is('reports/productleads') ? 'active-bg' : ''}}">
+                <a href="{{ url('reports/productleads') }}" class="nav-link">
+                    Product Leads
+                </a>
+            </li>
             <li class="nav-item {{ request()->is('reports/companies') ? 'active-bg' : ''}}">
                 <a href="{{ url('reports/companies') }}" class="nav-link">
                     Companies
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('reports/productleads') ? 'active-bg' : ''}}">
-                <a href="{{ url('reports/productleads') }}" class="nav-link">
-                    Product Leads
+            <li class="nav-item {{ request()->is('reports/services') ? 'active-bg' : ''}}">
+                <a href="{{ url('reports/services') }}" class="nav-link">
+                    Services
                 </a>
             </li>
         </ul>

@@ -57,8 +57,13 @@ class ProductV1Controller extends Controller
             })
             ->isFeatured(request('featured'))
             ->isActive()
-            ->latest()
-            ->paginate($this->paginateData)->withQueryString();
+            ->latest(); 
+
+        if (request('unique') === 'users') {
+            $prodLists = $prodLists->take($this->paginateData)->get()->unique('uid');
+        } else {
+            $prodLists = $prodLists->paginate($this->paginateData)->withQueryString();
+        }
         
         return new ProductCollection($prodLists);
     }

@@ -2934,3 +2934,33 @@ Route::resource('pois', 'RFQ\user\PoiController');
 Route::get('lists-product', 'RFQ\user\PoiController@listproducts')->name('product.interested');
 #=============================RFQs admin routes===========================#
 Route::resource('admin/rfqs', 'RFQ\admin\RfqController');
+
+
+#==============================Service=====================================#
+Route::group(['namespace' => 'Service'], function () {
+    Route::resource('auth/services', 'user\ServiceController')->except(['store', 'update', 'destroy']);
+
+    Route::get('auth/leads', 'user\ServiceController@serviceLeads')->name('auth.serviceleads');
+
+    Route::get('reports/services', 'user\ServiceReportController@services');
+    Route::get('reports/getDayServices/{time}/{form_id}', 'user\ServiceReportController@getDayServices');
+    Route::post('reports/getDayServices/{time}/{form_id}', 'user\ServiceReportController@getDayServices');
+    Route::get('reports/getMonthServices/{time}/{form_id}', 'user\ServiceReportController@getMonthServices');
+    Route::post('reports/getMonthServices/{time}/{form_id}', 'user\ServiceReportController@getMonthServices');
+    Route::get('reports/getWeekServices/{time}/{form_id}', 'user\ServiceReportController@getWeekServices');
+    Route::post('reports/getWeekServices/{time}/{form_id}', 'user\ServiceReportController@getWeekServices');
+
+    Route::prefix('admin')->group(function () {
+        Route::resource('service-categories', 'admin\ServiceCategoryController');
+        Route::resource('service-subcategories', 'admin\ServiceSubCategoryController');
+        Route::get('services','admin\AdminServiceController@index')->name('admin.services');
+        /** admin panel report section */
+        Route::get('reports/services', 'admin\ServiceReportController@services');
+        Route::get('reports/getDayServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getDayServices');
+        Route::post('reports/getDayServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getDayServices');
+        Route::get('reports/getMonthServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getMonthServices');
+        Route::post('reports/getMonthServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getMonthServices');
+        Route::get('reports/getWeekServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getWeekServices');
+        Route::post('reports/getWeekServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getWeekServices');
+    });
+});

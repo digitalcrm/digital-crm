@@ -42,6 +42,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.1/dist/alpine.min.js" defer></script>
         <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+        @stack('styles')
         @livewireStyles
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -230,11 +231,11 @@ $(function() {
 
     $('#formleadsTable').DataTable({
         "aaSorting": [],
-        'paging': true,
+        'paging': false,
         'lengthChange': true,
         'searching': true,
         'ordering': false,
-        'info': true,
+        'info': false,
         'autoWidth': false,
         'responsive': true
 //        'columnDefs': [

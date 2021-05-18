@@ -4,11 +4,11 @@ namespace App;
 
 use App\Traits\DefaultProfile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tbl_leads extends Model
 {
-
-    use DefaultProfile;
+    use DefaultProfile, SoftDeletes;
     //Table Name
     protected $table = 'tbl_leads';
     //Primary key
@@ -55,6 +55,7 @@ class Tbl_leads extends Model
         'uploaded_id',
         'designation',
         'pro_id',
+        'service_id',
         'leadtype',
     ];
 
@@ -139,6 +140,11 @@ class Tbl_leads extends Model
         return $this->belongsTo('App\Tbl_products', 'pro_id');
     }
 
+    public function services()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class, 'company');
@@ -149,8 +155,24 @@ class Tbl_leads extends Model
         return $this->morphMany('App\Todo', 'todoable');
     }
 
-    //
+    public function scopeServiceLeads($query)
+    {
+        return $query->where('leadtype', 3);
+    }
+
     //    public function tbl_contacts() {
     //        return $this->hasMany('App\Tbl_contacts', 'ld_id');
     //    }
+
+    public function scopeSearch($query, $value)
+    {
+        return $query->where('first_name', 'like', '%' . $value . '%')
+            ->orWhere('notes', 'like', '%' . $value . '%');
+            // ->orWhere('services.title', 'like', '%' . $value . '%');
+    }
+
+    public function scopeIsActive($query)
+    {
+        return $query->where('active', 1);
+    }
 }

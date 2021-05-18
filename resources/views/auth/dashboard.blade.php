@@ -9,14 +9,11 @@
             width: auto;
             margin: 0 auto;
         }
-        /*        #funnelPanel text {
-                    font-weight: 900;
-                }*/
 
     </style>
-    <?php
-    $global_reports = $data['global_reports'];
-    ?>
+    @php
+        $global_reports = $data['global_reports'];
+    @endphp
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -33,6 +30,7 @@
     <!-- Main content -->
     <section class="content mt-2 mx-0">
         <div class="container-fluid">
+            <livewire:dashboard.info-box />
             <!-- Main row -->
             <div class="row">
                 <!--D3 Funnel  sales-->
@@ -103,7 +101,8 @@
                     <div class="card shadow card-primary card-outline" style="position: relative; left: 0px; top: 0px;">
                         <div class="card-header d-flex p-0 ui-sortable-handle" style="cursor: move;">
                             <h3 class="card-title p-3">
-                                Latest Deals <span class="badge badge-secondary"><?php echo $data['latestDeals']['total']; ?></span>
+                                Latest Deals <span
+                                    class="badge badge-secondary"><?php echo $data['latestDeals']['total']; ?></span>
                             </h3>
 
                         </div>
@@ -140,7 +139,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div id="div-dealstage" style="">
-                                    <canvas id="canvas-dealstage" ></canvas>
+                                    <canvas id="canvas-dealstage"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +152,7 @@
                     <div class="card shadow card-primary card-outline" style="position: relative; left: 0px; top: 0px;">
                         <div class="card-header d-flex p-0 ui-sortable-handle" style="cursor: move;">
                             <h3 class="card-title p-3">
-                                Leads <span class ="badge badge-secondary" id="leadsTotal"></span>
+                                Leads <span class="badge badge-secondary" id="leadsTotal"></span>
                             </h3>
                             <ul class="nav nav-pills ml-auto p-2">
                                 <li class="nav-item">
@@ -170,7 +169,7 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div id="div-leads">
-                                    <canvas id="canvas-leads" ></canvas>
+                                    <canvas id="canvas-leads"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -200,7 +199,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div id="div-accounts">
-                                    <canvas id="canvas-accounts" ></canvas>
+                                    <canvas id="canvas-accounts"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -230,7 +229,7 @@
                         <div class="card-body">
                             <div class="tab-content">
                                 <div id="div-contacts">
-                                    <canvas id="canvas-contacts" ></canvas>
+                                    <canvas id="canvas-contacts"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -265,7 +264,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div id="div-deals">
-                                    <canvas id="canvas-deals" ></canvas>
+                                    <canvas id="canvas-deals"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -295,7 +294,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div id="div-customers">
-                                    <canvas id="canvas-customers" ></canvas>
+                                    <canvas id="canvas-customers"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -325,7 +324,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div id="div-sales">
-                                    <canvas id="canvas-sales" ></canvas>
+                                    <canvas id="canvas-sales"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -360,7 +359,7 @@
                         <div class="card-body">
                             <div class="tab-content p-0">
                                 <div id="div-formleads">
-                                    <canvas id="canvas-formleads" ></canvas>
+                                    <canvas id="canvas-formleads"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -496,16 +495,16 @@
         var barChartData = {
             labels: labels,
             datasets: [{
-                    label: title,
-                    backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-                    borderColor: window.chartColors.blue,
-                    borderWidth: 1,
-                    data: data
-                }]
+                label: title,
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: data
+            }]
 
         };
 
-        var ctx = document.getElementById(canvas).getContext('2d');   //'canvas-dealstage'
+        var ctx = document.getElementById(canvas).getContext('2d'); //'canvas-dealstage'
         window.myBar = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
@@ -520,43 +519,42 @@
             }
         });
     }
+
 </script>
 
-<script src="{{asset('assets/funnelChart/dist/chart.funnel.bundled.js')}}"></script>
+<script src="{{ asset('assets/funnelChart/dist/chart.funnel.bundled.js') }}"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script>
-
-
     var defaultsalesstage = "<?php echo $data['default_salesfunnel']; ?>";
     var defaultform = "<?php echo $data['form_id']; ?>";
-//    alert(defaultform);
-    var form_id = "{{$data['form_id']}}";
-    var viewsurl = "{{url('dashboard/viewsreport')}}";
-    var getDealsStage = "{{url('dashboard/getDealsStage')}}";
-    var getSalesFunnel = "{{url('dashboard/getSalesFunnel')}}";
-    var getSalesFunnelD3 = "{{url('dashboard/getSalesFunnelD3')}}";
-    var getleads = "{{url('dashboard/getLeadsData')}}";
-    var getaccounts = "{{url('dashboard/getAccountsData')}}";
-    var getcontacts = "{{url('dashboard/getContactsData')}}";
-    var getcustomers = "{{url('dashboard/getCustomersData')}}";
-    var getsales = "{{url('dashboard/getSalesData')}}";
+    //    alert(defaultform);
+    var form_id = "{{ $data['form_id'] }}";
+    var viewsurl = "{{ url('dashboard/viewsreport') }}";
+    var getDealsStage = "{{ url('dashboard/getDealsStage') }}";
+    var getSalesFunnel = "{{ url('dashboard/getSalesFunnel') }}";
+    var getSalesFunnelD3 = "{{ url('dashboard/getSalesFunnelD3') }}";
+    var getleads = "{{ url('dashboard/getLeadsData') }}";
+    var getaccounts = "{{ url('dashboard/getAccountsData') }}";
+    var getcontacts = "{{ url('dashboard/getContactsData') }}";
+    var getcustomers = "{{ url('dashboard/getCustomersData') }}";
+    var getsales = "{{ url('dashboard/getSalesData') }}";
 
-    var dayurlDeal = "{{url('reports/getDayDeals/{time}/{form_id}')}}";
-    var weekurlDeal = "{{url('reports/getWeekDeals/{time}/{form_id}')}}";
-    var monthurlDeal = "{{url('reports/getMonthDeals/{time}/{form_id}')}}";
-    var yearurlDeal = "{{url('reports/getYearDeals/{time}/{form_id}')}}";
+    var dayurlDeal = "{{ url('reports/getDayDeals/{time}/{form_id}') }}";
+    var weekurlDeal = "{{ url('reports/getWeekDeals/{time}/{form_id}') }}";
+    var monthurlDeal = "{{ url('reports/getMonthDeals/{time}/{form_id}') }}";
+    var yearurlDeal = "{{ url('reports/getYearDeals/{time}/{form_id}') }}";
 
-    var dayurlFormleads = "{{url('reports/getDayFormleads/{time}/{form_id}')}}";
-    var weekurlFormleads = "{{url('reports/getWeekFormleads/{time}/{form_id}')}}";
-    var monthurlFormleads = "{{url('reports/getMonthFormleads/{time}/{form_id}')}}";
-    var yearurlFormleads = "{{url('reports/getYearFormleads/{time}/{form_id}')}}";
+    var dayurlFormleads = "{{ url('reports/getDayFormleads/{time}/{form_id}') }}";
+    var weekurlFormleads = "{{ url('reports/getWeekFormleads/{time}/{form_id}') }}";
+    var monthurlFormleads = "{{ url('reports/getMonthFormleads/{time}/{form_id}') }}";
+    var yearurlFormleads = "{{ url('reports/getYearFormleads/{time}/{form_id}') }}";
 
 
-    $(function() {
+    $(function () {
         $(".sidebar-menu li").removeClass("active");
         $("#lidashboard").addClass("active");
-//        salesfunnel('year');
+        //        salesfunnel('year');
         dealstage('year');
 
         getLeads('year');
@@ -569,77 +567,79 @@
         eventCalendar();
         salesfunnelD3('year')
 
-        $("#funnelTime").change(function() {
+        $("#funnelTime").change(function () {
             var time = $(this).val();
             salesfunnel(time);
         });
 
-        $("#d3funnelTime").change(function() {
+        $("#d3funnelTime").change(function () {
             var time = $(this).val();
             salesfunnelD3(time);
         });
 
-        $("#dealstageTime").change(function() {
+        $("#dealstageTime").change(function () {
             var time = $(this).val();
             dealstage(time);
         });
 
-        $("#leadsTime").change(function() {
+        $("#leadsTime").change(function () {
             var time = $(this).val();
             getLeads(time);
         });
 
-        $("#accountsTime").change(function() {
+        $("#accountsTime").change(function () {
             var time = $(this).val();
             getAccounts(time);
         });
 
-        $("#contactsTime").change(function() {
+        $("#contactsTime").change(function () {
             var time = $(this).val();
             getContacts(time);
         });
 
-        $("#dealsTime").change(function() {
+        $("#dealsTime").change(function () {
             var time = $(this).val();
             var salesstage = $("#salesStage").val();
             getDeals(time, salesstage);
         });
 
-        $("#salesStage").change(function() {
+        $("#salesStage").change(function () {
             var time = $("#dealsTime").val();
             var salesstage = $(this).val();
             getDeals(time, salesstage);
         });
 
-        $("#customersTime").change(function() {
+        $("#customersTime").change(function () {
             var time = $(this).val();
             getCustomers(time);
         });
 
-        $("#salesTime").change(function() {
+        $("#salesTime").change(function () {
             var time = $(this).val();
             getSales(time);
         });
 
-        $("#formleadsTime").change(function() {
+        $("#formleadsTime").change(function () {
             var time = $(this).val();
             var form = $("#forms").val();
-//            alert(time + ' ' + form);
+            //            alert(time + ' ' + form);
             getFormleads(time, form);
         });
 
-        $("#forms").change(function() {
+        $("#forms").change(function () {
 
             var time = $("#formleadsTime").val();
             var form = $(this).val();
-//            alert(time + ' ' + form);
+            //            alert(time + ' ' + form);
             getFormleads(time, form);
         });
     });
 
     function dealstage(time) {
-        $.get(getDealsStage, {'time': time}, function(result) {
-//            alert(result);
+        $.get(getDealsStage, {
+            'time': time
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.dataset;
             var labels = res.labels;
@@ -653,10 +653,12 @@
 
     function salesfunnel(time) {
         //    alert(time);
-        $.get(getSalesFunnel, {'time': time}, function(result) {
+        $.get(getSalesFunnel, {
+            'time': time
+        }, function (result) {
             //        alert(result);
             var res = eval("(" + result + ")");
-//            alert(res.wonAmount);
+            //            alert(res.wonAmount);
             var data = res.dataset;
             var color = res.color;
             var labels = res.labels;
@@ -668,7 +670,9 @@
     }
 
     function getLeads(time) {
-        $.get(getleads, {'time': time}, function(result) {
+        $.get(getleads, {
+            'time': time
+        }, function (result) {
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -681,7 +685,9 @@
     }
 
     function getAccounts(time) {
-        $.get(getaccounts, {'time': time}, function(result) {
+        $.get(getaccounts, {
+            'time': time
+        }, function (result) {
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -694,9 +700,11 @@
     }
 
     function getContacts(time) {
-//        alert(time);
-        $.get(getcontacts, {'time': time}, function(result) {
-//            alert(result);
+        //        alert(time);
+        $.get(getcontacts, {
+            'time': time
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -709,7 +717,7 @@
     }
 
     function getDeals(time, salesstage) {
-//        alert();
+        //        alert();
 
         var url = '';
         if (time == 'day') {
@@ -725,10 +733,13 @@
             url = yearurlDeal;
         }
 
-//        alert(time + ' ' + salesstage + ' ' + url);
+        //        alert(time + ' ' + salesstage + ' ' + url);
 
-        $.get(url, {'time': time, 'form_id': salesstage}, function(result) {
-//            alert(result);
+        $.get(url, {
+            'time': time,
+            'form_id': salesstage
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -741,9 +752,11 @@
     }
 
     function getCustomers(time) {
-//        alert(time);
-        $.get(getcustomers, {'time': time}, function(result) {
-//            alert(result);
+        //        alert(time);
+        $.get(getcustomers, {
+            'time': time
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -756,8 +769,10 @@
     }
 
     function getSales(time) {
-        $.get(getsales, {'time': time}, function(result) {
-//            alert(result);
+        $.get(getsales, {
+            'time': time
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -770,7 +785,7 @@
     }
 
     function getFormleads(time, form) {
-//        alert(time + ' ' + form);
+        //        alert(time + ' ' + form);
 
         var url = '';
         if (time == 'day') {
@@ -786,10 +801,13 @@
             url = yearurlFormleads;
         }
 
-//        alert(time + ' ' + salesstage + ' ' + url);
+        //        alert(time + ' ' + salesstage + ' ' + url);
 
-        $.get(url, {'time': time, 'form_id': form}, function(result) {
-//            alert(result);
+        $.get(url, {
+            'time': time,
+            'form_id': form
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.formleads.reverse();
             var labels = res.labels.reverse();
@@ -802,18 +820,18 @@
     }
 
     function funnelChart(data, labels, color, title) {
-//    alert('data ' + data);
-//    alert('labels ' + labels);
+        //    alert('data ' + data);
+        //    alert('labels ' + labels);
         //    alert('color ' + color);
         $("#canvas-funnel").html('<canvas id="funnelchart" height="180"></canvas>');
         var config = {
             type: 'funnel',
             data: {
                 datasets: [{
-                        data: data,
-                        backgroundColor: color,
-                        hoverBackgroundColor: color
-                    }],
+                    data: data,
+                    backgroundColor: color,
+                    hoverBackgroundColor: color
+                }],
                 labels: labels
             },
             options: {
@@ -827,7 +845,7 @@
                     fontFamily: "sans-serif",
                     fontSize: 20,
                     display: true,
-                    text: title  //'Chart.js Funnel Chart'
+                    text: title //'Chart.js Funnel Chart'
                 },
                 animation: {
                     animateScale: true,
@@ -842,16 +860,18 @@
 
     function eventCalendar() {
         var events = '';
-        var url = '{{url("ajax/getUserEvents")}}';
+        var url = '{{ url("ajax/getUserEvents") }}';
         $.ajax({
             type: 'GET',
             url: url,
-            data: {uid: 0},
-            success: function(data) {
-//                alert(data);
+            data: {
+                uid: 0
+            },
+            success: function (data) {
+                //                alert(data);
                 events = eval('(' + data + ')');
-//                alert(data);
-//                $("#user").html(data);
+                //                alert(data);
+                //                $("#user").html(data);
 
 
 
@@ -860,8 +880,8 @@
                 //Date for the calendar events (dummy data)
                 var date = new Date();
                 var d = date.getDate(),
-                        m = date.getMonth(),
-                        y = date.getFullYear();
+                    m = date.getMonth(),
+                    y = date.getFullYear();
                 $('#calendarDiv').fullCalendar({
                     height: 496,
                     header: {
@@ -878,7 +898,8 @@
                     events: events,
                     editable: false,
                     droppable: false, // this allows things to be dropped onto the calendar !!!
-                    drop: function(date, allDay) { // this function is called when something is dropped
+                    drop: function (date,
+                    allDay) { // this function is called when something is dropped
 
                         // retrieve the dropped element's stored Event Object
                         var originalEventObject = $(this).data('eventObject');
@@ -907,21 +928,23 @@
             }
         });
     }
+
 </script>
 <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.rawgit.com/jakezatecky/d3-funnel/0.3.2/d3-funnel.js?1"></script>
 <script>
-
     function salesfunnelD3(time) {
-//        alert(time);
-        $.get(getSalesFunnelD3, {'time': time}, function(result) {
-//            alert(result);
+        //        alert(time);
+        $.get(getSalesFunnelD3, {
+            'time': time
+        }, function (result) {
+            //            alert(result);
             var res = eval("(" + result + ")");
             var data = res.dataset;
-//            var color = res.color;
-//            var labels = res.labels;
-//            var title = res.title;
+            //            var color = res.color;
+            //            var labels = res.labels;
+            //            var title = res.title;
             var wonAmount = res.wonAmount;
             $("#wonAmount").html(wonAmount);
             d3FunnelChart(data, "#funnelContainer", "#funnelPanel");
@@ -932,11 +955,11 @@
 
 
 
-//        var data = [
-//            ['Impression', '12000', '#008080', '#080800'],
-//            ['Traffic', '4000', '#702963'],
-//            ['Lead', '2500', '#ff634d', '#6f34fd'],
-//            ['Customer', '150', '#3f2ae2', '#07fff0']];
+        //        var data = [
+        //            ['Impression', '12000', '#008080', '#080800'],
+        //            ['Traffic', '4000', '#702963'],
+        //            ['Lead', '2500', '#ff634d', '#6f34fd'],
+        //            ['Customer', '150', '#3f2ae2', '#07fff0']];
 
 
         var options = {
@@ -956,7 +979,7 @@
         var funnel = new D3Funnel(data, options);
         funnel.draw(container);
 
-        $(window).on("resize", function() {
+        $(window).on("resize", function () {
             var width = $(panel).width();
             //$( "#funnelContainer" ).css( "width", width);
             options.width = width;
@@ -964,5 +987,6 @@
             funnel.draw(container);
         });
     }
+
 </script>
 @endsection

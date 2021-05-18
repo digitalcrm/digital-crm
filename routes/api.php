@@ -149,6 +149,8 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
     Route::get('auth/product', 'DashboardController@product');
 
+    Route::get('auth/services', 'DashboardController@authServiceLists')->name('auth.service-lists');
+
     Route::get('auth/company', 'DashboardController@company');
 
     /*
@@ -210,6 +212,18 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
     Route::get('list-category', 'CommonListController@listCategory');
 
     Route::get('list-subcategory/{catgory_id?}', 'CommonListController@listSubCategory');
+
+    /*
+        |--------------------------------------------------------------------------
+        | Service APi's
+        |--------------------------------------------------------------------------
+        |
+    */
+    Route::apiResource('api-services','ServiceV1Controller')->parameters([
+        'api-services' => 'api-services:slug'
+    ]);
+
+    Route::post('api-services/leads','ServiceV1Controller@leadStore');
 });
 
 

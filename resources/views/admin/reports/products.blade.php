@@ -150,7 +150,7 @@
             'time': 'day',
             'uid': user
         }, function(result) {
-            //                                                alert('Days ' + result);
+            alert('Days ' + result);
             var res = eval("(" + result + ")");
             var data = res.formleads;
             var label = res.label;
@@ -215,7 +215,8 @@
 
 
     function barGragh(label, data, labels, canvasId, divId) {
-        //                                    alert(label + " " + data + " " + labels + " " + canvasId + " " + divId);
+        alert(data)
+        // alert(label + " " + data + " " + labels + " " + canvasId + " " + divId);
         $('#' + divId).html('<canvas id="' + canvasId + '" style="height:230px"></canvas>');
         var areaChartData = {
             labels: labels,

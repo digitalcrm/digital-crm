@@ -18,49 +18,37 @@
 
     <!-- Main content -->
     <section class="content mt-2 mx-0">
-	<div class="container-fluid">
-        <!-- Small cardes (Stat card) -->
-        <div class="row">
-            <div class="col-lg-12 p-0">
-                @if(session('success'))
-                <div class='alert alert-success'>
-                    {{session('success')}}
-                </div>
-                @endif
-
-                @if(session('error'))
-                <div class='alert alert-success'>
-                    {{session('error')}}
-                </div>
-                @endif
-                <div class="card shadow card-primary card-outline">
-
-
-
-                    <!-- /.card-header -->
-                    <div class="card-body p-0">
-                        {!!$data['table']!!}
+        <div class="container-fluid">
+            <!-- Small cardes (Stat card) -->
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <x-alert />
+                    <div class="card shadow card-primary card-outline">
+                        <!-- /.card-header -->
+                        <div class="card-body p-0 table-responsive">
+                            {!!$data['table']!!}
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-                <div id="resulttt">
+                    <!-- /.card -->
+                    <div id="resulttt">
 
+                    </div>
                 </div>
             </div>
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
-	</div>
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 <script>
-    $(function() {
+    $(function () {
         // $(".sidebar-menu li").removeClass("active");
-//    $("#ulusers").addClass('menu-open');
-//    $("#ulusers ul").css('display', 'block');
+        //    $("#ulusers").addClass('menu-open');
+        //    $("#ulusers ul").css('display', 'block');
         // $("#liusers").addClass("active");
     });
+
 </script>
 @endsection

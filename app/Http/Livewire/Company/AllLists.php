@@ -12,6 +12,8 @@ class AllLists extends Component
 {
     use WithPagination, AuthorizesRequests;
 
+    protected $paginationTheme = 'bootstrap';
+    
     public $companies;
 
     public function deleteCompany($id)

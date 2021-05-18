@@ -236,6 +236,14 @@ $app = Tbl_Appdetails::find(1);
                         <p>Products</p>
                     </a>
                 </li>
+             
+                <li class="nav-item">
+                    <a href="{{ route('admin.services') }}"
+                        class="nav-link {{ request()->is('admin/services*') ? 'active' : '' }}">
+                        <i class="nav-icon fab fa-product-hunt icon-size"></i>
+                        <p>Services</p>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ url('admin/documents') }}"

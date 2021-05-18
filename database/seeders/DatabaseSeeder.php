@@ -2,6 +2,8 @@
 
 use Database\Seeders\AccountTypeSeeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\ServcategorySeeder;
+use Database\Seeders\ServSubcategorySeeder;
 use Database\Seeders\UnitSeeder;
 use Illuminate\Database\Seeder;
 
@@ -16,8 +18,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             // AdminSeeder::class,
-            AccountTypeSeeder::class,
-            UnitSeeder::class,
+            // AccountTypeSeeder::class,
+            // UnitSeeder::class,
+            ServcategorySeeder::class,
+            // ServSubcategorySeeder::class,
         ]);
     }
 }

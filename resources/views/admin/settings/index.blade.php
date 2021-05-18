@@ -32,7 +32,7 @@
 						</div>
 						<div class="card-body p-0">
 							<div class="row">
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -44,7 +44,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -56,7 +56,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -68,7 +68,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -80,7 +80,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -92,7 +92,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -104,7 +104,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -116,7 +116,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -128,7 +128,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -139,7 +139,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -152,7 +152,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -165,7 +165,7 @@
 								</div>
 
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -177,7 +177,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -202,7 +202,7 @@
 						</div>
 						<div class="card-body p-0">
 							<div class="row">
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -214,7 +214,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -226,7 +226,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -238,7 +238,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -250,7 +250,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -263,7 +263,7 @@
 								</div>
 
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -275,7 +275,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -287,7 +287,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -299,7 +299,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -311,7 +311,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -325,7 +325,7 @@
 
 
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -337,7 +337,7 @@
 									</div>
 								</div>
 
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -348,7 +348,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -359,7 +359,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -370,7 +370,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -381,7 +381,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
@@ -392,13 +392,35 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-md-4 col-lg-4">
 									<div class="card shadow card-primary card-outline">
 										<!--/.card-header-->
 										<div class="card-body">
 											<a href="{{ route('activity_type.index') }}" class="trash-link display-block">
 												<span class=""><i class="fa fa-cog fa-2x"></i></span>
 												<div class="text-bold mt-2">Booking Activities</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<div class="card shadow card-primary card-outline">
+										<!--/.card-header-->
+										<div class="card-body">
+											<a href="{{ route('service-categories.index') }}" class="trash-link display-block">
+												<span class=""><i class="fa fa-cog fa-2x"></i></span>
+												<div class="text-bold mt-2">Services Category</div>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<div class="card shadow card-primary card-outline">
+										<!--/.card-header-->
+										<div class="card-body">
+											<a href="{{ route('service-subcategories.index') }}" class="trash-link display-block">
+												<span class=""><i class="fa fa-cog fa-2x"></i></span>
+												<div class="text-bold mt-2">Services Subcategory</div>
 											</a>
 										</div>
 									</div>

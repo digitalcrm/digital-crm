@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-use App\Tbl_forms;
-use App\Tbl_formleads;
-use App\Tbl_leads;
-use App\Tbl_deals;
 use Excel;
+use App\Tbl_deals;
+use App\Tbl_forms;
+use App\Tbl_leads;
+use App\Tbl_formleads;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class WebtoleadController extends Controller
 {
@@ -286,10 +286,10 @@ class WebtoleadController extends Controller
     public function formleads($id)
     {
 
-        $forms = Tbl_forms::find($id);
+        $forms = Tbl_forms::findOrFail($id);
         $user = Auth::user();
         if ($user->can('view', $forms)) {
-            $formleads = Tbl_formleads::where('form_id', $id)->where('active', 1)->with('tbl_leads')->orderBy('fl_id', 'desc')->get();
+            $formleads = Tbl_formleads::where('form_id', $id)->where('active', 1)->with('tbl_leads')->latest()->paginate(10);
             $total = count($formleads);
             if ($total > 0) {
                 $formstable = '<div class="table-responsive"><table id="formleadsTable" class="table">';
@@ -345,7 +345,7 @@ class WebtoleadController extends Controller
                     $formstable .= '</tr>';
                 }
                 $formstable .= '</tbody>';
-                $formstable .= '</table></div>';
+                $formstable .= '</table><div>'.$formleads->links().'</div></div>';
             } else {
                 $formstable = 'No records available';
             }

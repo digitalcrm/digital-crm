@@ -259,7 +259,7 @@ class WebtoleadController extends Controller
     public function formleads($id)
     {
         $forms = Tbl_forms::find($id);
-        $formleads = Tbl_formleads::where('form_id', $id)->where('active', 1)->get();
+        $formleads = Tbl_formleads::where('form_id', $id)->where('active', 1)->latest()->paginate(10);
         $total = 0;
         if (count($formleads) > 0) {
             $formstable = '<table id="formleadsTable" class="table">';
@@ -300,7 +300,7 @@ class WebtoleadController extends Controller
                 //                <li><a href="' . url('admin/webtolead/deleteformlead/' . $formdetails->fl_id . '/' . $id) . '">Delete</a></li>
             }
             $formstable .= '</tbody>';
-            $formstable .= '</table>';
+            $formstable .= '</table><div class="mt-2 ml-2">'.$formleads->links().'</div>';
 
             $total = count($formleads);
         } else {
