@@ -118,6 +118,8 @@ class ProductV1Controller extends Controller
      */
     public function show(Tbl_products $product)
     {   
+        $product->increment('views');
+
         $prodDetails =  $product->whereHas('company', function (Builder $query) {
             $query->isActive();
         })  ->whereHas('users', function ($query) {
