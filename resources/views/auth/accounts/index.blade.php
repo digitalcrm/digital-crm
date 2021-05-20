@@ -293,7 +293,7 @@
         //     });
         // });
 
-        $('#AddAccountForm').submit(function(e) {
+        // $('#AddAccountForm').submit(function(e) {
 
             // alert('sdsjhjk');
 
