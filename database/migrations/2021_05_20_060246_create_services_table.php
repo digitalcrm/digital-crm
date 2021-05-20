@@ -21,8 +21,8 @@ class CreateServicesTable extends Migration
             $table->string('image')->nullable();
             $table->integer('price')->default(0)->nullable();
             $table->unsignedInteger('user_id')->nullable();
-            $table->foreignId('company_id')->nullable()->constrained();
-            $table->foreignId('servcategory_id')->nullable()->constrained();
+            $table->bigInteger('company_id')->nullable();
+            $table->bigInteger('servcategory_id')->nullable();
             $table->string('brand')->nullable();
             $table->text('tags')->nullable();
             $table->integer('views')->nullable();
