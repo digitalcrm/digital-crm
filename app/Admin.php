@@ -40,12 +40,7 @@ class Admin extends Authenticatable
 
     public function profileLogo()
     {
-        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl();
-    }
-
-    protected function defaultProfilePhotoUrl()
-    {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4AA';
+        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl($this->name);
     }
 
     /**

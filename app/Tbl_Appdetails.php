@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\DefaultProfile;
 use Illuminate\Database\Eloquent\Model;
 
 class Tbl_Appdetails extends Model
 {
+    use DefaultProfile;
+
     //Table Name
     protected $table = 'tbl_appdetails';
 
@@ -30,11 +33,7 @@ class Tbl_Appdetails extends Model
 
     public function profileLogo()
     {
-        return $this->app_picture ? asset($this->app_picture) : $this->defaultProfilePhotoUrl();
+        return $this->app_picture ? asset($this->app_picture) : $this->defaultProfilePhotoUrl($this->app_name);
     }
-
-    protected function defaultProfilePhotoUrl()
-    {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->app_name) . '&color=7F9CF5&background=EBF4AA';
-    }
+    
 }

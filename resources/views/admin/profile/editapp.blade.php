@@ -38,7 +38,7 @@
                       <div class="card card-primary">
                           <div class="card-header with-border">
                               <h3 class="card-title">
-                                  <img src="<?php echo ($data['app_picture'] != null) ? url($data['app_picture']) : '#'; ?>" height="25" width="25" />
+                                  <img src="{{ $data['profile_img'] }}" height="25" width="25" />
                                   {{$data['app_name']}}
                               </h3>
                           </div>

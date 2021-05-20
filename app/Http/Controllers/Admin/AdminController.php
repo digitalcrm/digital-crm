@@ -2,42 +2,42 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\Admin\MailController;
 use Mail;
-use Auth;
-// use Webklex\IMAP\Client;
-use Webklex\IMAP\Facades\Client;
-
-//---------Models---------------
-use App\Tbl_forms;
-use App\Tbl_formleads;
-use App\Tbl_formviews;
-use App\Tbl_leads;
-use App\Tbl_Accounts;
-use App\Tbl_deals;
 use App\User;
 use App\Admin;
-use App\Tbl_products;
-use App\Tbl_documents;
-use App\Tbl_contacts;
-use App\Tbl_leadsource;
-use App\Tbl_leadstatus;
+use App\currency;
+use App\Tbl_deals;
+use App\Tbl_forms;
+use App\Tbl_leads;
+// use Webklex\IMAP\Client;
+use App\Tbl_emails;
+
+//---------Models---------------
 use App\Tbl_events;
 use App\Tbl_invoice;
+use App\Tbl_Accounts;
+use App\Tbl_contacts;
+use App\Tbl_products;
+use App\Tbl_documents;
+use App\Tbl_formleads;
+use App\Tbl_formviews;
 use App\Tbl_territory;
-use App\Tbl_salesfunnel;
-use App\currency;
-use App\Tbl_Admin_Permissions;
 use App\Tbl_Appdetails;
+use App\Tbl_leadsource;
+use App\Tbl_leadstatus;
 use App\Tbl_Permissions;
+use App\Tbl_salesfunnel;
 use App\Tbl_Verifyadmin;
 use App\Tbl_emailcategory;
 use App\Tbl_emailtemplates;
-use App\Tbl_emails;
+use Illuminate\Http\Request;
+use App\Tbl_Admin_Permissions;
+use Webklex\IMAP\Facades\Client;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Admin\MailController;
 
 class AdminController extends Controller
 {
@@ -952,7 +952,7 @@ class AdminController extends Controller
 
     public function editApp()
     {
-        $appdetails = Tbl_Appdetails::first();
+        $appdetails = Tbl_Appdetails::firstOrFail();
         // echo json_encode($appdetails);
 
         return view('admin.profile.editapp')->with('data', $appdetails);
