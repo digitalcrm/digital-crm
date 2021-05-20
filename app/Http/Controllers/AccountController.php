@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 use Response;
-
+use App\Company;
+use App\Tbl_deals;
 use App\Tbl_leads;
-use App\Tbl_countries;
 use App\Tbl_states;
-use App\Tbl_industrytypes;
-use App\Tbl_accounttypes;
+use App\Tbl_Accounts;
+
+use App\Tbl_contacts;
+use App\Tbl_countries;
 use App\Tbl_leadsource;
 use App\Tbl_leadstatus;
-use App\Tbl_Accounts;
-use App\Tbl_contacts;
-use App\Tbl_deals;
-use App\Company;
-// use Excel;
-use App\Imports\AccountsImport;
+use App\Tbl_accounttypes;
+use App\Tbl_industrytypes;
+use Illuminate\Http\Request;
 use App\Exports\AccountsExport;
+use App\Imports\AccountsImport;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+// use Excel;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -54,9 +54,8 @@ class AccountController extends Controller
 
     public function getAccounts($uid)
     {
-        $accounts = Tbl_Accounts::with('Tbl_industrytypes')
-            ->with('Tbl_accounttypes')
-            ->where('uid', $uid)->where('active', 1)->orderBy('acc_id', 'desc')->get();
+        $accounts = Tbl_Accounts::with(['Tbl_industrytypes','haveCompany','Tbl_accounttypes'])
+            ->where('uid', $uid)->where('active', 1)->orderBy('acc_id', 'desc')->paginate(10);
 
         $total = count($accounts);
         if ($total > 0) {
@@ -77,15 +76,13 @@ class AccountController extends Controller
             $formstable .= '<tbody>';
             foreach ($accounts as $formdetails) {
 
-                $accountimage = ($formdetails->picture != '') ? $formdetails->picture : '/uploads/default/accounts.png';
-
                 $formstable .= '<tr>';
                 $formstable .= '<td width="10"><div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input checkAll" id="' . $formdetails->acc_id . '"><label class="custom-control-label" for="' . $formdetails->acc_id . '"></label></div></td>';
                 $formstable .= '<td class="table-title">';
-                $formstable .= '<img src="' . url($accountimage) . '" class="avatar"> ';
+                $formstable .= '<img src="' . $formdetails->profileLogo() . '" class="avatar"> ';
                 $formstable .= '<h6><a href="' . url('accounts/' . $formdetails->acc_id) . '">' . $formdetails->name . '</a>';
                 $formstable .= '</h6><div class="t-email"><a class="text-muted" href="' . url('mails/mailsend/accounts/' . $formdetails->acc_id) . '">' . $formdetails->email . '</a></div><div class="t-mob text-muted">' . $formdetails->mobile . '</div></td>';
-                $formstable .= '<td>' . $formdetails->company . '</td>';
+                $formstable .= '<td>' . $formdetails->haveCompany->c_name ?? '' . '</td>';
                 $industrytype = ($formdetails->tbl_industrytypes != null) ? $formdetails->tbl_industrytypes->type : '';
                 $formstable .= '<td>' . $industrytype . '</td>';
                 $accounttype = ($formdetails->tbl_accounttypes != null) ? $formdetails->tbl_accounttypes->account_type : '';
@@ -118,7 +115,9 @@ class AccountController extends Controller
                 $formstable .= '</tr>';
             }
             $formstable .= '</tbody>';
-            $formstable .= '</table></div>';
+            $formstable .= '</table>
+            <div class="m-2">'.$accounts->links().'</div>
+            </div>';
 
             $total = count($accounts);
         } else {

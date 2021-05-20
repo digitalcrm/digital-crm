@@ -263,6 +263,10 @@
     var latestDate = '<?php echo $data['latestDate']; ?>';
     $(function() {
 
+        $("#selectAll").click(function() {
+            var checked = ($(".checkAll").prop('checked') == false) ? true : false;
+            $(".checkAll").prop('checked', checked);
+        });
         // alert(oldDate + ' ' + latestDate);
 
         //Date range as a button

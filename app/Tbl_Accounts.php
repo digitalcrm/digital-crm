@@ -2,11 +2,12 @@
 
 namespace App;
 
-use App\Company;
+use App\Traits\DefaultProfile;
 use Illuminate\Database\Eloquent\Model;
 
 class Tbl_Accounts extends Model
 {
+    use DefaultProfile;
 
     //Table Name
     protected $table = 'tbl_accounts';
@@ -44,6 +45,11 @@ class Tbl_Accounts extends Model
         'active',
     ];
 
+    public function profileLogo()
+    {
+        return $this->picture ? asset($this->picture) : $this->defaultProfilePhotoUrl($this->name);
+    }
+    
     public function tbl_leads()
     {
         return $this->hasMany('App\Tbl_leads', 'acc_id');
@@ -79,8 +85,13 @@ class Tbl_Accounts extends Model
         return $this->belongsTo('App\Tbl_states', 'state');
     }
 
-    public function tbl_company()
+    // public function tbl_company()
+    // {
+    //     return $this->hasMany('App\Tbl_company', 'acc_id');
+    // }
+
+    public function haveCompany()
     {
-        return $this->hasMany('App\Tbl_company', 'acc_id');
+        return $this->belongsTo(Company::class, 'company');
     }
 }

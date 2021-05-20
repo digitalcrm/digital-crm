@@ -737,7 +737,7 @@ class LeadController extends Controller
         $leadstatuslist = Tbl_leadstatus::all();
 
         //-----------------------------------------
-        $query = DB::table('tbl_leads')->where('tbl_leads.uid', $uid)->where('tbl_leads.active', 1)->where('tbl_leads.leadtype', 1);
+        $query = Tbl_leads::where('tbl_leads.uid', $uid)->where('tbl_leads.active', 1)->where('tbl_leads.leadtype', 1);
         if ($status > 0) {
             $query->where('tbl_leads.ldstatus_id', $status);
         }
@@ -756,7 +756,7 @@ class LeadController extends Controller
             'tbl_accounts.name as account',
             'tbl_products.name as product'
         );
-        $leads = $query->get();
+        $leads = $query->paginate(10);
 
         // echo json_encode($leads);
         // exit();
@@ -856,7 +856,7 @@ class LeadController extends Controller
                 $formstable .= '</tr>';
             }
             $formstable .= '</tbody>';
-            $formstable .= '</table></div>';
+            $formstable .= '</table><div class="m-2">'.$leads->links().'</div></div>';
         } else {
             $formstable = 'No records available';
         }
