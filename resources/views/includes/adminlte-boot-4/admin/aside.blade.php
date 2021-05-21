@@ -52,7 +52,7 @@ $app = Tbl_Appdetails::find(1);
                 </li>
             @endcan
 
-            @can('isAdmin')
+            {{-- @can('isAdmin')
                 <li class="nav-item">
                     <a href="{{ url('admin/clients') }}"
                         class="nav-link {{ request()->is('admin/clients*') ? 'active' : '' }} {{ request()->is('admin/mails/mailsend/clients*') ? 'active' : '' }}">
@@ -60,7 +60,7 @@ $app = Tbl_Appdetails::find(1);
                         <p>Clients</p>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             <li class="nav-item">
                 <a href="{{ url('admin/webtolead/') }}"

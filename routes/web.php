@@ -1283,10 +1283,10 @@ Route::put('admin/users/updatefeatures/{id}', 'Admin\UserController@updateFeatur
 
 
 //----------------------------Clients Controller----------------------
-Route::resource('admin/clients', 'Admin\ClientController');
+// Route::resource('admin/clients', 'Admin\ClientController');
 
-Route::get('admin/clients/block/{id}/{block}', 'Admin\ClientController@block');
-Route::get('admin/clients/delete/{id}', 'Admin\ClientController@delete');
+// Route::get('admin/clients/block/{id}/{block}', 'Admin\ClientController@block');
+// Route::get('admin/clients/delete/{id}', 'Admin\ClientController@delete');
 
 
 //----------------------------Web to lead----------------------
