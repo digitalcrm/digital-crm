@@ -313,8 +313,7 @@ class InvoiceController extends Controller
                         $taxVal = $tax->tax . ' %';
                     }
 
-                    // $proImage = ($product->picture != '') ? '<img src="' . url($product->picture) . '" width="25" height="25">&nbsp;' : '';
-                    $proImage = '';
+                    $proImage = ($product->picture != '') ? '<img src="' . url($product->picture) . '" width="25" height="25">&nbsp;' : '';
 
                     $table .= '<tr class = "invoice-details">
                         <td>
@@ -386,7 +385,8 @@ class InvoiceController extends Controller
                 $taxName = $tax->name;
                 $taxVal = $tax->tax . ' %';
             }
-            $proImage = ($product->picture != '') ? '<img src="' . url($product->picture) . '" width="25" height="25">&nbsp;' : '';
+            // $proImage = ($product->picture != '') ? '<img src="' . url($product->picture) . '" width="25" height="25">&nbsp;' : '';
+            $proImage = '<img src="' . url($product->product_img) . '" width="25" height="25">&nbsp;';
 
 
             $table .= '<tr class = "invoice-details">
