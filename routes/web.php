@@ -2542,19 +2542,19 @@ Route::get('admin/ajax/getlatestnotifications', 'Admin\AjaxController@getLatestn
 
 // Ecommerce
 
-Route::resource('admin/ecommerce', 'Admin\EcommerceController')->names([
-    'index' => 'adminecommerce.index',
-    'show' => 'adminecommerce.show',
-    'create' => 'adminecommerce.create',
-    'edit' => 'adminecommerce.edit',
-    'store' => 'adminecommerce.store',
-    'update' => 'adminecommerce.update',
-    'destroy' => 'adminecommerce.delete',
-]);
-Route::get('admin/ecommerce/orders/{cid}', 'Admin\EcommerceController@getOrders');
-Route::get('admin/ecommerce/ajax/orders/{cid}', 'Admin\EcommerceController@ajaxGetUserOrders');
-Route::get('admin/ecommerce/consumers/list', 'Admin\EcommerceController@getConsumersList');
-Route::get('admin/ecommerce/consumers/show/{cid}', 'Admin\EcommerceController@showConsumer');
+// Route::resource('admin/ecommerce', 'Admin\EcommerceController')->names([
+//     'index' => 'adminecommerce.index',
+//     'show' => 'adminecommerce.show',
+//     'create' => 'adminecommerce.create',
+//     'edit' => 'adminecommerce.edit',
+//     'store' => 'adminecommerce.store',
+//     'update' => 'adminecommerce.update',
+//     'destroy' => 'adminecommerce.delete',
+// ]);
+// Route::get('admin/ecommerce/orders/{cid}', 'Admin\EcommerceController@getOrders');
+// Route::get('admin/ecommerce/ajax/orders/{cid}', 'Admin\EcommerceController@ajaxGetUserOrders');
+// Route::get('admin/ecommerce/consumers/list', 'Admin\EcommerceController@getConsumersList');
+// Route::get('admin/ecommerce/consumers/show/{cid}', 'Admin\EcommerceController@showConsumer');
 
 //----------------------------Cron Job ----------------------
 

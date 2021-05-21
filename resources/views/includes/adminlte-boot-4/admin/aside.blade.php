@@ -309,7 +309,7 @@ $app = Tbl_Appdetails::find(1);
                 </a>
             </li>
 
-            <li class="nav-item has-treeview">
+            {{-- <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-shopping-cart"></i>
                     <p>Ecommerce<i class="fas fa-angle-left right"></i></p>
@@ -328,7 +328,7 @@ $app = Tbl_Appdetails::find(1);
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
             <!--                <li class="nav-item">
                                     <a href="https://adminlte.io/docs" class="nav-link">
