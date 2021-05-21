@@ -150,6 +150,11 @@ class Tbl_leads extends Model
         return $this->belongsTo(Company::class, 'company');
     }
 
+    public function haveCompany()
+    {
+        return $this->belongsTo(Company::class, 'company');
+    }
+
     public function todos()
     {
         return $this->morphMany('App\Todo', 'todoable');

@@ -30,7 +30,7 @@
     <!-- Main content -->
     <section class="content mt-2 mx-0">
         <div class="container-fluid">
-            <livewire:dashboard.info-box />
+            {{-- <livewire:dashboard.info-box /> --}}
             <!-- Main row -->
             <div class="row">
                 <!--D3 Funnel  sales-->

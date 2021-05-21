@@ -65,7 +65,7 @@ class ProductController extends Controller
             ->where('active', 1)
             ->where('uid', $uid)
             ->orderBy('pro_id', 'desc')
-            ->get();
+            ->paginate(10);
 
         // echo json_encode($products);
         // exit();
@@ -74,6 +74,7 @@ class ProductController extends Controller
             $formstable = '<div class="table-responsive"><table id="productsTable" class="table">';
             $formstable .= '<thead>';
             $formstable .= '<tr>';
+            $formstable .= '<th></th>';
             $formstable .= '<th>Name</th>';
             $formstable .= '<th>Size/ Units</th>';
             $formstable .= '<th>Price</th>';
@@ -106,6 +107,10 @@ class ProductController extends Controller
                 }
 
                 $formstable .= '<tr>';
+                $formstable .= '<td>
+                <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="checkAll custom-control-input" 
+                id="' . $formdetails->pro_id . '"><label class="custom-control-label" for="' . $formdetails->pro_id . '"></label></div></td>';
                 $formstable .= '<td class="table-title">';
                 $formstable .= '<img src="' . url($img) . '" class="avatar">';
                 $formstable .= '<a href="' . url('products/' . $formdetails->pro_id) . '">' . $formdetails->name . '</a>&nbsp;';
@@ -132,7 +137,7 @@ class ProductController extends Controller
                 $formstable .= '</tr>';
             }
             $formstable .= '</tbody>';
-            $formstable .= '</table></div>';
+            $formstable .= '</table><div class="m-2">'.$products->links().'</div></div>';
         } else {
             $formstable = 'No records available';
         }

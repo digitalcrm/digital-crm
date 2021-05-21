@@ -188,7 +188,15 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label text-right" for="company">Company</label>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="company" id="company" placeholder="" value="{{$data['leadarr']['company']}}">
+                                    <select class="form-control" name="company" id="company">
+                                        <option>Select Company</option>
+                                        @forelse($company as $comp)
+                                            <option value="{{ $comp->id }}" {{ old('company', $data['leadarr']['company']) == $comp->id  ? 'selected' : '' }}>{{ $comp->c_name }}</option>
+                                        @empty
+                                            <option>Not Found</option>
+                                        @endforelse
+                                    </select>
+                                    {{-- <input type="text" class="form-control" name="company" id="company" placeholder="" value="{{$data['leadarr']['company']}}"> --}}
                                     <span class="text-danger">{{ $errors->first('company') }}</span>
                                 </div>
                             </div>

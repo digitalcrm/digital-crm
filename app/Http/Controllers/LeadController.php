@@ -172,7 +172,9 @@ class LeadController extends Controller
             }
             $data['productoptions'] = $productoptions;
 
-            return view('auth.leads.create')->with('data', $data);
+            $company = auth()->user()->company()->get(['id','c_name']);
+
+            return view('auth.leads.create', compact('company'))->with('data', $data);
         } else {
             return redirect('/leads');
         }
@@ -193,6 +195,7 @@ class LeadController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255:tbl_leads',
+            'company' => 'nullable|exists:companies,id'
         ]);
 
         $filename = '';
@@ -441,7 +444,7 @@ class LeadController extends Controller
                 ->with('Tbl_states')
                 ->with('Tbl_salutations')
                 ->with('Tbl_products')
-                ->find($id);
+                ->findOrFail($id);
             $leadarr = $leads->toArray();
 
             // echo json_encode($leads);
@@ -538,10 +541,11 @@ class LeadController extends Controller
             }
             $data['productoptions'] = $productoptions;
 
+            $company = auth()->user()->company()->get(['id','c_name']);
             // echo json_encode($leadarr);
             // exit();
 
-            return view('auth.leads.edit')->with("data", $data);
+            return view('auth.leads.edit', compact('company'))->with("data", $data);
         } else {
             return redirect('/leads');
         }
@@ -685,7 +689,7 @@ class LeadController extends Controller
         // echo $formdata['product'];
         // exit();
 
-        $leads = Tbl_leads::find($id);
+        $leads = Tbl_leads::findOrFail($id);
         $leads->first_name = (isset($formdata['first_name'])) ? $formdata['first_name'] : $leads->mobile;
         $leads->last_name = (isset($formdata['last_name'])) ? $formdata['last_name'] : $leads->last_name;
         $leads->email = ($formdata['email'] != '') ? $formdata['email'] : $leads->email;
@@ -834,7 +838,7 @@ class LeadController extends Controller
                 $formstable .= '</td>';
                 $formstable .= '<td>' . $formdetails->leadsource  . '</td>'; //$leadsource
                 $formstable .= '<td>' . $formdetails->account  . '</td>';    //(($formdetails->tbl_accounts != '') ? $formdetails->tbl_accounts->name : '')
-                $formstable .= '<td>' . $formdetails->company . '</td>';
+                $formstable .= '<td>' . $formdetails->haveCompany->c_name . '</td>';
                 $formstable .= '<td>' . $formdetails->product . '</td>';    //(($formdetails->tbl_products != '') ? $formdetails->tbl_products->name : '')
                 $formstable .= '<td>' . date('d-m-Y', strtotime($formdetails->created_at)) . '</td>';
                 $formstable .= '<td><a class="badge badge-success" href="' . url('leads/adddeal/' . $formdetails->ld_id) . '">Add Deal</a></td>';
@@ -1722,9 +1726,9 @@ class LeadController extends Controller
             $data['productoptions'] = $productoptions;
 
             // echo json_encode($data);
+            $company = auth()->user()->company()->get(['id','c_name']);
 
-
-            return view('auth.leads.editprolead')->with('data', $data);
+            return view('auth.leads.editprolead', compact('company'))->with('data', $data);
         } else {
             return redirect('leads/getproductleads/list');
         }
@@ -1744,6 +1748,7 @@ class LeadController extends Controller
             $this->validate($request, [
                 'first_name' => 'required|max:255',
                 'mobile' => 'required|numeric',
+                'company' => 'nullable|exists:companies,id',
                 // 'last_name' => 'required|max:255',
                 // 'email' => 'required|email|max:255',    //,email,' . $id . ',ld_id |unique:tbl_leads
             ]);
