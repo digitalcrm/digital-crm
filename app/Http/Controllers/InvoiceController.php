@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 use Mail;
-use App\Tbl_tax;
-use App\Tbl_invoice;
-use App\Tbl_invoice_products;
-use App\Tbl_leads;
-use App\Tbl_products;
 use App\User;
+use App\Tbl_tax;
 use App\currency;
+use App\Tbl_leads;
+use App\Tbl_invoice;
+use App\Tbl_products;
+use Illuminate\Http\Request;
+use App\Tbl_invoice_products;
 use App\Tbl_post_order_stage;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class InvoiceController extends Controller
 {
@@ -169,6 +169,7 @@ class InvoiceController extends Controller
             'name' => 'required|max:255',
             'inv_number' => 'required|max:255|unique:tbl_invoice',
             'billto' => 'required|max:255',
+            'products' => 'required|exists:tbl_products,pro_id',
         ], ['inv_number.unique' => 'The invoice number is already taken']);
 
         $products = $request->input('products');
@@ -598,7 +599,7 @@ class InvoiceController extends Controller
             foreach ($invproducts as $invpro) {
 
                 //---------------------Products-------------------------------
-                $productCost = Tbl_products::find($invpro->pro_id);
+                $productCost = Tbl_products::findOrFail($invpro->pro_id);
                 //            $tax = Tbl_tax::find($invpro->tax_id);
 
                 $productsId = 'products' . $k;
@@ -712,6 +713,7 @@ class InvoiceController extends Controller
                 'name' => 'required|max:255',
                 'inv_number' => 'required|max:255',
                 'billto' => 'required|max:255',
+                'products' => 'required|exists:tbl_products,pro_id',
             ], ['inv_number.unique' => 'The invoice number is already taken']);
 
             $products = $request->input('products');

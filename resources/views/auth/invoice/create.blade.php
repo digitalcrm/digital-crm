@@ -139,6 +139,7 @@
                                             <select id="products1" name="products[]" class="form-control products" onchange="return productChange('products1');">
                                                 <?php echo $data['product_options']; ?>
                                             </select>
+                                            <span class="text-danger">{{ $errors->first('products') }}</span>
                                         </td>
                                         <td>
                                             <div class="input-group">
