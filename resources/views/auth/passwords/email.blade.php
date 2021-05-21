@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center mt-5 pb-4">
-                    <img alt="company-logo" src="{{ asset('uploads/logo/digitalcrm-logo.png') }}" height="55px" />
+                    <x-logo />
                 </div>
                 <div class="card shadows no-border"
                     style="box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06);border: 0px solid rgba(0,0,0,.125)!important;width:350px;">

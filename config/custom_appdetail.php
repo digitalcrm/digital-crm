@@ -3,7 +3,13 @@
 return [
     'name' => env('APP_NAME', 'BigIndia'),
 
+    'logoEnable' => false,
+
     'logo' => 'https://www.bigindia.com/_next/image?url=%2Fimages%2Fbigindia.jpg&w=384&q=75',
+
+    'favEnable' => false,
+
+    'favIconPath' => 'public/bigindiafav.png',
 
 	'product' => 'https://www.bigindia.com/product/',
 
