@@ -4,9 +4,12 @@
 <aside class="main-sidebar sidebar-light-primary">
     <!-- Brand Logo -->
     <a href="{{ url('dashboard') }}" class="brand-link">
-        {{-- <img src="{{ asset('assets/adminlte-boot-4/dist/img/AdminLTELogo.png') }}"
-        alt="Digital CRM"
-        class="brand-image img-circle"> --}}
+
+        @if(config('custom_appdetail.logoEnable'))
+            <img src="{{ config('custom_appdetail.logo') }}"
+                alt="{{ config('app.name') }}" class="brand-image img-circle">
+        @endif
+
         <span class="brand-text font-weight-light">{{ config('custom_appdetail.name') }}</span>
     </a>
     <!-- Sidebar -->
