@@ -92,6 +92,6 @@ class Tbl_Accounts extends Model
 
     public function haveCompany()
     {
-        return $this->belongsTo(Company::class, 'company');
+        return $this->belongsTo(Company::class, 'company')->withDefault();
     }
 }

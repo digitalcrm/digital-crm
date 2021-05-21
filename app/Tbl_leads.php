@@ -152,7 +152,7 @@ class Tbl_leads extends Model
 
     public function haveCompany()
     {
-        return $this->belongsTo(Company::class, 'company');
+        return $this->belongsTo(Company::class, 'company')->withDefault();
     }
 
     public function todos()

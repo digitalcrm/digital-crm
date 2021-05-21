@@ -15,47 +15,21 @@ Route::middleware(['auth:admin'])->group(function () {
     });
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 Route::middleware(['isActive'])->group(function () {
 
-    // Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    // ------------------------------------------------------------------------
-
-    // bootstrap 4
-
-
-
-    Route::get('bootstrap/profile', 'HomeController@bootstrap');
-
-    Route::get('adminlte4', 'HomeController@adminlte');
-
-    Route::get('admin/adminlte4', 'Admin\AdminController@adminlte');
-
-
+    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
     // ------------------------------------------------------------------------
 
     // today events
-
-
-
     Route::get('today/events', 'CalendarController@getTodayEvents');
-
-
-
-
-
-
-
-
 
     //----------------------------Accounts Controller----------------------
 
-    Route::resource('accounts', 'AccountController');
+    Route::resource('accounts', 'AccountController')->middleware('verified');
 
     Route::get('accounts/delete/{id}', 'AccountController@deleteAccount');
 
@@ -77,7 +51,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Contacts Controller----------------------
 
-    Route::resource('contacts', 'ContactController');
+    Route::resource('contacts', 'ContactController')->middleware('verified');
 
     Route::get('contacts/delete/{id}', 'ContactController@deleteContact');
 
@@ -95,7 +69,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Lead Controller----------------------
 
-    Route::resource('leads', 'LeadController');
+    Route::resource('leads', 'LeadController')->middleware('verified');
 
     Route::get('leads/delete/{id}', 'LeadController@deleteLead');
 
@@ -163,7 +137,7 @@ Route::middleware(['isActive'])->group(function () {
     Route::post('leads/pro/exportdata', 'LeadController@exportProductLeadsData');
     //----------------------------Customer Controller----------------------
 
-    Route::resource('customers', 'CustomersController');
+    Route::resource('customers', 'CustomersController')->middleware('verified');
 
     Route::get('customers/delete/{id}', 'CustomersController@delete');
 
@@ -187,7 +161,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Sales Controller----------------------
 
-    Route::resource('sales', 'SalesController');
+    Route::resource('sales', 'SalesController')->middleware('verified');
 
     Route::get('sales/delete/{id}', 'SalesController@delete');
 
@@ -205,7 +179,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Orders Controller----------------------
 
-    Route::resource('orders', 'OrderController');
+    Route::resource('orders', 'OrderController')->middleware('verified');
 
     Route::get('orders/getorderdealdetails/{id}', 'OrderController@getOrderDealDetails');
 
@@ -213,7 +187,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Document Controller----------------------
 
-    Route::resource('documents', 'DocumentController');
+    Route::resource('documents', 'DocumentController')->middleware('verified');
 
     Route::get('documents/delete/{id}', 'DocumentController@delete');
 
@@ -225,7 +199,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Products Controller----------------------
 
-    Route::resource('products', 'ProductController');
+    Route::resource('products', 'ProductController')->middleware('verified');
 
     Route::get('products/delete/{id}', 'ProductController@delete');
 
@@ -261,7 +235,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Mailer Controller----------------------
 
-    Route::resource('mailers', 'MailerController');
+    Route::resource('mailers', 'MailerController')->middleware('verified');
 
     Route::post('mailers/mailsendAction', 'MailerController@mailSendAction');
 
@@ -283,7 +257,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Mail Controller----------------------
 
-    Route::resource('mails', 'MailController');
+    Route::resource('mails', 'MailController')->middleware('verified');
 
     Route::get('mails/delete/{id}', 'MailController@delete');
 
@@ -319,7 +293,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Campaigns Controller----------------------
 
-    Route::resource('campaigns', 'CampaignController');
+    Route::resource('campaigns', 'CampaignController')->middleware('verified');
 
     Route::get('campaigns/deleteAll/{id}', 'CampaignController@deleteAll');
 
@@ -355,7 +329,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Tax Controller----------------------
 
-    Route::resource('tax', 'TaxController');
+    Route::resource('tax', 'TaxController')->middleware('verified');
 
     Route::get('tax/deletetax/{id}', 'TaxController@deleteTax');
 
@@ -365,7 +339,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Trash Controller----------------------
 
-    Route::get('trash', 'TrashController@index');
+    Route::get('trash', 'TrashController@index')->middleware('verified');
 
     Route::get('trash/accounts', 'TrashController@accounts');
 
@@ -419,7 +393,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Subusers Controller----------------------
 
-    Route::resource('subusers', 'SubuserController');
+    Route::resource('subusers', 'SubuserController')->middleware('verified');
 
     Route::get('subusers/view/{id}', 'SubuserController@view');
 
@@ -445,7 +419,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Forecast Controller----------------------
 
-    Route::resource('forecast', 'ForecastController');
+    Route::resource('forecast', 'ForecastController')->middleware('verified');
 
     Route::get('forecastEdit/{id}/{year}', 'ForecastController@forecastEdit');
 
@@ -473,13 +447,13 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------SMTP Controller----------------------
 
-    Route::resource('smtp', 'SmtpController');
+    Route::resource('smtp', 'SmtpController')->middleware('verified');
 
 
 
     //----------------------------Deal Controller----------------------
 
-    Route::resource('deals', 'DealController');
+    Route::resource('deals', 'DealController')->middleware('verified');
 
     Route::get('deals/changestage/{deal_id}/{sfun_id}', 'DealController@changestage');
 
@@ -512,7 +486,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Dashboard Controller----------------------
 
-    Route::get('/dashboard', 'HomeController@dashboard');
+    Route::get('/dashboard', 'HomeController@dashboard')->middleware('verified');
 
 
 
@@ -568,27 +542,19 @@ Route::middleware(['isActive'])->group(function () {
 
     Route::post('dashboard/getSalesData', 'DashboardController@getSalesData');
 
-
-
-    //----------------------bootstrap4-----------------------------
-
-    Route::get('/bootstrap4', 'HomeController@bootstrapfour');
-
-
-
     //----------------------------Home Controller----------------------
 
-    Route::get('/user/profile', 'HomeController@index');
+    Route::get('/user/profile', 'HomeController@index')->middleware('verified');
 
-    Route::get('/profile/update', 'HomeController@update');
+    Route::get('/profile/update', 'HomeController@update')->middleware('verified');
 
-    Route::get('/profile/userUpdate/{id}', 'HomeController@userUpdate');
+    Route::get('/profile/userUpdate/{id}', 'HomeController@userUpdate')->middleware('verified');
 
-    Route::put('/profile/userUpdate/{id}', 'HomeController@userUpdate');
+    Route::put('/profile/userUpdate/{id}', 'HomeController@userUpdate')->middleware('verified');
 
-    Route::get('/testmail', 'HomeController@testMail');
+    Route::get('/testmail', 'HomeController@testMail')->middleware('verified');
 
-    Route::get('/inbox', 'MailController@inbox');
+    Route::get('/inbox', 'MailController@inbox')->middleware('verified');
 
     Route::get('/user/verify/{token}', 'VerifyUserController@verifyUser');
 
@@ -598,7 +564,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Web to lead----------------------
 
-    Route::resource('webtolead', 'WebtoleadController');
+    Route::resource('webtolead', 'WebtoleadController')->middleware('verified');
 
     Route::get('webtolead/deleteform/{id}', 'WebtoleadController@formDelete');
 
@@ -668,14 +634,14 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Widget Controller----------------------
 
-    Route::resource('widgets', 'WidgetsController');
+    Route::resource('widgets', 'WidgetsController')->middleware('verified');
 
     Route::get('widgets/delete/{id}', 'WidgetsController@delete');
 
 
     // Ecommerce
 
-    Route::resource('ecommerce', 'EcommerceController');
+    Route::resource('ecommerce', 'EcommerceController')->middleware('verified');
     Route::get('ecommerce/orders/list', 'EcommerceController@getOrders');
 
     // -----------------------------Reports Controller-------------------------------------------
@@ -854,7 +820,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Notifications Controller----------------------
 
-    Route::resource('notifications', 'NotificationController');
+    Route::resource('notifications', 'NotificationController')->middleware('verified');
 
     Route::get('notifications/delete/{id}', 'NotificationController@delete');
 
@@ -864,7 +830,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Territory Controller----------------------
 
-    Route::resource('territory', 'TerritoryController');
+    Route::resource('territory', 'TerritoryController')->middleware('verified');
 
     Route::get('territory/delete/{id}', 'TerritoryController@delete');
 
@@ -876,7 +842,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Newsletter Controller----------------------
 
-    Route::resource('newsletter', 'NewsletterController');
+    Route::resource('newsletter', 'NewsletterController')->middleware('verified');
 
     Route::get('newsletter/delete/{id}', 'NewsletterController@delete');
 
@@ -884,7 +850,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Calendar Controller----------------------
 
-    Route::resource('calendar', 'CalendarController');
+    Route::resource('calendar', 'CalendarController')->middleware('verified');
 
     Route::get('calendar/delete/{id}', 'CalendarController@delete');
 
@@ -892,13 +858,13 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Settings Controller----------------------
 
-    Route::resource('settings', 'SettingsController');
+    Route::resource('settings', 'SettingsController')->middleware('verified');
 
 
 
     //----------------------------Projects Controller----------------------
 
-    Route::resource('projects', 'ProjectController');
+    Route::resource('projects', 'ProjectController')->middleware('verified');
 
     Route::get('projects/getprojectsbystatus/{id}', 'ProjectController@getProjectsByStatus');
 
@@ -920,7 +886,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------Rd's Controller----------------------
 
-    Route::resource('rds', 'RdController');
+    Route::resource('rds', 'RdController')->middleware('verified');
 
     Route::get('rds/delete/{id}', 'RdController@delete');
 
@@ -940,7 +906,7 @@ Route::middleware(['isActive'])->group(function () {
 
     //----------------------------File Manager Controller----------------------
 
-    Route::resource('files', 'FileManagerController');
+    Route::resource('files', 'FileManagerController')->middleware('verified');
 
     //Route::get('admin/files/delete/{id}', 'Admin\FileManagerController@delete');
 
@@ -2634,7 +2600,7 @@ Route::namespace('Task')->group(function () {
 
 
 
-    Route::resource('taskmanagement', 'User\TaskController');
+    Route::resource('taskmanagement', 'User\TaskController')->middleware('verified');
     Route::put('task/completed/{id}', 'User\TaskController@taskcompleted')->name('taskcompleted.update');
     Route::get('/delete-all-task', 'User\TaskController@deletealltask')->name('delete-all-task.task');
 
@@ -2665,7 +2631,7 @@ Route::namespace('Task')->group(function () {
 
 #=============================================Ticketing==================#
 Route::namespace('Ticket')->group(function () {
-    Route::resource('tickets', 'user\TicketController');
+    Route::resource('tickets', 'user\TicketController')->middleware('verified');
     Route::get('/delete-all-tickets', 'user\TicketController@deletealltickets')->name('delete-all-tickets.tickets');
     Route::get('kanban/ticket/', 'user\TicketController@kanban')->name('tickets.kanban');
     Route::get('kanban/ticket/changedstatus/{ticket_id}/{status_id}/{from_id}', 'user\TicketController@changedstatus');
@@ -2843,16 +2809,16 @@ Route::prefix('clients')->group(function () {
 Route::group(['namespace' => 'Bookings'], function () {
 
     /* Booking Services routes */
-    Route::resource('bookservices', 'BookingServiceController')->except(['show',]);
+    Route::resource('bookservices', 'BookingServiceController')->except(['show'])->middleware('verified');
 
-    Route::resource('activity_type', 'BookingActivityTypeController')->except(['show']);
+    Route::resource('activity_type', 'BookingActivityTypeController')->except(['show'])->middleware('verified');
 
     /* Booking Create Events routes*/
-    Route::resource('bookevents', 'BookingEventController');
+    Route::resource('bookevents', 'BookingEventController')->middleware('verified');
     Route::get('eventStatus', 'BookingEventController@eventStatus')->name('eventStatus');
 
     /* list of services at front side */
-    Route::get('bookings', 'BookingController')->name('bookings');
+    Route::get('bookings', 'BookingController')->name('bookings')->middleware('verified');
 
     /**
      * These two below calendar route are not in used
@@ -2869,7 +2835,7 @@ Route::group(['namespace' => 'Bookings'], function () {
     Route::post('bookings/{bookservice:service_name}/event/{bookevent}', 'BookingHomePageController@store')->name('event.store');
 
     /** Booked Customer */
-    Route::resource('confirmed_users', 'BookedCustomerController');
+    Route::resource('confirmed_users', 'BookedCustomerController')->middleware('verified');
 
     /** Booking Reports */
     Route::get('reports/appointments', 'BookingReportController@appointment')->name('reports.appointments');
@@ -2922,7 +2888,7 @@ Route::group(['namespace' => 'Bookings'], function () {
 // });
 
 #=============================Companies===========================#
-Route::resource('companies', 'Company\User\CompanyController');
+Route::resource('companies', 'Company\User\CompanyController')->middleware('verified');
 
 #=============================RFQs user routes===========================#
 Route::resource('rfq-forms', 'RFQ\user\RfqController');
@@ -2938,11 +2904,11 @@ Route::resource('admin/rfqs', 'RFQ\admin\RfqController');
 
 #==============================Service=====================================#
 Route::group(['namespace' => 'Service'], function () {
-    Route::resource('auth/services', 'user\ServiceController')->except(['store', 'update', 'destroy']);
+    Route::resource('auth/services', 'user\ServiceController')->except(['store', 'update', 'destroy'])->middleware('verified');
 
-    Route::get('auth/leads', 'user\ServiceController@serviceLeads')->name('auth.serviceleads');
+    Route::get('auth/leads', 'user\ServiceController@serviceLeads')->name('auth.serviceleads')->middleware('verified');
 
-    Route::get('reports/services', 'user\ServiceReportController@services');
+    Route::get('reports/services', 'user\ServiceReportController@services')->middleware('verified');
     Route::get('reports/getDayServices/{time}/{form_id}', 'user\ServiceReportController@getDayServices');
     Route::post('reports/getDayServices/{time}/{form_id}', 'user\ServiceReportController@getDayServices');
     Route::get('reports/getMonthServices/{time}/{form_id}', 'user\ServiceReportController@getMonthServices');
@@ -2953,7 +2919,7 @@ Route::group(['namespace' => 'Service'], function () {
     Route::prefix('admin')->group(function () {
         Route::resource('service-categories', 'admin\ServiceCategoryController');
         Route::resource('service-subcategories', 'admin\ServiceSubCategoryController');
-        Route::get('services','admin\AdminServiceController@index')->name('admin.services');
+        Route::get('services', 'admin\AdminServiceController@index')->name('admin.services');
         /** admin panel report section */
         Route::get('reports/services', 'admin\ServiceReportController@services');
         Route::get('reports/getDayServices/{time}/{form_id}/{user_id}', 'admin\ServiceReportController@getDayServices');

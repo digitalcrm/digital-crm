@@ -53,6 +53,7 @@
                                     @forelse($services as $service)
                                         <tr>
                                             <td>
+                                                <img src="{{ $service->service_img }}" width="25" height="25" />
                                                 <a href="{{ route('services.show', $service->id) }}">
                                                     {{ $service->title }}
                                                 </a>

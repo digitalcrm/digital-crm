@@ -115,14 +115,14 @@
                                     <a href="{{ url('leads/getproductleads/list') }}"
                                         class="nav-link nav-link-custom">
                                         <i class="nav-icon far fa-circle icon-size"></i>
-                                        <p class="">Product Leads</p>
+                                        <p class="sub-nav">Product Leads</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('auth.serviceleads') }}"
                                         class="nav-link nav-link-custom">
                                         <i class="nav-icon far fa-circle icon-size"></i>
-                                        <p class="">Service Leads</p>
+                                        <p class="sub-nav">Service Leads</p>
                                     </a>
                                 </li>
                             @endif
@@ -255,7 +255,7 @@
                         <li
                             class="nav-item has-treeview {{ Request::is('auth/services*') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
-                                <ion-icon name="shirt-outline"></ion-icon>
+                                <ion-icon name="settings-outline"></ion-icon>
                                 <p>
                                     Services
                                     <i class="right fas fa-angle-left"></i>
@@ -334,7 +334,7 @@
                                     <li class="nav-item">
                                         <a href="{{ url('projects') }}"
                                             class="nav-link nav-link-custom {{ Request::is('projects*') ? 'active' : '' }}">
-                                            <i class="fas fa-circle nav-icon"></i>
+                                            <i class="nav-icon far fa-circle icon-size"></i>
                                             <p class="sub-nav">Projects</p>
                                         </a>
                                     </li>
@@ -361,15 +361,15 @@
                                 <li class="nav-item">
                                     <a href="{{ route('rfq-forms.index') }}"
                                         class="nav-link {{ request()->is('rfq') ? 'active' : '' }}">
-                                        <ion-icon name="notifications-outline"></ion-icon>
+                                        <i class="nav-icon far fa-circle icon-size"></i>
                                         <p class="sub-nav">RFQ</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('pois.index') }}"
                                         class="nav-link {{ request()->is('pois*') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon icon-size text-warning"></i>
-                                        <p class="sub-nav">Proudct of Interest</p>
+                                        <i class="nav-icon far fa-circle icon-size"></i>
+                                        <p class="sub-nav">Product of Interest</p>
                                     </a>
                                 </li>
                             </ul>

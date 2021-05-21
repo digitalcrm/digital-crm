@@ -82,7 +82,7 @@ class AccountController extends Controller
                 $formstable .= '<img src="' . $formdetails->profileLogo() . '" class="avatar"> ';
                 $formstable .= '<h6><a href="' . url('accounts/' . $formdetails->acc_id) . '">' . $formdetails->name . '</a>';
                 $formstable .= '</h6><div class="t-email"><a class="text-muted" href="' . url('mails/mailsend/accounts/' . $formdetails->acc_id) . '">' . $formdetails->email . '</a></div><div class="t-mob text-muted">' . $formdetails->mobile . '</div></td>';
-                $formstable .= '<td>' . $formdetails->haveCompany->c_name ?? '' . '</td>';
+                $formstable .= '<td>' . $formdetails->haveCompany->c_name . '</td>';
                 $industrytype = ($formdetails->tbl_industrytypes != null) ? $formdetails->tbl_industrytypes->type : '';
                 $formstable .= '<td>' . $industrytype . '</td>';
                 $accounttype = ($formdetails->tbl_accounttypes != null) ? $formdetails->tbl_accounttypes->account_type : '';
