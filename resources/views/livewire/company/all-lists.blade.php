@@ -49,12 +49,12 @@
                                     @forelse($companies as $company)
                                         <tr>
                                             <td>
-                                                <a href="{{ config('custom_appdetail.company').$company->slug }}" target="_new" rel="noopener noreferrer">
+                                                {{-- <a href="{{ config('custom_appdetail.company').$company->slug }}" target="_new" rel="noopener noreferrer"> --}}
                                                     <img src="{{ $company->companyLogo() }}" alt="{{ $company->c_name }}" width="45px" height="45px"
                                                         style="border-radius: 50%" />
                                                     {{ $company->c_name }}
 
-                                                </a>
+                                                {{-- </a> --}}
                                             </td>
                                             <td>
                                                 <a href="{{ url('/leads/getproductleads/list') }}">

@@ -40,7 +40,7 @@ class TaskController extends Controller
         //                     ->latest()
         //                     ->paginate(5);
 
-        $tasks = auth()->user()->currentuser()->with('todoable','tasktype','outcome')->latest()->get();
+        $tasks = auth()->user()->currentuser()->with('todoable','tasktype','outcome')->latest()->paginate(10);
 
         return view('taskmanagement.cruds.user.index_tasktable',compact('tasks'));
     }

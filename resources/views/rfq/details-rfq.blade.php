@@ -30,7 +30,7 @@
                                 {{ $details->created_at->isoFormat('D-MM-Y') }}</span>
                         </p>
                         <p class="card-text">
-                            <img src="{{ $details->user->profileUrl() }}" class="img-fluid rounded-circle"
+                            <img src="{{ $details->user->profile_img }}" class="img-fluid rounded-circle"
                                 alt="{{ $details->user->name }}" style="width: 2rem" srcset="">
                             {{ $details->user->name ?? '' }}
                         </p>

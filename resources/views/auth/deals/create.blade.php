@@ -97,7 +97,7 @@
                                     <div class="form-group row">
                                         <label class="col-md-3 col-form-label text-right" for="product">Product</label>
                                         <div class="col-md-9">
-										<select class="form-control required" name="product" id="product" required>
+										<select class="form-control required" name="product" id="product">
                                             {!!$data['productoptions']!!}
                                         </select>
                                         <input type="hidden" id="pro_id" name="pro_id">

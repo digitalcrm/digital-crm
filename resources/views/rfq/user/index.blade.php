@@ -53,12 +53,12 @@
                                         @forelse($rfqs as $rfq)
                                             <tr>
                                                 <td>
-                                                    {{-- <a href="{{ route('details.rfq', $rfq->slug) }}" target="_blank">
-                                                        {{ $rfq->product_name }}
-                                                    </a> --}}
-                                                    <a href="{{ __('custom.rfq_quote_now').$rfq->slug }}" rel="noopener noreferrer" target="_blank">
+                                                    <a href="{{ route('details.rfq', $rfq->slug) }}" rel="noopener noreferrer" target="_blank">
                                                         {{ $rfq->product_name }}
                                                     </a>
+                                                    {{-- <a href="{{ __('custom.rfq_quote_now').$rfq->slug }}" rel="noopener noreferrer" target="_blank">
+                                                        {{ $rfq->product_name }}
+                                                    </a> --}}
                                                 </td>
                                                 <td>
                                                     {{ $rfq->tbl_category->category ?? '' }}

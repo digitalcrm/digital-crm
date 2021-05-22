@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-use App\Tbl_Accounts;
-use App\Tbl_leads;
-use App\Tbl_countries;
-use App\Tbl_states;
+use App\User;
+use App\Company;
+use App\currency;
 use App\Tbl_deals;
-use App\Tbl_deal_events;
-use App\Tbl_industrytypes;
+use App\Tbl_leads;
+use App\Tbl_states;
+use App\Tbl_Accounts;
+use App\Tbl_products;
+use App\Tbl_projects;
+use App\Tbl_countries;
+use App\Tbl_deal_types;
 use App\Tbl_leadsource;
 use App\Tbl_leadstatus;
-use App\Tbl_salesfunnel;
-use App\User;
-use App\currency;
+use App\Tbl_deal_events;
 use App\Tbl_lossreasons;
-use App\Tbl_products;
+use App\Tbl_salesfunnel;
+use App\Tbl_industrytypes;
+use App\Exports\DealsExport;
+use App\Imports\DealsImport;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Tbl_admin_notifications;
-use App\Tbl_deal_types;
-use App\Tbl_projects;
-use App\Company;
+use Illuminate\Support\Facades\DB;
 
 // use Excel;
-use App\Imports\DealsImport;
-use App\Exports\DealsExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 //use Controllers
 use App\Http\Controllers\ProjectController;
@@ -141,7 +141,7 @@ class DealController extends Controller
             $data['dealstageoptions'] = $dealstageoptions;
 
             //  Products
-            $products = Tbl_products::where('active', 1)->get();    //where('uid', $uid)->
+            $products = Tbl_products::where('active', 1)->where('uid', auth()->user()->id)->get();    //where('uid', $uid)->
             $productoptions = '<option value="">Select ...</option>';
             foreach ($products as $product) {
                 $productoptions .= '<option value="' . $product->pro_id . '">' . $product->name . '</option>';
@@ -182,6 +182,7 @@ class DealController extends Controller
             'dealname' => 'required|max:255',
             'amount' => 'required|numeric',
             'closingdate' => 'required|date_format:d-m-Y',
+            'product' => 'exists:tbl_products:pro_id'
         ]);
 
         $ld_id = 0;

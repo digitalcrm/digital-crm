@@ -834,7 +834,7 @@ class InvoiceController extends Controller
 
     public function getProductoptions($uid)
     {
-        $products = Tbl_products::with('tbl_units')->where('active', 1)->get();     //where('uid', $uid)->
+        $products = Tbl_products::with('tbl_units')->where('active', 1)->where('uid', auth()->user()->id)->get();     //where('uid', $uid)->
         //        echo json_encode($products);
         //        exit();
         $product_options = '<option value="0">Select Product</option>';
