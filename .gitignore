@@ -1,8 +1,11 @@
 /node_modules
 /public/hot
+/uploads/contacts
+/uploads/invoice
+/uploads/leads
+/uploads/products
 /public/storage
 /storage/*.key
-/storage/framework/sessions
 /vendor
 /.idea
 /.vscode
